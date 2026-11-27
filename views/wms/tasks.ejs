@@ -1,0 +1,35 @@
+<%
+const taskLabels={PUTAWAY:'Ubicar recepción',PICKING:'Preparar pedido',REABASTECIMIENTO:'Reponer preparación',REUBICACION:'Reorganizar inventario',DEVOLUCION_RUTA:'Aislar devolución'};
+const stateLabels={PENDIENTE:'Por asignar y atender',EN_PROCESO:'En ejecución',COMPLETADA:'Completadas',CANCELADA:'Canceladas'};
+const states=filters.status&&stateLabels[filters.status]?[filters.status]:['PENDIENTE','EN_PROCESO','COMPLETADA','CANCELADA'];
+const priorityLabels={NORMAL:'Normal',ALTA:'Alta',URGENTE:'Urgente',BAJA:'Baja'};
+%>
+<div class="tp-page tp-board-page">
+  <header class="tp-page-head"><div><span class="tp-eyebrow"><%= can('wms.tasks.assign')?'Planificar · delegar · supervisar':'Consulta de operaciones' %></span><h1>Todo el equipo, en movimiento.</h1><p><%= can('wms.tasks.assign')?'Cada tarea tiene un origen, un destino y una persona responsable.':'Sigue el trabajo confirmado por el equipo de operaciones.' %></p></div><% if(can('wms.tasks.create')){ %><a class="tp-primary" href="/wms/tareas/nueva">+ Planificar movimiento</a><% } %></header>
+  <div class="tp-board-metrics"><a href="/wms/tareas?status=PENDIENTE"><span class="tp-metric-dot pending"></span><span>Por atender</span><strong><%= summary.tasks.pendientes||0 %></strong></a><a href="/wms/tareas?status=EN_PROCESO"><span class="tp-metric-dot active"></span><span>En ejecución</span><strong><%= summary.tasks.en_proceso||0 %></strong></a><a href="/wms/tareas?status=COMPLETADA"><span class="tp-metric-dot complete"></span><span>Completadas hoy</span><strong><%= summary.tasks.completadas_hoy||0 %></strong></a><a href="/wms/mapa"><span class="tp-metric-dot zones"></span><span>Zonas del almacén</span><strong><%= summary.zones.length %></strong></a></div>
+  <% if(summary.replenishment.length){ %><div class="tp-attention-banner"><span class="tp-attention-icon">!</span><div><strong><%= summary.replenishment.length %> productos necesitan reposición</strong><p>La preparación está por debajo del objetivo configurado.</p></div><% if(can('wms.tasks.create')){ %><a href="/wms/tareas/nueva">Revisar existencias →</a><% } %></div><% } %>
+  <section class="tp-board-shell" aria-labelledby="taskBoardTitle">
+    <div class="tp-board-toolbar"><div><h2 id="taskBoardTitle">Tablero de trabajo</h2><p><%= tasks.length %> tareas en esta consulta · los estados cambian con acciones reales</p></div><form class="tp-board-filter"><label for="taskStatusFilter">Ver</label><select id="taskStatusFilter" name="status"><option value="">Todos los estados</option><% Object.entries(stateLabels).forEach(([value,label])=>{ %><option value="<%= value %>" <%= filters.status===value?'selected':'' %>><%= label %></option><% }) %></select><button class="tp-secondary">Aplicar</button></form></div>
+    <div class="tp-kanban <%= states.length===1?'is-filtered':'' %>">
+      <% states.forEach(state=>{ const columnTasks=tasks.filter(task=>task.estado===state); %>
+      <section class="tp-kanban-column tp-state-<%= state.toLowerCase() %>" aria-labelledby="column-<%= state %>">
+        <header class="tp-column-header"><span class="tp-column-dot"></span><h3 id="column-<%= state %>"><%= stateLabels[state] %></h3><span class="tp-column-count"><%= columnTasks.length %></span></header>
+        <div class="tp-column-cards">
+          <% if(!columnTasks.length){ %><div class="tp-column-empty"><span>○</span><strong><%= state==='PENDIENTE'?'La cola está al día.':state==='EN_PROCESO'?'Sin movimientos en curso.':state==='COMPLETADA'?'Aquí aparecerán las confirmaciones.':'Sin tareas canceladas.' %></strong><small><%= state==='PENDIENTE'?'Los nuevos movimientos aparecerán aquí.':'El estado se registra desde el flujo de trabajo.' %></small></div><% } %>
+          <% columnTasks.forEach(task=>{ %>
+          <article class="tp-work-card" aria-label="<%= task.codigo_tarea %>: <%= task.producto %>">
+            <header><span class="tp-task-kind"><%= taskLabels[task.tipo]||task.tipo %></span><span class="tp-priority tp-priority-<%= task.prioridad.toLowerCase() %>"><%= priorityLabels[task.prioridad]||task.prioridad %></span></header>
+            <h4><%= task.producto %></h4><div class="tp-work-quantity"><strong><%= Number(task.cantidad).toLocaleString('es-PE') %></strong><span>unidades</span><small>Lote <%= task.numero_lote %></small></div>
+            <div class="tp-work-route"><div><span class="tp-route-dot"></span><small>Recoger</small><strong><%= task.zona_origen %></strong></div><div><span class="tp-route-dot destination"></span><small>Depositar</small><strong><%= task.zona_destino %></strong></div></div>
+            <details class="tp-work-details"><summary>Ubicaciones y referencia</summary><dl><dt>Origen</dt><dd><%= task.loc_origen %></dd><dt>Destino</dt><dd><%= task.loc_destino %></dd><dt>Producto</dt><dd><%= task.sku %></dd><dt>Tarea</dt><dd><%= task.codigo_tarea %></dd><% if(task.referencia_operativa){ %><dt>Referencia</dt><dd><%= task.referencia_operativa %></dd><% } %></dl><% if(task.observaciones){ %><p><strong>Instrucción:</strong> <%= task.observaciones %></p><% } %></details>
+            <div class="tp-assignee"><span class="tp-person-avatar"><%= task.asignado?task.asignado.trim().charAt(0).toUpperCase():'?' %></span><div><strong><%= task.asignado||'Sin asignar' %></strong><small><%= task.asignado?'Operador responsable':'Elige quién la atenderá' %></small></div></div>
+            <% if(task.estado==='PENDIENTE'&&can('wms.tasks.assign')){ %><form method="post" action="/wms/tareas/<%= task.id %>/asignar" class="tp-assignment"><input type="hidden" name="_csrf" value="<%= csrfToken %>"><label for="operator-<%= task.id %>" class="visually-hidden">Operador para <%= task.codigo_tarea %></label><select id="operator-<%= task.id %>" name="operador_id" required aria-label="Asignar <%= task.codigo_tarea %>"><option value="">Elegir operador</option><% operators.forEach(operator=>{ %><option value="<%= operator.id %>" <%= Number(task.asignado_a)===Number(operator.id)?'selected':'' %>><%= operator.nombre %></option><% }) %></select><button class="tp-assign-button"><%= task.asignado?'Cambiar':'Asignar' %></button></form><% } %>
+            <footer><time><%= date(task.creado_en,true) %></time><% if(can('wms.tasks.manage')&&['PENDIENTE','EN_PROCESO'].includes(task.estado)){ %><form method="post" action="/wms/tareas/<%= task.id %>/cancelar"><input type="hidden" name="_csrf" value="<%= csrfToken %>"><button class="tp-cancel-button" data-confirm="¿Cancelar esta tarea? El inventario no se moverá.">Cancelar</button></form><% } else { %><span class="tp-done-label"><%= task.estado==='COMPLETADA'?'✓ Confirmada':'Cerrada' %></span><% } %></footer>
+          </article>
+          <% }) %>
+        </div>
+      </section>
+      <% }) %>
+    </div>
+  </section>
+</div>

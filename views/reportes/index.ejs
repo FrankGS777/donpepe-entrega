@@ -1,0 +1,43 @@
+<% const maxFlow=Math.max(...flow.map(row=>Math.max(Number(row.entradas)||0,Number(row.salidas)||0)),1); const maxValue=Math.max(...stock.map(row=>Number(row.valorizado)||0),1); const completion=summary.tasks?Math.round(summary.completedTasks/summary.tasks*100):0; %>
+<section class="analytics-hero">
+  <div><h1>Reportes operativos</h1><p>Kardex, tareas, capacidad y vencimientos de los últimos 30 días.</p></div>
+  <div class="analytics-actions"><span><b>Actualizado</b><small><%= date(new Date(),true) %></small></span><a class="btn btn-brand" href="/reportes/kardex.csv"><svg class="icon"><use href="/icons.svg#i-arrows"></use></svg> Exportar kardex CSV</a></div>
+</section>
+
+<section class="analytics-kpis">
+  <article><small>OPERACIONES</small><strong><%= summary.operations.toLocaleString('es-PE') %></strong><p>movimientos registrados</p><span class="purple"><svg class="icon"><use href="/icons.svg#i-arrows"></use></svg></span></article>
+  <article><small>ENTRADAS</small><strong><%= summary.inbound.toLocaleString('es-PE') %></strong><p>unidades recibidas</p><span class="green"><svg class="icon"><use href="/icons.svg#i-truck"></use></svg></span></article>
+  <article><small>SALIDAS</small><strong><%= summary.outbound.toLocaleString('es-PE') %></strong><p>unidades despachadas</p><span class="coral"><svg class="icon"><use href="/icons.svg#i-package"></use></svg></span></article>
+  <article><small>VALOR INVENTARIO</small><strong><%= money(summary.inventoryValue) %></strong><p>a costo de compra</p><span class="yellow"><svg class="icon"><use href="/icons.svg#i-chart"></use></svg></span></article>
+</section>
+
+<div class="analytics-grid">
+  <section class="panel analytics-flow">
+    <div class="panel-title"><div><h2>ENTRADAS VS. SALIDAS</h2><small>Unidades confirmadas por kardex</small></div><div class="chart-legend"><span><i class="in"></i>Entradas</span><span><i class="out"></i>Salidas</span></div></div>
+    <div class="report-flow-chart"><% if(!flow.length){ %><div class="empty refined-empty"><strong>Sin movimientos en el periodo</strong></div><% } %><% flow.forEach(row=>{ %><div class="report-flow-row"><time><%= new Intl.DateTimeFormat('es-PE',{day:'2-digit',month:'short',timeZone}).format(new Date(row.fecha)) %></time><div class="report-flow-bars"><span class="in" style="width:<%= Math.max(0,Number(row.entradas||0)/maxFlow*100) %>%"><b><%= row.entradas||0 %></b></span><span class="out" style="width:<%= Math.max(0,Number(row.salidas||0)/maxFlow*100) %>%"><b><%= row.salidas||0 %></b></span></div><small><%= row.operaciones %> ops.</small></div><% }) %></div>
+  </section>
+
+  <section class="panel report-scorecard">
+    <div class="panel-title"><div><h2>CUMPLIMIENTO DE TAREAS RF</h2></div><a href="/wms/tareas">Abrir cola</a></div>
+    <div class="completion-ring" style="--completion:<%= completion %>"><div><strong><%= completion %>%</strong><span>completadas</span></div></div>
+    <div class="task-report-list"><% taskSummary.forEach(row=>{ %><div><span class="task-state <%= row.estado==='COMPLETADA'?'complete':row.estado==='EN_PROCESO'?'progressing':row.estado==='CANCELADA'?'cancelled':'pending' %>"></span><p><strong><%= row.estado.replaceAll('_',' ') %></strong><small><%= row.unidades||0 %> unidades</small></p><b><%= row.tareas %></b></div><% }) %></div>
+  </section>
+
+  <section class="panel valuation-panel">
+    <div class="panel-title"><div><h2>VALORIZACIÓN POR CATEGORÍA</h2></div><span class="report-total"><%= money(summary.inventoryValue) %></span></div>
+    <div class="valuation-bars"><% stock.forEach((row,index)=>{ const pct=Number(row.valorizado||0)/maxValue*100; %><div><div><span><i class="c<%= index%5 %>"></i><%= row.categoria %></span><b><%= money(row.valorizado) %></b></div><em><i style="width:<%= pct %>%"></i></em><small><%= Number(row.unidades||0).toLocaleString('es-PE') %> unidades</small></div><% }) %></div>
+  </section>
+
+  <section class="panel occupancy-panel">
+    <div class="panel-title"><div><h2>OCUPACIÓN POR LOC</h2></div><span class="report-total"><%= summary.averageOccupancy.toFixed(1) %>% promedio</span></div>
+    <div class="occupancy-list"><% occupancy.slice(0,10).forEach(row=>{ const pct=Math.min(Number(row.porcentaje_ocupacion||0),100); %><a href="/wms/posiciones"><div><strong><%= row.codigo_loc %></strong><small><%= row.zona %> · <%= row.tipo %></small></div><span><b><%= pct %>%</b><em><i class="<%= pct>=90?'danger':pct>=75?'warning':'' %>" style="width:<%= pct %>%"></i></em><small><%= row.ocupacion_hu %>/<%= row.capacidad_hu %> HU · <%= row.unidades_ocupadas %> UND</small></span></a><% }) %></div>
+  </section>
+
+  <section class="panel expiry-report">
+    <div class="panel-title"><div><h2>LOTES QUE VENCEN EN 30 DÍAS</h2><small>Prioridad FEFO por fecha más próxima</small></div><span class="risk-count"><%= expiring.length %> lotes</span></div>
+    <% if(!expiring.length){ %><div class="empty refined-empty"><strong>No existen lotes próximos a vencer</strong><small>El horizonte revisado es de 30 días.</small></div><% } %>
+    <div class="table-responsive"><table class="table table-darkish"><thead><tr><th>Producto y lote</th><th>LOC</th><th>Stock</th><th>Vencimiento</th><th>Prioridad</th></tr></thead><tbody><% expiring.forEach(row=>{ %><tr><td><strong><%= row.nombre %></strong><small><%= row.numero_lote %></small></td><td><span class="loc-code"><%= row.codigo_loc %></span></td><td><%= row.cantidad_actual %> UND</td><td><%= date(row.fecha_vencimiento) %></td><td><span class="expiry-days <%= Number(row.dias)<=7?'critical':Number(row.dias)<=15?'warning':'' %>"><%= row.dias %> días</span></td></tr><% }) %></tbody></table></div>
+  </section>
+</div>
+
+<aside class="report-method"><svg class="icon"><use href="/icons.svg#i-shield"></use></svg><div><strong>Fuente y criterio</strong><p>Los indicadores se calculan directamente sobre kardex, tareas RF, lotes y capacidad de LOC. La exportación conserva el detalle para auditoría y conciliación externa.</p></div></aside>

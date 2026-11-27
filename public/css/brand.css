@@ -1,0 +1,148 @@
+/* Arte final elegido: dorado original, transparente y sin filtros de color. */
+body[class] .donpepe-logo {
+  display: block;
+  width: 100%;
+  max-width: 100%;
+  height: auto;
+  min-height: 0;
+  padding: 0;
+  line-height: 0;
+  flex: 0 0 auto;
+  overflow: visible;
+  background: transparent;
+  border: 0;
+  border-radius: 0;
+  box-shadow: none;
+}
+
+body[class] .donpepe-logo img {
+  display: block;
+  width: 100%;
+  height: auto !important;
+  max-width: 100%;
+  max-height: none;
+  object-fit: contain;
+  object-position: center;
+  filter: none;
+  background: transparent;
+  border: 0;
+  border-radius: 0;
+  padding: 0;
+  margin: 0;
+  box-shadow: none;
+}
+
+/* El sidebar mantiene sus enlaces y anchura: la marca aprovecha el espacio útil. */
+body[class] .sidebar .brand {
+  align-items: stretch;
+  padding: 20px 0;
+  width: calc(100% + 26px);
+  margin-inline: -13px;
+}
+
+body[class] .sidebar .brand .donpepe-logo {
+  width: 100%;
+}
+
+body[class] .sidebar .brand .donpepe-logo img {
+  width: 100%;
+  max-height: none;
+}
+
+body[class] .sidebar .brand small {
+  padding-inline: 8px;
+}
+
+/* Sobre fondos claros, el soporte oscuro permite conservar el dorado elegido. */
+body.role-jefe_operaciones :is(.sidebar .brand, .shell-home) .donpepe-logo,
+body.rf-mode .rf-brand .donpepe-logo,
+body[class][data-theme="light"]
+  :is(.sidebar .brand, .shell-home, .rf-brand)
+  .donpepe-logo,
+body[class]
+  [data-theme="light"]
+  :is(.sidebar .brand, .shell-home, .rf-brand)
+  .donpepe-logo {
+  padding: 10px 8px;
+  border-radius: 12px;
+  background: #241332;
+  box-shadow: inset 0 0 0 1px #f4c92824;
+}
+
+body[class][data-theme="dark"]
+  :is(.sidebar .brand, .shell-home, .rf-brand)
+  .donpepe-logo,
+body[class]
+  [data-theme="dark"]
+  :is(.sidebar .brand, .shell-home, .rf-brand)
+  .donpepe-logo {
+  background: transparent;
+  box-shadow: none;
+}
+
+body[class] .auth-wordmark {
+  width: min(340px, 100%);
+  max-width: 100%;
+}
+
+body[class] .auth-stage {
+  min-width: 0;
+  grid-template-columns: minmax(0, 1fr);
+}
+
+body[class] .auth-card {
+  min-width: 0;
+  max-width: 100%;
+}
+
+body[class] .shell-home {
+  width: 138px;
+  height: auto;
+  align-self: center;
+  flex: 0 0 auto;
+}
+
+body[class] .shell-home .donpepe-logo {
+  width: 100%;
+}
+
+body[class] .rf-brand .donpepe-logo {
+  width: 188px;
+  height: auto;
+  min-height: 0;
+  overflow: visible;
+}
+
+body[class] .lot-label-brand .donpepe-logo {
+  width: 156px;
+  flex: 0 0 156px;
+}
+
+@media (max-width: 600px) {
+  body[class] .shell-home {
+    width: 118px;
+  }
+}
+
+@media (max-width: 380px) {
+  body[class] .shell-home {
+    width: 98px;
+  }
+
+  body[class] .rf-brand .donpepe-logo {
+    width: 158px;
+  }
+}
+
+@media print {
+  body[class] .lot-label-brand {
+    background: #241332 !important;
+    color: #fff !important;
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+  }
+
+  body[class] .lot-label-brand > span:not(.donpepe-logo) {
+    color: #fff !important;
+  }
+}

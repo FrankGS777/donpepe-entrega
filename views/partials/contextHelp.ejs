@@ -1,0 +1,42 @@
+<%
+const helpCatalog = [
+  { test:/^\/roles/, title:'Roles y permisos', summary:'Cada rol personalizado hereda una interfaz y únicamente los permisos que marcas. No crea otra cuenta administradora.', steps:['Define responsabilidad e interfaz de escritorio o RF','Marca acciones; sus consultas necesarias se incluyen automáticamente','Revisa el acceso efectivo, guarda y asigna el rol al usuario'], terms:['Perfil: escritorio operativo o terminal móvil','Dependencia: consulta necesaria para realizar una acción','Plantilla protegida: no se cambia ni se elimina'] },
+  { test:/^\/mi-cuenta/, title:'Tu correo personal', summary:'Los enlaces aprobados llegan a tu dirección vinculada, no a un receptor global. Tu correo de acceso no cambia.', steps:['Confirma tu contraseña y escribe el nuevo correo','Abre el enlace de verificación desde tu sesión','Confirma antes de 30 minutos; el correo anterior permanece vigente hasta entonces'], terms:['Verificación: comprueba acceso a la nueva dirección','Recuperación: sigue requiriendo aprobación del administrador'] },
+  { test:/^\/dashboard$/, title:can('dashboard.admin')?'Gobierno WMS':'Centro de operaciones', summary:can('dashboard.admin')?'Supervisa indicadores, accesos y ajustes pendientes. La ejecución física corresponde a RF.':'Planifica la cola y delega trabajo al operador; supervisa su avance sin confirmar movimientos en su lugar.', steps:can('dashboard.admin')?['Revisa recuperaciones y ajustes pendientes','Consulta evidencia y trazabilidad','Aprueba o rechaza desde el módulo correspondiente']:['Revisa tareas pendientes y riesgos','Asigna un operador RF activo','Supervisa la ejecución confirmada por escaneo'], terms:['KPI: indicador que resume el estado actual','Segregación: planificar, ejecutar y aprobar son responsabilidades diferentes'] },
+  { test:/^\/productos/, title:'Maestro de SKU', summary:'Un SKU identifica el producto; su estrategia WMS define dónde y cómo se almacena.', steps:can('products.update')?['Define identidad y clasificación','Registra dimensiones y trazabilidad','Asigna LOC activa y objetivo de picking']:['Consulta el SKU y su stock','Revisa dimensiones y controles logísticos','Configura LOC de picking, mínimo y objetivo'], terms:['SKU: identificador interno único','LOC primaria: dirección activa para preparación'] },
+  { test:/^\/compras\/nueva$/, title:'Crear una orden', summary:'La orden autoriza qué proveedor entregará, qué SKU y a qué costo estimado.', steps:['Selecciona el proveedor','Agrega SKU, cantidad y costo','Revisa el resumen y crea la orden'], terms:['OC: orden de compra','Estimado: valor planificado; no es aún una recepción'] },
+  { test:/^\/compras\/\d+\/recibir$/, title:'Recepción WMS', summary:'Verifica físicamente cada línea; el stock entra primero a recepción y luego se ubica.', steps:['Comprueba lote y fechas','Confirma la LOC de recepción','Genera put-away para almacenar'], terms:['Put-away: tarea desde recepción hacia reserva o picking','FEFO: primero vence, primero sale'] },
+  { test:/^\/compras/, title:'Abastecimiento', summary:'La cola separa órdenes pendientes, recibidas y canceladas. La recepción física se registra desde RF.', steps:['Localiza una orden','Revisa proveedor y detalle','Consulta el avance de recepción y su trazabilidad'], terms:['Pendiente: aún puede recibirse o cancelarse','Recibida: ya generó lotes y trabajo WMS'] },
+  { test:/^\/wms\/posiciones/, title:'LOC, zonas y posiciones', summary:'LOC es una dirección física; su zona aporta el propósito y la posición contiene SKU + lote.', steps:['Elige zona, pasillo y estante','Consulta el nivel y casillero de la LOC','Revisa la HU, SKU y lote almacenados'], terms:['Reserva: stock de respaldo','Picking: stock activo disponible para despacho'] },
+  { test:/^\/wms\/tareas/, title:can('wms.tasks.assign')?'Delegación de trabajo':'Seguimiento del trabajo', summary:'El operador asignado confirma origen, producto y destino desde RF. Nadie ejecuta movimientos físicos desde esta pantalla.', steps:can('wms.tasks.assign')?['Revisa tareas originadas por recepción o pedidos','Asigna un operador RF activo','Supervisa avance o cancela una tarea abierta']:['Filtra por estado','Consulta origen, destino y operador','Revisa trazabilidad del movimiento confirmado'], terms:['Check-in: recepción → ubicación','Pick order: picking → staging','Route returns: retorno → cuarentena'] },
+  { test:/^\/inventario\/lotes/, title:'Trazabilidad por lote', summary:'Consulta dónde está cada lote, cuánto queda y cuándo vence.', steps:['Busca SKU, lote o LOC','Revisa estado y vencimiento','Consulta o imprime la etiqueta del lote'], terms:['Posición: lote de un SKU en una LOC','Disponible: apto para la operación configurada'] },
+  { test:/^\/inventario\/movimientos/, title:'Kardex', summary:'Cada entrada y salida explica quién cambió el inventario y por qué.', steps:['Filtra el evento','Relaciona referencia y lote','Verifica el par de un traslado'], terms:['Kardex: historial inmutable de movimientos','Traslado: salida de origen + entrada en destino'] },
+  { test:/^\/auditorias/, title:can('audits.approve')?'Aprobación de ajustes':'Conteo cíclico', summary:'El conteo identifica SKU, lote de fabricante y LOC. Solo el administrador aprueba diferencias registradas por otra persona.', steps:can('audits.approve')?['Revisa quién contó y la evidencia','Contrasta cantidad, lote y LOC','Aprueba o rechaza sin alterar el conteo original']:['Cuenta físicamente el lote en la LOC','Registra la cantidad y evidencia','Espera la decisión administrativa sobre la diferencia'], terms:['Doble control: quien cuenta no aprueba','Ajuste: movimiento generado tras aprobación'] },
+  { test:/^\/reportes/, title:'Análisis WMS', summary:'Los paneles separan flujo de unidades, tareas, valor del stock y riesgo de vencimiento.', steps:['Lee el indicador','Identifica la excepción','Exporta o abre el módulo operativo'], terms:['Valorización: stock × costo','Flujo: entradas y salidas de kardex'] },
+  { test:/^\/usuarios/, title:'Accesos y responsabilidades', summary:'Los permisos se asignan por rol y las cuentas se bloquean sin borrar historial.', steps:['Crea la identidad','Asigna el rol correcto','Activa o bloquea la cuenta'], terms:['RBAC: permisos por rol','Bloqueada: no inicia sesión, pero conserva trazabilidad'] },
+  { test:/^\/catalogos/, title:'Maestros del sistema', summary:'Configura datos reutilizados por productos, compras y el WMS.', steps:['Elige el maestro','Crea o revisa el registro','Verifica relaciones antes de eliminar'], terms:['Zona: agrupación funcional o ambiental','LOC: dirección física única dentro de una zona'] },
+];
+const contextualHelp = helpCatalog.find(item=>item.test.test(currentPath));
+%>
+<% if(contextualHelp){ %>
+  <button class="context-help-button" type="button" data-ui-drawer-open="#contextHelp" aria-controls="contextHelp">
+    <svg class="icon"><use href="/icons.svg#i-shield"></use></svg>
+    <span>¿Cómo funciona?</span>
+  </button>
+  <aside class="offcanvas offcanvas-end context-help-panel" data-ui-drawer hidden tabindex="-1" id="contextHelp" aria-labelledby="contextHelpTitle">
+    <div class="offcanvas-header">
+      <div><span class="eyebrow">GUÍA DE ESTA PANTALLA</span><h2 id="contextHelpTitle"><%= contextualHelp.title %></h2></div>
+      <button type="button" class="btn-close btn-close-white" data-ui-drawer-close aria-label="Cerrar"></button>
+    </div>
+    <div class="offcanvas-body">
+      <p class="context-help-summary"><%= contextualHelp.summary %></p>
+      <ol class="context-help-steps">
+        <% contextualHelp.steps.forEach((step,index)=>{ %><li><span><%= index+1 %></span><strong><%= step %></strong></li><% }) %>
+      </ol>
+      <div class="context-help-terms">
+        <span class="eyebrow">TÉRMINOS CLAVE</span>
+        <% contextualHelp.terms.forEach(term=>{ const parts=term.split(':'); %><p><strong><%= parts.shift() %></strong><span><%= parts.join(':') %></span></p><% }) %>
+      </div>
+    </div>
+  </aside>
+<% } %>

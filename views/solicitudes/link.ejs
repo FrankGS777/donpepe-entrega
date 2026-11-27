@@ -1,0 +1,9 @@
+<div class="page-head page-head-premium"><div><h1><%= delivery.sent?'CORREO ENVIADO':'NO SE PUDO ENVIAR' %></h1><p><%= delivery.sent?'El usuario recibió el enlace en su correo registrado.':'El enlace fue generado, pero el servidor de correo requiere atención.' %></p></div><a class="btn btn-outline-dark" href="/solicitudes">Volver</a></div>
+<section class="secure-link-card panel light-panel <%= delivery.sent?'delivery-success':'delivery-failed' %>" data-activation-path="<%= activationUrl %>">
+  <div class="secure-link-status"><span><svg class="icon"><use href="/icons.svg#<%= delivery.sent?'i-check':'i-alert' %>"></use></svg></span><div><small><%= delivery.sent?'ENTREGA CONFIRMADA':'ENTREGA PENDIENTE' %></small><h2>Restablecimiento de contraseña</h2><p>Cuenta: <%= request.correo %> · Destino: <%= delivery.to %></p></div></div>
+  <div class="secure-link-rules"><div><b>1 uso</b><span>Se invalida al completar</span></div><div><b><%= expiresIn %></b><span>Vigencia</span></div><div><b>Correo</b><span><%= delivery.sent?'Enviado':'No entregado' %></span></div></div>
+  <% if(delivery.sent){ %><div class="secure-delivery-note success"><strong>Entrega automática completada</strong><p>No es necesario copiar ni compartir manualmente el enlace.</p></div><% } else { %>
+    <div class="request-delivery-error"><strong>Error de envío</strong><span><%= delivery.error %></span></div>
+    <details class="manual-fallback"><summary>Enlace de contingencia</summary><p>Úsalo solo después de verificar personalmente la identidad del usuario.</p><div class="secure-link-copy"><input id="activationLink" class="form-control" readonly data-activation-link value="<%= activationUrl %>"><button class="btn btn-brand" type="button" data-copy-activation>Copiar</button></div></details>
+  <% } %>
+</section>

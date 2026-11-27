@@ -1,0 +1,141 @@
+{
+  "provider": "Poly Haven",
+  "license": "https://polyhaven.com/license",
+  "assets": [
+    {
+      "file": "concrete_floor_02_diff_2k.jpg",
+      "source": "https://dl.polyhaven.org/file/ph-assets/Textures/jpg/2k/concrete_floor_02/concrete_floor_02_diff_2k.jpg",
+      "assetPage": "https://polyhaven.com/a/concrete_floor_02",
+      "channel": "diff",
+      "bytes": 3310792,
+      "sha256": "b08a20dcb306d08ee7f4a05ec216b19b7fd37e95745998ec5f81ecedaac1f0e9",
+      "license": "CC0-1.0"
+    },
+    {
+      "file": "concrete_floor_02_nor_gl_2k.jpg",
+      "source": "https://dl.polyhaven.org/file/ph-assets/Textures/jpg/2k/concrete_floor_02/concrete_floor_02_nor_gl_2k.jpg",
+      "assetPage": "https://polyhaven.com/a/concrete_floor_02",
+      "channel": "nor_gl",
+      "bytes": 935810,
+      "sha256": "ce12d18f283f884f4be6f6c110f81582376049caada1e226958659d3d5fbaae1",
+      "license": "CC0-1.0"
+    },
+    {
+      "file": "concrete_floor_02_rough_2k.jpg",
+      "source": "https://dl.polyhaven.org/file/ph-assets/Textures/jpg/2k/concrete_floor_02/concrete_floor_02_rough_2k.jpg",
+      "assetPage": "https://polyhaven.com/a/concrete_floor_02",
+      "channel": "rough",
+      "bytes": 1417673,
+      "sha256": "cb539b0f8fdc8c63241683e01c923eb040fa701ec4c60cff27b674294746ae67",
+      "license": "CC0-1.0"
+    },
+    {
+      "file": "brown_planks_03_diff_2k.jpg",
+      "source": "https://dl.polyhaven.org/file/ph-assets/Textures/jpg/2k/brown_planks_03/brown_planks_03_diff_2k.jpg",
+      "assetPage": "https://polyhaven.com/a/brown_planks_03",
+      "channel": "diff",
+      "bytes": 2411538,
+      "sha256": "1140ceac531c2dfe2e714357e34cd81cce62878ced24fa711b87c4ca24416058",
+      "license": "CC0-1.0"
+    },
+    {
+      "file": "brown_planks_03_nor_gl_2k.jpg",
+      "source": "https://dl.polyhaven.org/file/ph-assets/Textures/jpg/2k/brown_planks_03/brown_planks_03_nor_gl_2k.jpg",
+      "assetPage": "https://polyhaven.com/a/brown_planks_03",
+      "channel": "nor_gl",
+      "bytes": 2425492,
+      "sha256": "4aa94e511dda5ed998194debaf6049806f44a0afd3b750168efcd7a35bc0ff4a",
+      "license": "CC0-1.0"
+    },
+    {
+      "file": "brown_planks_03_rough_2k.jpg",
+      "source": "https://dl.polyhaven.org/file/ph-assets/Textures/jpg/2k/brown_planks_03/brown_planks_03_rough_2k.jpg",
+      "assetPage": "https://polyhaven.com/a/brown_planks_03",
+      "channel": "rough",
+      "bytes": 1015477,
+      "sha256": "cfb6bf6494d6487c56b2699a45d71966439bc2cc41b386b12a62451048f0172c",
+      "license": "CC0-1.0"
+    },
+    {
+      "file": "metal_plate_diff_2k.jpg",
+      "source": "https://dl.polyhaven.org/file/ph-assets/Textures/jpg/2k/metal_plate/metal_plate_diff_2k.jpg",
+      "assetPage": "https://polyhaven.com/a/metal_plate",
+      "channel": "diff",
+      "bytes": 2670774,
+      "sha256": "864c9a653acd1f5034c9bbe7f955b18cc9687a81bbdfa805e7a2319939676910",
+      "license": "CC0-1.0"
+    },
+    {
+      "file": "metal_plate_nor_gl_2k.jpg",
+      "source": "https://dl.polyhaven.org/file/ph-assets/Textures/jpg/2k/metal_plate/metal_plate_nor_gl_2k.jpg",
+      "assetPage": "https://polyhaven.com/a/metal_plate",
+      "channel": "nor_gl",
+      "bytes": 2516654,
+      "sha256": "146f8c00874a584bcc4a184643e72f160da2a7568d469198e02b26c9ff93cf43",
+      "license": "CC0-1.0"
+    },
+    {
+      "file": "metal_plate_rough_2k.jpg",
+      "source": "https://dl.polyhaven.org/file/ph-assets/Textures/jpg/2k/metal_plate/metal_plate_rough_2k.jpg",
+      "assetPage": "https://polyhaven.com/a/metal_plate",
+      "channel": "rough",
+      "bytes": 3045988,
+      "sha256": "3cdc139df4ec5b304dd986278c1fb026c67c42e6623f0ee5caa7f373d51c7bef",
+      "license": "CC0-1.0"
+    },
+    {
+      "file": "asphalt_03_diff_2k.jpg",
+      "source": "https://dl.polyhaven.org/file/ph-assets/Textures/jpg/2k/asphalt_03/asphalt_03_diff_2k.jpg",
+      "assetPage": "https://polyhaven.com/a/asphalt_03",
+      "channel": "diff",
+      "bytes": 3723686,
+      "sha256": "12621c0ec24e4dd3c51a2598483b87a5925212b1db125dd5dfcfbd0226a06922",
+      "license": "CC0-1.0"
+    },
+    {
+      "file": "asphalt_03_nor_gl_2k.jpg",
+      "source": "https://dl.polyhaven.org/file/ph-assets/Textures/jpg/2k/asphalt_03/asphalt_03_nor_gl_2k.jpg",
+      "assetPage": "https://polyhaven.com/a/asphalt_03",
+      "channel": "nor_gl",
+      "bytes": 4336458,
+      "sha256": "73416b96bf9524e4dc09f8e16e6b04875e8c90991a44286f36bd87f26415ee5d",
+      "license": "CC0-1.0"
+    },
+    {
+      "file": "asphalt_03_rough_2k.jpg",
+      "source": "https://dl.polyhaven.org/file/ph-assets/Textures/jpg/2k/asphalt_03/asphalt_03_rough_2k.jpg",
+      "assetPage": "https://polyhaven.com/a/asphalt_03",
+      "channel": "rough",
+      "bytes": 2918347,
+      "sha256": "86b95e4004b01437aa165a4c68903b3fb28eff9e88815dcb6bc9f11a29b08c42",
+      "license": "CC0-1.0"
+    },
+    {
+      "file": "industrial_sunset_02_1k.hdr",
+      "source": "https://dl.polyhaven.org/file/ph-assets/HDRIs/hdr/1k/industrial_sunset_02_1k.hdr",
+      "assetPage": "https://polyhaven.com/a/industrial_sunset_02",
+      "channel": "hdri",
+      "bytes": 1610744,
+      "sha256": "43ad8b5ae5de42a6d0123ed063ba6867488c2f90adf24efdf051781952b5e9cb",
+      "license": "CC0-1.0"
+    },
+    {
+      "file": "empty_warehouse_01_2k.hdr",
+      "source": "https://dl.polyhaven.org/file/ph-assets/HDRIs/hdr/2k/empty_warehouse_01_2k.hdr",
+      "assetPage": "https://polyhaven.com/a/empty_warehouse_01",
+      "channel": "hdri",
+      "bytes": 6581920,
+      "sha256": "9734d30c83fe480a2a7c7521b7bdb816d869c2468d45d3794bde729d6181f830",
+      "license": "CC0-1.0"
+    },
+    {
+      "file": "industrial_sunset_02_puresky_4k.hdr",
+      "source": "https://dl.polyhaven.org/file/ph-assets/HDRIs/hdr/4k/industrial_sunset_02_puresky_4k.hdr",
+      "assetPage": "https://polyhaven.com/a/industrial_sunset_02_puresky",
+      "channel": "hdri",
+      "bytes": 16086915,
+      "sha256": "79c8cbb67b306a04ae8e5aa17536f8f5fb71b2219c09b39793890bc53b1ef9f7",
+      "license": "CC0-1.0"
+    }
+  ]
+}

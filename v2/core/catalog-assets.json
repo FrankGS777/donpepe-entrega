@@ -1,0 +1,148 @@
+{
+  "verifiedOn": "2026-10-17",
+  "products": [
+    {
+      "id": "SKU-ARROZ",
+      "name": "Arroz superior Costeño 750 g",
+      "brand": "Costeño",
+      "category": "Abarrotes",
+      "presentation": "Bolsa de 750 g",
+      "barcode": "7755139965326",
+      "imageUrl": "/images/catalog/sku-arroz.webp",
+      "referenceUrl": "https://www.metro.pe/arroz-superior-costeno-750g-171247/p"
+    },
+    {
+      "id": "SKU-ACEITE",
+      "name": "Aceite vegetal Primor Clásico 900 ml",
+      "brand": "Primor",
+      "category": "Abarrotes",
+      "presentation": "Botella de 900 ml",
+      "barcode": "7750243979214",
+      "imageUrl": "/images/catalog/sku-aceite.webp",
+      "referenceUrl": "https://www.metro.pe/aceite-vegetal-primor-cl-sico-botella-900ml-3201-2/p"
+    },
+    {
+      "id": "SKU-FIDEOS",
+      "name": "Spaghetti Don Vittorio 500 g",
+      "brand": "Don Vittorio",
+      "category": "Abarrotes",
+      "presentation": "Bolsa de 500 g",
+      "barcode": "7750243072571",
+      "imageUrl": "/images/catalog/sku-fideos.webp",
+      "referenceUrl": "https://www.metro.pe/spaghetti-don-vittorio-500g-962239/p"
+    },
+    {
+      "id": "SKU-AZUCAR",
+      "name": "Azúcar rubia Dulfina 1 kg",
+      "brand": "Dulfina",
+      "category": "Abarrotes",
+      "presentation": "Bolsa de 1 kg",
+      "barcode": "7751160000234",
+      "imageUrl": "/images/catalog/sku-azucar.webp",
+      "referenceUrl": "https://www.metro.pe/azucar-rubia-dulfina-bolsa-1-kg-333705/p"
+    },
+    {
+      "id": "SKU-ATUN",
+      "name": "Filete de atún Primor 140 g",
+      "brand": "Primor",
+      "category": "Abarrotes",
+      "presentation": "Lata de 140 g",
+      "barcode": "7750243049658",
+      "imageUrl": "/images/catalog/sku-atun.webp",
+      "referenceUrl": "https://www.metro.pe/filete-de-atun-primor-140g/p"
+    },
+    {
+      "id": "SKU-LECHE",
+      "name": "Leche entera UHT Gloria 946 ml",
+      "brand": "Gloria",
+      "category": "Lácteos",
+      "presentation": "Caja de 946 ml",
+      "barcode": "7751271019545",
+      "imageUrl": "/images/catalog/sku-leche.webp",
+      "referenceUrl": "https://www.metro.pe/leche-entera-uht-gloria-caja-946ml-3230/p"
+    },
+    {
+      "id": "SKU-YOGUR",
+      "name": "Yogurt bebible Gloria fresa 946 g",
+      "brand": "Gloria",
+      "category": "Lácteos refrigerados",
+      "presentation": "Botella de 946 g",
+      "barcode": "7751271027526",
+      "imageUrl": "/images/catalog/sku-yogur.webp",
+      "referenceUrl": "https://www.metro.pe/yogurt-bebible-gloria-fresa-botella-946g-48255001-2/p"
+    },
+    {
+      "id": "SKU-QUESO",
+      "name": "Queso fresco Floralp 500 g",
+      "brand": "Floralp",
+      "category": "Lácteos refrigerados",
+      "presentation": "Molde de 500 g",
+      "barcode": "7751758876821",
+      "imageUrl": "/images/catalog/sku-queso.webp",
+      "referenceUrl": "https://www.metro.pe/queso-fresco-floralp-molde-500-gr-2-2/p"
+    },
+    {
+      "id": "SKU-JUGO",
+      "name": "Jugo de naranja Eco Fresh 1 L",
+      "brand": "Eco Fresh",
+      "category": "Bebidas refrigeradas",
+      "presentation": "Botella de 1 L",
+      "barcode": "7752705002843",
+      "imageUrl": "/images/catalog/sku-jugo.webp",
+      "referenceUrl": "https://www.metro.pe/jugo-de-naranja-natural-wong-botella-1l-1038985/p"
+    },
+    {
+      "id": "SKU-HELADO",
+      "name": "Helado Peziduri vainilla D’Onofrio 900 ml",
+      "brand": "D’Onofrio",
+      "category": "Congelados",
+      "presentation": "Pote de 900 ml",
+      "barcode": "8445291014091",
+      "imageUrl": "/images/catalog/sku-helado.webp",
+      "referenceUrl": "https://www.metro.pe/helado-de-crema-peziduri-vainilla-900ml-299433005-2/p"
+    },
+    {
+      "id": "SKU-POLLO",
+      "name": "Filete de pechuga de pollo congelado San Fernando por kg",
+      "brand": "San Fernando",
+      "category": "Congelados",
+      "presentation": "Venta por kg · peso variable",
+      "barcode": "2578970000002",
+      "imageUrl": "/images/catalog/sku-pollo.webp",
+      "referenceUrl": "https://www.metro.pe/filete-de-pechuga-de-pollo-san-fernando-x-kg-987004/p"
+    },
+    {
+      "id": "SKU-DETERGENTE",
+      "name": "Detergente Sapolio Aros de Poder Limón 730 g",
+      "brand": "Sapolio",
+      "category": "Limpieza",
+      "presentation": "Bolsa de 730 g",
+      "barcode": "7750243079358",
+      "imageUrl": "/images/catalog/sku-detergente.webp",
+      "referenceUrl": "https://www.metro.pe/detergente-en-polvo-sapolio-aros-de-poder-limon-730g-1030636/p"
+    }
+  ],
+  "suppliers": [
+    {
+      "id": "PROV-1",
+      "name": "Corporación Vega",
+      "site": "https://www.vega.pe",
+      "logoUrl": "/images/catalog/prov-1.png",
+      "referenceUrl": "https://www.vega.pe"
+    },
+    {
+      "id": "PROV-2",
+      "name": "Makro Supermayorista",
+      "site": "https://www.makro.plazavea.com.pe",
+      "logoUrl": "/images/catalog/prov-2.png",
+      "referenceUrl": "https://www.makro.plazavea.com.pe"
+    },
+    {
+      "id": "PROV-3",
+      "name": "Alicorp S.A.A.",
+      "site": "https://www.alicorp.com.pe",
+      "logoUrl": "/images/catalog/prov-3.png",
+      "referenceUrl": "https://www.alicorp.com.pe"
+    }
+  ]
+}

@@ -1,0 +1,69 @@
+<div class="page-head">
+  <div>
+    <h1>
+      <%= title %>
+    </h1>
+    <p>Asigna el rol mínimo necesario.</p>
+  </div><a href="/usuarios" class="btn btn-outline-light">Cancelar y volver</a>
+</div>
+<div class="panel form-panel">
+  <%- include('../partials/errors') %>
+    <form method="post" action="<%= user.id?'/usuarios/'+user.id+'?_method=PUT':'/usuarios' %>">
+      <input type="hidden" name="_csrf" value="<%= csrfToken %>">
+      <div class="form-section">
+        <div><span>01</span>
+          <h2>IDENTIDAD DE LA CUENTA</h2>
+        </div>
+        <p>El correo será el identificador único de inicio de sesión.</p>
+      </div>
+      <div class="row g-3">
+        <div class="col-md-6"><label class="form-label" for="userName">Nombre completo</label><input id="userName"
+            class="form-control" name="nombre" maxlength="100" autocomplete="name" required
+            value="<%= user.nombre||'' %>" placeholder="Nombre del colaborador"></div>
+        <div class="col-md-6"><label class="form-label" for="userEmail">Correo corporativo de acceso</label><input
+            id="userEmail" class="form-control" type="email" maxlength="100" name="correo" autocomplete="username"
+            required value="<%= user.correo||'' %>" placeholder="usuario@donpepe.pe"><small class="field-help">Se
+            utiliza únicamente para iniciar sesión.</small></div>
+        <div class="col-md-6"><label class="form-label" for="userRecoveryEmail">Correo personal de recuperación</label><input id="userRecoveryEmail" class="form-control" type="email" maxlength="100"
+            name="correo_recuperacion" autocomplete="email" required <%= isSelf?'readonly':'' %>
+            value="<%= user.correo_recuperacion||'' %>" placeholder="usuario@gmail.com"><small class="field-help">Recibe
+            el enlace aprobado por el administrador.<% if(isSelf){ %> <a href="/mi-cuenta">Vincular otro correo desde Mi cuenta</a>.<% } %></small></div>
+        <div class="col-md-6">
+          <% if(isSelf){ %><label class="form-label">Contraseña</label>
+            <div class="password-protected"><strong>Protegida y no visible</strong><a href="/mi-clave">Cambiar mi
+                contraseña</a></div><small class="field-help">Para cambiarla debes confirmar tu contraseña
+              actual.</small>
+            <% } else { %><label class="form-label" for="userPassword">
+                <%= user.id?'Asignar nueva contraseña':'Contraseña inicial' %>
+              </label><input id="userPassword" class="form-control" type="password" name="password" minlength="10"
+                maxlength="72" <%=user.id?'':'required' %> autocomplete="new-password"><small class="field-help">
+                <%= user.id ? 'Déjala vacía para conservarla. La nueva debe ser distinta de la actual y de las cinco anteriores.' : 'Mínimo 10 caracteres, una mayúscula, una minúscula y un número.' %>
+              </small>
+              <% } %>
+        </div>
+      </div>
+
+      <div class="form-section mt-4">
+        <div><span>02</span>
+          <h2>RESPONSABILIDAD Y ESTADO</h2>
+        </div>
+        <p>Los permisos se derivan del rol; no se asignan privilegios sueltos.</p>
+      </div>
+      <div class="role-choice-grid mb-3">
+        <% const availableRoles=roles.filter(r=>isSelf&&currentUser.rol==='administrador_wms'?r.nombre==='administrador_wms':r.nombre!=='administrador_wms'); availableRoles.forEach(role=>{ %>
+          <label class="role-choice"><input type="radio" name="rol_id" value="<%= role.id %>"
+              <%=Number(user.rol_id||availableRoles[0]?.id)===Number(role.id)?'checked':'' %> required><span>
+              <%= role.id %>
+            </span><strong>
+              <%=
+                role.etiqueta||role.nombre.replaceAll('_',' ') %></strong><small><%= roleDescriptions[role.nombre]||role.descripcion %> · <%= role.permisos_count %> permisos</small></label>
+      <% }) %>
+    </div>
+    <% if(isSelf){ %><input type="hidden" name="activo" value="1"><% } %><label class="form-switch-box"><input class="form-check-input" type="checkbox" <%- isSelf?'disabled':'name="activo"' %> value="1" <%= user.activo?'checked':'' %>><span><strong>Cuenta activa</strong><small><%= isSelf?'El administrador único debe permanecer activo.':'Al bloquearla ya no inicia sesión, pero' %>
+                    conserva toda su trazabilidad.</small></span></label>
+          <div class="form-actions"><a href="/usuarios" class="btn btn-outline-light">Cancelar</a><button
+              class="btn btn-brand">
+              <%= user.id?'Guardar cambios':'Crear cuenta interna' %>
+            </button></div>
+    </form>
+</div>

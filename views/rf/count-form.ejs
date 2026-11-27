@@ -1,0 +1,26 @@
+<section class="rf-page-head"><a href="/rf/count">← Posiciones de conteo</a><h1>Cuenta lo que ves</h1><p><%= location.zona %></p></section>
+<%- include('../partials/errors') %>
+<form method="post" action="/rf/count/<%= location.id %>" class="rf-count-form" data-rf-count novalidate>
+  <input type="hidden" name="_csrf" value="<%= csrfToken %>">
+  <div class="rf-count-step"><b>1</b><div><strong>Confirma la ubicación</strong><small>Lee la etiqueta física del lugar donde estás.</small></div></div>
+  <div class="rf-count-location"><%- include('_location',{code:location.codigo_loc,zone:location.zona}) %></div>
+  <label for="countLoc">Etiqueta de ubicación</label>
+  <input id="countLoc" class="form-control" name="codigo_loc" data-scan-input data-rf-scan-only data-scan-identity="location" data-expected-code="<%= location.codigo_loc %>" readonly inputmode="none" required autocomplete="off" value="<%= form.codigo_loc||'' %>" placeholder="Pendiente de escanear">
+  <button class="rf-camera-action" type="button" data-rf-scan-for="countLoc"><svg class="icon"><use href="/icons.svg#i-camera"/></svg> Escanear ubicación</button>
+  <div class="rf-count-step"><b>2</b><div><strong>Identifica producto y lote</strong><small>Una etiqueta identifica el producto; la del lote permite seguir su trazabilidad.</small></div></div>
+  <label for="countProduct">Producto</label>
+  <input id="countProduct" class="form-control" name="codigo_producto" data-scan-input data-rf-scan-only data-scan-identity="product" readonly inputmode="none" required autocomplete="off" value="<%= form.codigo_producto||'' %>" placeholder="Pendiente de escanear">
+  <button class="rf-camera-action" type="button" data-rf-scan-for="countProduct"><svg class="icon"><use href="/icons.svg#i-camera"/></svg> Escanear producto</button>
+  <label for="countBatch">Lote impreso</label>
+  <input id="countBatch" class="form-control" name="codigo_lote" data-scan-input data-rf-scan-only data-scan-identity="lot" data-rf-allow-new-lot readonly inputmode="none" required maxlength="50" autocomplete="off" value="<%= form.codigo_lote||'' %>" placeholder="Pendiente de escanear">
+  <button class="rf-camera-action" type="button" data-rf-scan-for="countBatch"><svg class="icon"><use href="/icons.svg#i-camera"/></svg> Escanear lote</button>
+  <div class="rf-count-step"><b>3</b><div><strong>Cuenta físicamente</strong><small>Si hay diferencias, se enviarán a revisión. No se ajusta el inventario automáticamente.</small></div></div>
+  <label for="countQty">Unidades de este lote en la posición</label>
+  <input id="countQty" class="form-control rf-quantity-input" name="stock_fisico" type="number" min="0" max="10000000" inputmode="numeric" required value="<%= form.stock_fisico??'' %>" placeholder="0">
+  <details class="rf-count-extra"><summary>Añadir una incidencia o stock hallado <span aria-hidden="true">+</span></summary>
+    <label for="countExpiry">Vencimiento de unidades no registradas</label><input id="countExpiry" class="form-control" name="fecha_vencimiento" type="date" value="<%= form.fecha_vencimiento||'' %>">
+    <label for="countNotes">Qué encontraste</label><textarea id="countNotes" class="form-control" name="observaciones" rows="3" maxlength="2000" placeholder="Estado del empaque, diferencia o evidencia"><%= form.observaciones||'' %></textarea>
+  </details>
+  <div class="rf-inline-error" role="alert" data-rf-form-error hidden></div>
+  <button class="btn btn-brand btn-lg w-100" data-rf-count-submit>Enviar conteo a revisión <span aria-hidden="true">→</span></button>
+</form>

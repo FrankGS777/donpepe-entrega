@@ -1,0 +1,75 @@
+<div class="logistics-map-panels">
+  <header class="ln-map-heading">
+    <div><h1>La red de DonPepe</h1><p>Del centro de distribución a cada sucursal. Explora el exterior o entra al almacén.</p></div>
+    <div class="ln-map-switch" role="tablist" aria-label="Área del mapa" data-network-tabs>
+      <button type="button" id="networkExteriorTab" role="tab" aria-selected="true" aria-controls="networkExteriorPanel" data-network-tab="exterior">Red y transporte</button>
+      <button type="button" id="networkInteriorTab" role="tab" aria-selected="false" aria-controls="networkInteriorPanel" tabindex="-1" data-network-tab="interior">Interior del almacén</button>
+    </div>
+  </header>
+  <section id="networkExteriorPanel" role="tabpanel" aria-labelledby="networkExteriorTab" data-network-panel="exterior"><%- include('../partials/logisticsScene', { sceneVariant: 'map' }) %></section>
+  <section id="networkInteriorPanel" role="tabpanel" aria-labelledby="networkInteriorTab" data-network-panel="interior" hidden>
+<div class="wmap-page" id="warehouseMap" data-endpoint="/wms/mapa/datos" data-can-plan="<%= can('wms.tasks.create')?'true':'false' %>">
+  <header class="wmap-heading">
+    <div>
+      <span class="wmap-eyebrow">DENTRO DEL CENTRO DE DISTRIBUCIÓN</span>
+      <h1>Encuentra tu mercancía</h1>
+      <p>Elige una zona y acércate a un estante. Toca una caja para ver su producto, lote y tareas. <span id="wmapSurveyNote">El plano es operativo, no un levantamiento físico.</span></p>
+    </div>
+    <div class="wmap-heading-actions">
+      <a class="wmap-link" href="/wms/posiciones">Ver inventario por LOC</a>
+      <% if(can('wms.tasks.create')){ %><a class="wmap-link wmap-link-primary" href="/wms/tareas/nueva">Nueva tarea</a><% } %>
+    </div>
+  </header>
+
+  <section class="wmap-shell" aria-label="Mapa de almacén y controles">
+    <div class="wmap-explorer">
+      <div class="wmap-toolbar" aria-label="Controles de búsqueda del mapa">
+        <label>Zona <select id="wmapZone"><option value="">Todas las zonas</option></select></label>
+        <label>Pasillo <select id="wmapAisle"><option value="">Todos los pasillos</option></select></label>
+        <label>Rack <select id="wmapRack"><option value="">Todos los racks</option></select></label>
+        <label>SKU <select id="wmapSku"><option value="">Todos los SKU</option></select></label>
+        <button id="wmapReset" class="wmap-reset" type="button" title="Reiniciar cámara">Restablecer</button>
+      </div>
+      <div class="wmap-stage" id="wmapStage">
+        <div class="wmap-loading" id="wmapLoading" role="status" aria-live="polite"><span class="wmap-loading-orbit"></span><strong>Cargando ubicaciones reales…</strong></div>
+        <div class="wmap-canvas" id="wmapCanvas" aria-label="Escena interactiva del almacén"></div>
+        <div class="wmap-stage-top">
+          <span id="wmapStatus">Conectando con el almacén</span>
+          <div class="wmap-view-switch" role="group" aria-label="Perspectiva del mapa">
+            <button type="button" id="wmapTop" class="active" aria-pressed="true">Planta isométrica</button>
+            <button type="button" id="wmapPerspective" aria-pressed="false">Pasillo</button>
+          </div>
+        </div>
+        <div class="wmap-stage-bottom">Arrastra y gira · rueda o pinza para zoom · en Pasillo usa W/A/S/D · toca una placa o caja para inspeccionar el lote</div>
+      </div>
+      <div class="wmap-legend" aria-label="Leyenda de ocupación">
+        <span><i class="wmap-legend-dot available"></i>Libre</span>
+        <span><i class="wmap-legend-dot partial"></i>Casillero ocupado</span>
+        <span><i class="wmap-legend-dot full"></i>Lleno o bloqueado</span>
+        <span><i class="wmap-legend-dot active"></i>Tarea en proceso</span>
+        <span class="wmap-legend-note">Las rutas representan tareas pendientes o en proceso; no son trayectorias físicas medidas.</span>
+      </div>
+    </div>
+
+    <aside class="wmap-inspector" aria-live="polite">
+      <div class="wmap-inspector-head"><span>INSPECTOR DE LOC</span><strong id="wmapInspectCode">Selecciona una ubicación</strong><button type="button" class="wmap-inspector-close" id="wmapInspectorClose" aria-label="Cerrar inspector">×</button></div>
+      <div id="wmapInspectBody" class="wmap-inspect-body"><p>Toca una celda del mapa o usa los selectores para consultar capacidad, stock y tareas.</p></div>
+      <div class="wmap-inspector-footer"><span id="wmapUpdated"></span><button type="button" id="wmapRefresh">Actualizar datos</button></div>
+    </aside>
+  </section>
+
+  <section class="wmap-accessible-list" aria-labelledby="wmapListTitle">
+      <div class="wmap-accessible-head"><h2 id="wmapListTitle">Ubicaciones</h2><p>Usa los filtros del mapa. Esta lista ofrece una alternativa accesible y muestra como máximo 60 direcciones.</p></div>
+    <div class="wmap-list" id="wmapLocationList">
+      <% zones.forEach(zone=>{ const locs=locations.filter(loc=>loc.zoneId===zone.id); %>
+        <div class="wmap-list-zone"><h3><%= zone.name %> <small><%= zone.code %></small></h3><div>
+          <% locs.forEach(loc=>{ %>
+            <button type="button" class="wmap-list-loc" data-loc-id="<%= loc.id %>"><strong><%= loc.code %></strong><span><%= loc.occupied?'Ocupado':'Libre' %> · <%= loc.units %> UND</span></button>
+          <% }) %>
+        </div></div>
+      <% }) %>
+    </div>
+  </section>
+</div>
+  </section>
+</div>

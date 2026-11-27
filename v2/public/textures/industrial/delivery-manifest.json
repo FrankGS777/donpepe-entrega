@@ -1,0 +1,100 @@
+{
+  "assets": [
+    {
+      "file": "concrete_floor_02_diff_2k.webp",
+      "sourceFile": "concrete_floor_02_diff_2k.jpg",
+      "source": "https://dl.polyhaven.org/file/ph-assets/Textures/jpg/2k/concrete_floor_02/concrete_floor_02_diff_2k.jpg",
+      "bytes": 2146952,
+      "sha256": "586679dfb41c3c448333acb16df031c29285faef02783e3c153714ad50e4a94d",
+      "license": "CC0-1.0"
+    },
+    {
+      "file": "concrete_floor_02_nor_gl_2k.webp",
+      "sourceFile": "concrete_floor_02_nor_gl_2k.jpg",
+      "source": "https://dl.polyhaven.org/file/ph-assets/Textures/jpg/2k/concrete_floor_02/concrete_floor_02_nor_gl_2k.jpg",
+      "bytes": 1529838,
+      "sha256": "1d2cb6a97641ed4dfd97133217d5bca6a030089c0cc66a2cd5b5cfebd3cfd321",
+      "license": "CC0-1.0"
+    },
+    {
+      "file": "concrete_floor_02_rough_2k.webp",
+      "sourceFile": "concrete_floor_02_rough_2k.jpg",
+      "source": "https://dl.polyhaven.org/file/ph-assets/Textures/jpg/2k/concrete_floor_02/concrete_floor_02_rough_2k.jpg",
+      "bytes": 817344,
+      "sha256": "de914337e98842901d48ad35746330b580973ad3ce9c0bb5a146c00ca5f872a0",
+      "license": "CC0-1.0"
+    },
+    {
+      "file": "brown_planks_03_diff_2k.webp",
+      "sourceFile": "brown_planks_03_diff_2k.jpg",
+      "source": "https://dl.polyhaven.org/file/ph-assets/Textures/jpg/2k/brown_planks_03/brown_planks_03_diff_2k.jpg",
+      "bytes": 1493616,
+      "sha256": "511b79976f731afd1ef4b0ab453f9b79c1e4c1840b223a2c45b5279822d316c4",
+      "license": "CC0-1.0"
+    },
+    {
+      "file": "brown_planks_03_nor_gl_2k.webp",
+      "sourceFile": "brown_planks_03_nor_gl_2k.jpg",
+      "source": "https://dl.polyhaven.org/file/ph-assets/Textures/jpg/2k/brown_planks_03/brown_planks_03_nor_gl_2k.jpg",
+      "bytes": 1336970,
+      "sha256": "82e3413eaed9f68d7df5b94a12534dbc795f8e468e402cbfcd81ea404b4f24b3",
+      "license": "CC0-1.0"
+    },
+    {
+      "file": "brown_planks_03_rough_2k.webp",
+      "sourceFile": "brown_planks_03_rough_2k.jpg",
+      "source": "https://dl.polyhaven.org/file/ph-assets/Textures/jpg/2k/brown_planks_03/brown_planks_03_rough_2k.jpg",
+      "bytes": 451682,
+      "sha256": "05b942c7c99efcd56c0535f39a7312328783f5b0a9920cfc240a808dd72b5805",
+      "license": "CC0-1.0"
+    },
+    {
+      "file": "metal_plate_diff_2k.webp",
+      "sourceFile": "metal_plate_diff_2k.jpg",
+      "source": "https://dl.polyhaven.org/file/ph-assets/Textures/jpg/2k/metal_plate/metal_plate_diff_2k.jpg",
+      "bytes": 675102,
+      "sha256": "b88ddb02f8c027497e457788d1ff196555a3256b5ba9b1b4dce3fcc50bfd37e1",
+      "license": "CC0-1.0"
+    },
+    {
+      "file": "metal_plate_nor_gl_2k.webp",
+      "sourceFile": "metal_plate_nor_gl_2k.jpg",
+      "source": "https://dl.polyhaven.org/file/ph-assets/Textures/jpg/2k/metal_plate/metal_plate_nor_gl_2k.jpg",
+      "bytes": 923538,
+      "sha256": "1d6dc29de2a1270e487f7a10024763082249e2946874c6056feeaa4de10b458f",
+      "license": "CC0-1.0"
+    },
+    {
+      "file": "metal_plate_rough_2k.webp",
+      "sourceFile": "metal_plate_rough_2k.jpg",
+      "source": "https://dl.polyhaven.org/file/ph-assets/Textures/jpg/2k/metal_plate/metal_plate_rough_2k.jpg",
+      "bytes": 1224052,
+      "sha256": "6ddb9f040fa3774aff312c64f44461c1ac10b42216b5881aa993d9cddddcb1aa",
+      "license": "CC0-1.0"
+    },
+    {
+      "file": "asphalt_03_diff_2k.webp",
+      "sourceFile": "asphalt_03_diff_2k.jpg",
+      "source": "https://dl.polyhaven.org/file/ph-assets/Textures/jpg/2k/asphalt_03/asphalt_03_diff_2k.jpg",
+      "bytes": 1493246,
+      "sha256": "6fe373cdf834ff5ba307fa50715254f7fcc93a916acda72d7201490330874eb7",
+      "license": "CC0-1.0"
+    },
+    {
+      "file": "asphalt_03_nor_gl_2k.webp",
+      "sourceFile": "asphalt_03_nor_gl_2k.jpg",
+      "source": "https://dl.polyhaven.org/file/ph-assets/Textures/jpg/2k/asphalt_03/asphalt_03_nor_gl_2k.jpg",
+      "bytes": 2157860,
+      "sha256": "d97f4ea76a2243dc490cd220b3ccb10da4e9cf862b0d5c402b7ba84525df8e5e",
+      "license": "CC0-1.0"
+    },
+    {
+      "file": "asphalt_03_rough_2k.webp",
+      "sourceFile": "asphalt_03_rough_2k.jpg",
+      "source": "https://dl.polyhaven.org/file/ph-assets/Textures/jpg/2k/asphalt_03/asphalt_03_rough_2k.jpg",
+      "bytes": 1276304,
+      "sha256": "8ff90e5bdc342d7565953050e180b5cde323e68f97df66be2232525252f5692c",
+      "license": "CC0-1.0"
+    }
+  ]
+}

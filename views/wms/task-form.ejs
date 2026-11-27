@@ -1,0 +1,55 @@
+<% const values = typeof form === 'object' && form ? form : {}; const taskOperators = typeof operators !== 'undefined' ? operators : []; %>
+<div class="tp-page">
+  <header class="tp-page-head">
+    <div><a class="tp-back-link" href="/wms/tareas">← Tablero de tareas</a><h1>Un movimiento, tres decisiones.</h1><p>Elige qué mover. Te proponemos un destino compatible.</p></div>
+    <a class="tp-map-link" href="/wms/mapa?seleccionar=origen"><svg class="icon"><use href="/icons.svg#i-pin"></use></svg> Elegir desde el mapa</a>
+  </header>
+  <div id="taskServerErrors"><%- include('../partials/errors') %></div>
+  <form method="post" action="/wms/tareas" id="wmsTaskForm" class="tp-planner" novalidate data-wms='<%- JSON.stringify({positions,destinations,initial:values}).replaceAll("'","&#39;") %>'>
+    <input type="hidden" name="_csrf" value="<%= csrfToken %>">
+    <input type="hidden" id="taskSource" name="lote_origen_id" value="<%= values.lote_origen_id||'' %>">
+    <nav class="tp-progress" aria-label="Pasos de planificación">
+      <button type="button" data-step-link="1" aria-current="step"><span>1</span><strong>Intención</strong><small>¿Para qué?</small></button>
+      <button type="button" data-step-link="2" disabled><span>2</span><strong>Producto</strong><small>¿Qué mover?</small></button>
+      <button type="button" data-step-link="3" disabled><span>3</span><strong>Confirmación</strong><small>¿A dónde?</small></button>
+    </nav>
+    <section class="tp-step" data-task-step="1" aria-labelledby="taskIntentTitle">
+      <div class="tp-step-heading"><span class="tp-eyebrow">01 / 03</span><h2 id="taskIntentTitle" tabindex="-1">¿Qué necesitas hacer?</h2><p>Los pedidos de tienda y la mercancía recibida generan sus propias tareas.</p></div>
+      <div class="tp-purpose-grid">
+        <label class="tp-purpose"><input type="radio" name="tipo" value="REABASTECIMIENTO" <%= values.tipo!=='REUBICACION'?'checked':'' %>><span class="tp-purpose-icon"><svg class="icon"><use href="/icons.svg#i-package"></use></svg></span><strong>Reponer preparación</strong><span>Lleva producto de reserva al área donde se preparan los pedidos.</span><small data-intent-count="REABASTECIMIENTO">Calculando disponibilidad…</small><b class="tp-choice-indicator" aria-hidden="true">✓</b></label>
+        <label class="tp-purpose"><input type="radio" name="tipo" value="REUBICACION" <%= values.tipo==='REUBICACION'?'checked':'' %>><span class="tp-purpose-icon"><svg class="icon"><use href="/icons.svg#i-arrows"></use></svg></span><strong>Reorganizar inventario</strong><span>Mueve existencias disponibles a otro espacio de reserva o preparación.</span><small data-intent-count="REUBICACION">Calculando disponibilidad…</small><b class="tp-choice-indicator" aria-hidden="true">✓</b></label>
+      </div>
+      <div class="tp-context-note"><svg class="icon"><use href="/icons.svg#i-shield"></use></svg><p>¿Necesitas preparar un <a href="/wms/sucursales/nuevo">pedido de sucursal</a>? Inícialo desde ese pedido para conservar su trazabilidad.</p></div>
+      <div class="tp-step-footer"><span>No se mueve inventario hasta la confirmación del operador.</span><button type="button" class="tp-primary" data-task-next>Elegir producto <span aria-hidden="true">→</span></button></div>
+    </section>
+    <section class="tp-step" data-task-step="2" aria-labelledby="taskProductTitle" hidden>
+      <div class="tp-step-heading"><span class="tp-eyebrow">02 / 03</span><h2 id="taskProductTitle" tabindex="-1">Encuentra el producto, no el código.</h2><p id="sourceHelp">Mostramos las existencias que puedes mover para esta intención.</p></div>
+      <div class="tp-source-toolbar"><label class="tp-search"><svg class="icon"><use href="/icons.svg#i-search"></use></svg><input id="positionSearch" type="search" placeholder="Buscar producto, marca o lote…" autocomplete="off" aria-label="Buscar producto, marca o lote"></label><label class="tp-zone-filter"><span>Zona</span><select id="originZone" aria-label="Filtrar zona de origen"><option value="">Todas las zonas</option></select></label></div>
+      <div class="tp-selection-status"><span id="sourceCount" role="status" aria-live="polite"></span><button type="button" class="tp-text-button" id="clearSourceFilters" hidden>Quitar filtros</button></div>
+      <div class="tp-source-grid" id="sourceCards" role="group" aria-label="Existencias disponibles"></div>
+      <button type="button" class="tp-more-button" id="showMoreSources" hidden>Ver más productos</button>
+      <div class="tp-selected-source" id="sourceInsight" hidden aria-live="polite"></div>
+      <div class="tp-inline-error" id="sourceError" role="alert" hidden></div>
+      <div class="tp-step-footer"><button type="button" class="tp-secondary" data-task-back>← Intención</button><button type="button" class="tp-primary" id="continueWithSource" data-task-next disabled>Elegir destino <span aria-hidden="true">→</span></button></div>
+    </section>
+    <section class="tp-step" data-task-step="3" aria-labelledby="taskConfirmTitle" hidden>
+      <div class="tp-step-heading"><span class="tp-eyebrow">03 / 03</span><h2 id="taskConfirmTitle" tabindex="-1">Revisa el movimiento.</h2><p id="destinationGuidance">El destino sugerido debe confirmarse antes de crear la tarea.</p></div>
+      <div class="tp-confirm-layout">
+        <div class="tp-confirm-fields">
+          <div class="tp-product-summary" id="confirmProduct"></div>
+          <label class="tp-field" for="taskDestination"><span>Destino compatible</span><select id="taskDestination" name="ubicacion_destino_id" required disabled><option value="">Elige primero un producto</option></select></label><p class="tp-field-note" id="destinationReason"></p>
+          <div class="tp-quantity-row"><label class="tp-field" for="taskQuantity"><span>Cantidad a mover</span><input id="taskQuantity" type="number" min="1" max="1" name="cantidad" required value="<%= values.cantidad||1 %>" inputmode="numeric" disabled></label><button type="button" class="tp-secondary" id="useSuggested" disabled>Usar sugerida</button></div><p class="tp-field-note" id="quantityRule">Elige el producto para calcular la cantidad.</p>
+          <div class="tp-paired-fields"><label class="tp-field" for="taskPriority"><span>Prioridad</span><select id="taskPriority" name="prioridad"><% [['NORMAL','Normal · secuencia habitual'],['ALTA','Alta · riesgo de faltante'],['URGENTE','Urgente · operación detenida'],['BAJA','Baja · organización sin urgencia']].forEach(([value,label])=>{ %><option value="<%= value %>" <%= (values.prioridad||'NORMAL')===value?'selected':'' %>><%= label %></option><% }) %></select></label>
+          <% if(can('wms.tasks.assign')){ %><label class="tp-field" for="taskOperator"><span>Asignar a operador</span><select id="taskOperator" name="operador_id"><option value="">Dejar en cola, sin asignar</option><% taskOperators.forEach(operator=>{ %><option value="<%= operator.id %>" <%= Number(values.operador_id)===Number(operator.id)?'selected':'' %>><%= operator.nombre %></option><% }) %></select></label><% } %></div>
+          <details class="tp-extra"><summary>Añadir instrucción al operador</summary><label class="tp-field" for="taskNotes"><span>Instrucción opcional</span><textarea id="taskNotes" name="observaciones" maxlength="500" rows="3" placeholder="Por ejemplo: usar transpaleta y revisar el embalaje."><%= values.observaciones||'' %></textarea></label></details>
+          <details class="tp-extra tp-trace-details"><summary>Ver ubicación exacta y trazabilidad</summary><dl id="taskTraceability"></dl></details>
+        </div>
+        <aside class="task-route-preview tp-route-preview" id="taskPreview" aria-live="polite"><span class="tp-eyebrow">Tu movimiento</span><div class="preview-state"><strong>Completa el destino</strong><small>La disponibilidad se vuelve a validar al guardar.</small></div><div class="preview-route" hidden><div><small>Recoger</small><strong data-preview="originZone">—</strong><span data-preview="origin">—</span></div><b aria-hidden="true">↓</b><div><small>Depositar</small><strong data-preview="destinationZone">—</strong><span data-preview="destination">—</span></div></div><div class="preview-product" hidden><strong data-preview="product">—</strong><span data-preview="quantity">—</span></div><div class="tp-next-action"><span>Después de crear</span><strong id="taskNextActionTitle">Asignar a un operador</strong><small id="taskNextActionNote">Desde el tablero. La tarea no se ejecuta automáticamente.</small></div></aside>
+      </div>
+      <div class="tp-inline-error" id="confirmError" role="alert" hidden></div>
+      <div class="tp-step-footer"><button type="button" class="tp-secondary" data-task-back>← Cambiar producto</button><button type="submit" class="tp-primary" id="createTaskButton" disabled>Crear tarea <span aria-hidden="true">✓</span></button></div>
+    </section>
+    <p class="tp-live-status" id="taskLiveStatus" role="status" aria-live="polite"></p>
+    <noscript><p class="tp-inline-error">Activa JavaScript para planificar el movimiento y comprobar sus ubicaciones.</p></noscript>
+  </form>
+</div>

@@ -1,0 +1,37 @@
+<% const networkVariant = typeof sceneVariant === 'string' ? sceneVariant : 'dashboard'; %>
+<section class="logistics-scene logistics-scene--<%= networkVariant %>" data-logistics-scene data-endpoint="/wms/red/datos" aria-label="Red logística de DonPepe">
+  <header class="ln-heading">
+    <div class="ln-heading-brand"><span class="ln-heading-symbol" aria-hidden="true">↗</span><div><strong>Tu operación, en movimiento</strong><span>Centro de distribución y sucursales</span></div></div>
+    <label class="ln-search"><span aria-hidden="true">⌕</span><span class="ln-sr">Localizar un pedido o una sucursal</span><select data-ln-selector><option value="warehouse">Centro de distribución</option></select></label>
+    <div class="ln-data-status"><i aria-hidden="true"></i><span data-ln-updated>Datos del sistema</span><button type="button" data-ln-refresh title="Actualizar datos" aria-label="Actualizar datos">↻</button></div>
+  </header>
+  <div class="ln-stage" data-ln-stage>
+    <div class="ln-canvas" data-ln-canvas aria-label="Escena 3D interactiva de la red logística"></div>
+    <div class="ln-loading" data-ln-loading role="status"><span></span><strong>Preparando tu red logística…</strong></div>
+    <div class="ln-metrics" aria-label="Resumen de datos reales">
+      <div class="ln-metric"><span class="ln-metric-icon ln-metric-icon--stock" aria-hidden="true">▣</span><div><span>Unidades en el CD</span><strong data-ln-units>—</strong><small>Existencias registradas</small></div></div>
+      <div class="ln-metric"><span class="ln-metric-icon ln-metric-icon--tasks" aria-hidden="true">⇄</span><div><span>Trabajo activo</span><strong data-ln-tasks>—</strong><small data-ln-tasks-note>Pendiente + en ejecución</small></div></div>
+      <div class="ln-metric"><span class="ln-metric-icon ln-metric-icon--orders" aria-hidden="true">▰</span><div><span>Listos para salir</span><strong data-ln-ready>—</strong><small>Pedidos preparados</small></div></div>
+    </div>
+    <aside class="ln-inspector" data-ln-inspector aria-live="polite">
+      <div class="ln-inspector-top"><span class="ln-inspector-icon" data-ln-inspect-icon aria-hidden="true">▣</span><div><span class="ln-eyebrow" data-ln-inspect-kind>CENTRO DE DISTRIBUCIÓN</span><h2 data-ln-inspect-title>DonPepe</h2></div><button type="button" data-ln-focus title="Enfocar selección" aria-label="Enfocar selección">⌖</button><button type="button" class="ln-inspector-toggle" data-ln-inspector-toggle aria-expanded="true" aria-label="Mostrar u ocultar detalles de la selección">⌄</button></div>
+      <span class="ln-status-pill" data-ln-inspect-status>Consultando datos</span>
+      <p class="ln-inspect-description" data-ln-inspect-description>Selecciona el almacén, un camión o una sucursal para conocer su operación.</p>
+      <dl class="ln-facts" data-ln-facts></dl>
+      <div class="ln-inspector-actions" data-ln-actions></div>
+    </aside>
+    <div class="ln-camera-tools" role="group" aria-label="Cámara del mapa">
+      <button type="button" data-ln-camera="in" aria-label="Acercar" title="Acercar">+</button><button type="button" data-ln-camera="out" aria-label="Alejar" title="Alejar">−</button><span></span><button type="button" data-ln-camera="rotate" aria-label="Girar vista" title="Girar vista">↶</button><button type="button" data-ln-camera="top" aria-label="Vista desde arriba" title="Vista desde arriba">▱</button><button type="button" data-ln-camera="home" aria-label="Restablecer cámara" title="Restablecer cámara">⌂</button>
+    </div>
+    <div class="ln-scene-caption"><span class="ln-simulation-tag"><i aria-hidden="true"></i>SIMULACIÓN</span><span>Distribución esquemática · sin GPS ni entregas automáticas</span></div>
+    <div class="ln-floating-label" data-ln-label hidden></div>
+    <section class="ln-tracking" aria-label="Seguimiento del pedido seleccionado">
+      <div class="ln-tracking-heading"><span class="ln-tracking-icon" aria-hidden="true">▰</span><div><strong data-ln-tracking-title>Flujo hacia tus sucursales</strong><small data-ln-tracking-note>Selecciona un pedido para ver su etapa real</small></div><button class="ln-play" type="button" data-ln-play aria-pressed="false"><span data-ln-play-icon aria-hidden="true">▶</span><span data-ln-play-label>Reproducir</span></button></div>
+      <ol class="ln-progress" data-ln-progress><li><i>1</i><span>Pedido</span></li><li><i>2</i><span>Preparación</span></li><li><i>3</i><span>Listo</span></li><li><i>4</i><span>Despachado</span></li><li><i>5</i><span>Recepción</span></li></ol>
+      <p class="ln-tracking-disclaimer" data-ln-route-note>La animación explica el recorrido; no confirma movimientos ni recepción en tienda.</p>
+    </section>
+    <div class="ln-interaction-hint">Arrastra para girar · rueda para acercar · selecciona para inspeccionar</div>
+  </div>
+  <details class="ln-accessible"><summary>Consultar la red sin el mapa 3D <span data-ln-list-count></span></summary><div class="ln-accessible-content" data-ln-list><p>Cargando los datos del sistema…</p></div></details>
+  <p class="ln-error" data-ln-error role="alert" hidden></p>
+</section>

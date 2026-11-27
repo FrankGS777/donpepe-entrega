@@ -1,0 +1,23 @@
+<% const isAdmin=currentUser.rol==='administrador_wms'; const groups=isAdmin?[
+ ['',['dashboard.admin','/dashboard','i-grid','Panel ejecutivo']],
+ ['GOBIERNO Y SEGURIDAD',['users.view','/usuarios','i-users','Usuarios'],['roles.manage','/roles','i-shield','Roles y permisos'],['requests.manage','/solicitudes','i-bell','Recuperaciones'],['catalogs.view','/catalogos/categorias','i-tags','Maestros WMS'],['reports.business','/reportes','i-chart','Analítica y reportes']],
+ ['ABASTECIMIENTO',['purchases.view','/compras','i-truck','Órdenes y recepción'],['distribution.view','/wms/sucursales','i-truck','Pedidos de sucursales']],
+ ['SUPERVISIÓN · SOLO CONSULTA',['wms.positions','/wms/mapa','i-pin','Mapa interactivo'],['wms.positions','/wms/posiciones','i-layers','Stock por LOC'],['wms.tasks','/wms/tareas','i-arrows','Seguimiento de tareas']],
+ ['TRAZABILIDAD',['products.view','/productos','i-package','SKU y estrategia'],['inventory.lots','/inventario/lotes','i-layers','Lotes y caducidad'],['inventory.movements','/inventario/movimientos','i-arrows','Kardex por LOC'],['audits.view','/auditorias','i-shield','Aprobación de ajustes']]
+ ]:[
+ ['',['dashboard.warehouse','/dashboard','i-grid','Torre operativa']],
+ ['EJECUCIÓN DEL TURNO',['wms.tasks.create','/wms/tareas/nueva','i-plus','Planificar traslado'],['wms.tasks','/wms/tareas','i-arrows','Tablero de tareas'],['distribution.view','/wms/sucursales','i-truck','Pedidos de sucursales']],
+ ['CONTROL DE PISO',['wms.positions','/wms/mapa','i-pin','Mapa interactivo'],['wms.positions','/wms/posiciones','i-layers','Capacidad por LOC'],['audits.view','/auditorias','i-clipboard','Conteos y diferencias']],
+ ['INVENTARIO VIVO',['products.view','/productos','i-package','SKU y reposición'],['inventory.lots','/inventario/lotes','i-layers','Lotes FEFO'],['inventory.movements','/inventario/movimientos','i-arrows','Movimientos']]
+ ]; %>
+<aside class="sidebar" id="sidebar" data-sidebar-scroll>
+ <a class="brand" href="<%= homePath %>"><%- include('brandLogo') %><small><%= isAdmin?'CENTRO DE CONTROL':'TORRE DE OPERACIONES' %></small></a>
+ <nav class="nav flex-column gap-1 mt-4 role-nav" aria-label="Módulos disponibles">
+ <% if(!isAdmin){ %><div class="shift-signal"><i></i><span><%= currentUser.rol==='jefe_operaciones'?'PLANIFICACIÓN Y DELEGACIÓN':currentUser.rol_etiqueta %></span></div><% } %>
+ <% groups.forEach(([heading,...links])=>{const allowed=links.filter(([permission])=>can(permission)); if(!allowed.length)return; %>
+ <% if(heading){ %><p class="nav-section"><%= heading %></p><% } %>
+ <% allowed.forEach(([permission,href,icon,label])=>{const active=href==='/wms/tareas'?currentPath===href:href.startsWith('/catalogos')?currentPath.startsWith('/catalogos'):currentPath===href||!href.startsWith('/wms/')&&currentPath.startsWith(href+'/'); %>
+ <a class="nav-link <%= active?'active':'' %>" href="<%= href %>" <%- active?'aria-current="page"':'' %>><svg class="icon"><use href="/icons.svg#<%= icon %>"/></svg><%= label %><% if(href==='/solicitudes'&&pendingRequestCount){ %><span class="nav-count"><%= pendingRequestCount %></span><% } %></a>
+ <% }); }); %>
+ </nav><div class="sidebar-user"><span class="avatar"><%= currentUser.nombre.charAt(0) %></span><div><strong><%= currentUser.nombre %></strong><small><%= currentUser.rol_etiqueta||currentUser.rol.replaceAll('_',' ') %></small></div></div>
+</aside>

@@ -1,0 +1,96 @@
+{
+  "version": 1,
+  "generatedOn": "2026-10-18",
+  "categories": [
+    {
+      "id": "CAT-ABARROTES",
+      "imageUrl": "/images/categories/abarrotes.webp",
+      "imageKind": "GENERATED_CATEGORY_SCENE"
+    },
+    {
+      "id": "CAT-LACTEOS",
+      "imageUrl": "/images/categories/lacteos.webp",
+      "imageKind": "GENERATED_CATEGORY_SCENE"
+    },
+    {
+      "id": "CAT-LACTEOS-REFRIGERADOS",
+      "imageUrl": "/images/categories/lacteos-refrigerados.webp",
+      "imageKind": "GENERATED_CATEGORY_SCENE"
+    },
+    {
+      "id": "CAT-BEBIDAS-REFRIGERADAS",
+      "imageUrl": "/images/categories/bebidas-refrigeradas.webp",
+      "imageKind": "GENERATED_CATEGORY_SCENE"
+    },
+    {
+      "id": "CAT-CONGELADOS",
+      "imageUrl": "/images/categories/congelados.webp",
+      "imageKind": "GENERATED_CATEGORY_SCENE"
+    },
+    {
+      "id": "CAT-LIMPIEZA",
+      "imageUrl": "/images/categories/limpieza.webp",
+      "imageKind": "GENERATED_CATEGORY_SCENE"
+    },
+    {
+      "id": "CAT-ACEITES",
+      "imageUrl": "/images/categories/aceites.webp",
+      "imageKind": "GENERATED_CATEGORY_SCENE"
+    },
+    {
+      "id": "CAT-ARROCES",
+      "imageUrl": "/images/categories/arroces.webp",
+      "imageKind": "GENERATED_CATEGORY_SCENE"
+    },
+    {
+      "id": "CAT-AZUCARES",
+      "imageUrl": "/images/categories/azucares.webp",
+      "imageKind": "GENERATED_CATEGORY_SCENE"
+    },
+    {
+      "id": "CAT-PASTAS",
+      "imageUrl": "/images/categories/pastas.webp",
+      "imageKind": "GENERATED_CATEGORY_SCENE"
+    },
+    {
+      "id": "CAT-CONSERVAS",
+      "imageUrl": "/images/categories/conservas.webp",
+      "imageKind": "GENERATED_CATEGORY_SCENE"
+    },
+    {
+      "id": "CAT-SALSAS",
+      "imageUrl": "/images/categories/salsas.webp",
+      "imageKind": "GENERATED_CATEGORY_SCENE"
+    },
+    {
+      "id": "CAT-CONDIMENTOS",
+      "imageUrl": "/images/categories/condimentos.webp",
+      "imageKind": "GENERATED_CATEGORY_SCENE"
+    },
+    {
+      "id": "CAT-GALLETAS",
+      "imageUrl": "/images/categories/galletas.webp",
+      "imageKind": "GENERATED_CATEGORY_SCENE"
+    },
+    {
+      "id": "CAT-BEBIDAS",
+      "imageUrl": "/images/categories/bebidas.webp",
+      "imageKind": "GENERATED_CATEGORY_SCENE"
+    },
+    {
+      "id": "CAT-SNACKS",
+      "imageUrl": "/images/categories/snacks.webp",
+      "imageKind": "GENERATED_CATEGORY_SCENE"
+    },
+    {
+      "id": "CAT-DESAYUNO",
+      "imageUrl": "/images/categories/desayuno.webp",
+      "imageKind": "GENERATED_CATEGORY_SCENE"
+    },
+    {
+      "id": "CAT-REPOSTERIA",
+      "imageUrl": "/images/categories/reposteria.webp",
+      "imageKind": "GENERATED_CATEGORY_SCENE"
+    }
+  ]
+}

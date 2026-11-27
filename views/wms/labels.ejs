@@ -1,0 +1,25 @@
+<div class="page-head">
+  <div>
+    <h1>ETIQUETAS QR</h1>
+    <p>Imprime etiquetas cortas para SKU, lote o LOC. El QR contiene el código operativo exacto.</p>
+  </div>
+  <button class="btn btn-brand" data-print><svg class="icon"><use href="/icons.svg#i-clipboard"/></svg> Imprimir</button>
+</div>
+
+<section class="panel label-studio" data-labels='<%- JSON.stringify(data).replaceAll("'","&#39;") %>'>
+  <div class="label-toolbar">
+    <div>
+      <label class="form-label" for="labelType">Tipo de etiqueta</label>
+      <select id="labelType" class="form-select" data-label-type>
+        <option value="lots">Lote físico</option>
+        <option value="locations">LOC</option>
+        <option value="products">SKU</option>
+      </select>
+    </div>
+    <div>
+      <label class="form-label" for="labelSearch">Buscar</label>
+      <input id="labelSearch" class="form-control" data-label-search placeholder="SKU, lote, producto o LOC...">
+    </div>
+  </div>
+  <div class="label-grid" data-label-grid></div>
+</section>

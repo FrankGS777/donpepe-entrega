@@ -1,0 +1,294 @@
+{
+  "version": 1,
+  "verifiedOn": "2026-10-18",
+  "basis": "Official brand/manufacturer portfolios; no commercial partnership asserted",
+  "suppliers": [
+    {
+      "id": "PROV-3",
+      "name": "Alicorp S.A.A.",
+      "code": "PROV-003",
+      "zones": [
+        "DRY",
+        "CLEANING"
+      ],
+      "site": "https://www.alicorp.com.pe",
+      "referenceUrl": "https://www.alicorp.com.pe/pe/es/productos/consumo-masivo",
+      "imageSourceUrl": "https://www.alicorp.com.pe/images/logo-alicorp-header.svg",
+      "kind": "MANUFACTURER",
+      "logoUrl": "/images/suppliers/prov-3.webp",
+      "imageUrl": "/images/suppliers/prov-3.webp",
+      "imageKind": "OFFICIAL_SUPPLIER_LOGO",
+      "sourceType": "OFFICIAL_MANUFACTURER_PORTFOLIO",
+      "verifiedOn": "2026-10-18",
+      "brandIds": [
+        "BRAND-PRIMOR",
+        "BRAND-DON-VITTORIO",
+        "BRAND-COCINERO",
+        "BRAND-NICOLINI",
+        "BRAND-ALACENA",
+        "BRAND-TARI",
+        "BRAND-BLANCA-FLOR",
+        "BRAND-SAPOLIO"
+      ],
+      "leadDays": 2,
+      "preferredBackground": "light",
+      "sourcingNote": "Portafolio público verificado. Las alternativas de abastecimiento y plazos son configuración DonPepe; no acreditan un contrato comercial con el fabricante.",
+      "imageSha256": "7452931c4a7a484e3bb6d881cf8895499ce08a3885deeab9d8b6489b18b12a05",
+      "sourceSha256": "25bdfff603c8f9f10f8c1edddd1d657e0d06ee41d9a35dba6881442f8ac7f7c8"
+    },
+    {
+      "id": "PROV-GLORIA",
+      "name": "Leche Gloria",
+      "code": "PROV-GLORIA",
+      "zones": [
+        "DRY",
+        "COLD"
+      ],
+      "site": "https://www.gloria.com.pe",
+      "referenceUrl": "https://www.gloria.com.pe/Site/nosotros/archivos/visita_nuestra_planta",
+      "kind": "MANUFACTURER",
+      "imageSourceUrl": "https://www.gloria.com.pe/logogloria3.svg",
+      "logoUrl": "/images/suppliers/prov-gloria.webp",
+      "imageUrl": "/images/suppliers/prov-gloria.webp",
+      "imageKind": "OFFICIAL_SUPPLIER_LOGO",
+      "sourceType": "OFFICIAL_MANUFACTURER_PORTFOLIO",
+      "verifiedOn": "2026-10-18",
+      "brandIds": [
+        "BRAND-GLORIA",
+        "BRAND-BONLE"
+      ],
+      "leadDays": 2,
+      "preferredBackground": "light",
+      "sourcingNote": "Portafolio público verificado. Las alternativas de abastecimiento y plazos son configuración DonPepe; no acreditan un contrato comercial con el fabricante.",
+      "imageSha256": "685d87511249a1fa41eb5f12220d18364f3b8b3537e2ac53bfccdb203960a3a5",
+      "sourceSha256": "d34850db3f4a56f2a9355c9c5599439ab022c3ab18b233342eeec03190df5914"
+    },
+    {
+      "id": "PROV-NESTLE",
+      "name": "Nestlé Perú",
+      "code": "PROV-NESTLE",
+      "zones": [
+        "DRY",
+        "FROZEN"
+      ],
+      "site": "https://www.nestle.com.pe",
+      "referenceUrl": "https://tiendanestle.pe/collections/kirma",
+      "imageReferenceUrl": "https://www.nestle.com/about/history/logo-evolution",
+      "imageSourceUrl": "https://www.nestle.com/sites/default/files/about-history-logo-2018.jpg",
+      "sourceCrop": {
+        "left": 95,
+        "top": 135,
+        "width": 300,
+        "height": 300
+      },
+      "sourceCropNote": "Se retira únicamente el marco de presentación; se conserva íntegro el nido y el nombre corporativo, sin recoloración ni modificación de sus formas.",
+      "kind": "MANUFACTURER",
+      "logoUrl": "/images/suppliers/prov-nestle.webp",
+      "imageUrl": "/images/suppliers/prov-nestle.webp",
+      "imageKind": "OFFICIAL_SUPPLIER_LOGO",
+      "sourceType": "OFFICIAL_MANUFACTURER_PORTFOLIO",
+      "verifiedOn": "2026-10-18",
+      "brandIds": [
+        "BRAND-NESTLE",
+        "BRAND-NESCAFE",
+        "BRAND-KIRMA",
+        "BRAND-D-ONOFRIO"
+      ],
+      "leadDays": 2,
+      "preferredBackground": "light",
+      "sourcingNote": "Portafolio público verificado. Las alternativas de abastecimiento y plazos son configuración DonPepe; no acreditan un contrato comercial con el fabricante.",
+      "imageSha256": "6fb85e658cb1517c79850492f3ec0b67859954bb4790d7c6a06b768008c2cf0f",
+      "sourceSha256": "e746a2736ff6ad941af622c7017e7309e92b00306e57e486280f08e042ded798"
+    },
+    {
+      "id": "PROV-MOLITALIA",
+      "name": "Molitalia",
+      "code": "PROV-MOLITALIA",
+      "zones": [
+        "DRY"
+      ],
+      "site": "https://www.molitalia.com.pe",
+      "referenceUrl": "https://www.molitalia.com.pe/productos/marcas/costa/",
+      "imageSourceUrl": "https://www.molitalia.com.pe/wp-content/uploads/2020/09/Logo.png",
+      "preferredBackground": "dark",
+      "kind": "MANUFACTURER",
+      "logoUrl": "/images/suppliers/prov-molitalia.webp",
+      "imageUrl": "/images/suppliers/prov-molitalia.webp",
+      "imageKind": "OFFICIAL_SUPPLIER_LOGO",
+      "sourceType": "OFFICIAL_MANUFACTURER_PORTFOLIO",
+      "verifiedOn": "2026-10-18",
+      "brandIds": [
+        "BRAND-MOLITALIA",
+        "BRAND-FANNY",
+        "BRAND-COSTA",
+        "BRAND-AMBROSOLI"
+      ],
+      "leadDays": 2,
+      "sourcingNote": "Portafolio público verificado. Las alternativas de abastecimiento y plazos son configuración DonPepe; no acreditan un contrato comercial con el fabricante.",
+      "imageSha256": "115ad8bd2e4f69daebcb637d63f3b88fe7eb7663798726c4162668568211ef07",
+      "sourceSha256": "36af28f651937c8a2e9c1f5f5b03f8cba7f5a8bb5adf7c422391b5ea48429bd4"
+    },
+    {
+      "id": "PROV-LINDLEY",
+      "name": "Arca Continental Lindley",
+      "code": "PROV-LINDLEY",
+      "zones": [
+        "DRY"
+      ],
+      "site": "https://www.arcacontinentallindley.pe",
+      "referenceUrl": "https://www.arcacontinentallindley.pe/promociones-y-ganadores/",
+      "imageSourceUrl": "https://www.arcacontinentallindley.pe/wp-content/uploads/2023/07/Logotipo.png",
+      "kind": "BOTTLER_DISTRIBUTOR",
+      "logoUrl": "/images/suppliers/prov-lindley.webp",
+      "imageUrl": "/images/suppliers/prov-lindley.webp",
+      "imageKind": "OFFICIAL_SUPPLIER_LOGO",
+      "sourceType": "OFFICIAL_MANUFACTURER_PORTFOLIO",
+      "verifiedOn": "2026-10-18",
+      "brandIds": [
+        "BRAND-COCA-COLA",
+        "BRAND-FANTA",
+        "BRAND-FRUGOS",
+        "BRAND-SAN-LUIS",
+        "BRAND-SPRITE"
+      ],
+      "leadDays": 2,
+      "preferredBackground": "light",
+      "sourcingNote": "Portafolio público verificado. Las alternativas de abastecimiento y plazos son configuración DonPepe; no acreditan un contrato comercial con el fabricante.",
+      "imageSha256": "290ebc2e1b5774ead79539203be115306d20988beda4dd853fa9e62a6cf442d8",
+      "sourceSha256": "607718ab83268a341a463d93ffe6032483af7651284df065c884dae7e4a6c32f"
+    },
+    {
+      "id": "PROV-AJE",
+      "name": "Grupo AJE",
+      "code": "PROV-AJE",
+      "zones": [
+        "DRY"
+      ],
+      "site": "https://www.ajegroup.com",
+      "referenceUrl": "https://www.ajegroup.com/nuestras-marcas/",
+      "evidenceUrl": "https://www.ajegroup.com/wp-content/uploads/2026/01/Reporte2024.pdf",
+      "imageSourceUrl": "https://www.ajegroup.com/aje-assets/aje_group/wp-content/uploads/2020/09/24234609/LOGO-AJE.png",
+      "kind": "MANUFACTURER",
+      "logoUrl": "/images/suppliers/prov-aje.webp",
+      "imageUrl": "/images/suppliers/prov-aje.webp",
+      "imageKind": "OFFICIAL_SUPPLIER_LOGO",
+      "sourceType": "OFFICIAL_MANUFACTURER_PORTFOLIO",
+      "verifiedOn": "2026-10-18",
+      "brandIds": [
+        "BRAND-CIELO",
+        "BRAND-VOLT",
+        "BRAND-ORO"
+      ],
+      "leadDays": 2,
+      "preferredBackground": "light",
+      "sourcingNote": "Portafolio público verificado. Las alternativas de abastecimiento y plazos son configuración DonPepe; no acreditan un contrato comercial con el fabricante.",
+      "imageSha256": "6629ab03af6ccac9fb645664382d1cf27b478ee80f62a86cc158e272eeed06c4",
+      "sourceSha256": "ed27a66fdf9442c7c134a002c7f273217a63f233245fd0a9db26d2d72697beb7"
+    },
+    {
+      "id": "PROV-PEPSICO",
+      "name": "PepsiCo",
+      "code": "PROV-PEPSICO",
+      "zones": [
+        "DRY"
+      ],
+      "site": "https://www.pepsico.com",
+      "referenceUrl": "https://www.pepsico.com/newsroom/stories/2026/pepsico-first-corporate-brand-campaign",
+      "imageReferenceUrl": "https://www.pepsico.com/media/logo-files",
+      "imageSourceUrl": "https://digitalassets.pepsico.com/transform/7c417867-1251-4602-8b69-1ea452a03bbe/Pepsico-logo-footer?q=75&w=1200",
+      "preferredBackground": "dark",
+      "kind": "MANUFACTURER",
+      "logoUrl": "/images/suppliers/prov-pepsico.webp",
+      "imageUrl": "/images/suppliers/prov-pepsico.webp",
+      "imageKind": "OFFICIAL_SUPPLIER_LOGO",
+      "sourceType": "OFFICIAL_MANUFACTURER_PORTFOLIO",
+      "verifiedOn": "2026-10-18",
+      "brandIds": [
+        "BRAND-CHEETOS",
+        "BRAND-DORITOS",
+        "BRAND-QUAKER"
+      ],
+      "leadDays": 2,
+      "sourcingNote": "Portafolio público verificado. Las alternativas de abastecimiento y plazos son configuración DonPepe; no acreditan un contrato comercial con el fabricante.",
+      "imageSha256": "b23ba298afc804ec620d432c44288fcdccd9cf86fab7ec79f52033a903ec94ab",
+      "sourceSha256": "a1667e67e2b6d6e6f2270a7e0057c14220f4f9f5b93d307ace9a7cf959d6267d"
+    },
+    {
+      "id": "PROV-COSTENO",
+      "name": "Costeño Alimentos",
+      "code": "PROV-COSTENO",
+      "zones": [
+        "DRY"
+      ],
+      "site": "https://www.costenoalimentos.com.pe",
+      "referenceUrl": "https://www.costenoalimentos.com.pe/",
+      "imageSourceUrl": "https://www.costenoalimentos.com.pe/images/logo.png",
+      "kind": "MANUFACTURER",
+      "logoUrl": "/images/suppliers/prov-costeno.webp",
+      "imageUrl": "/images/suppliers/prov-costeno.webp",
+      "imageKind": "OFFICIAL_SUPPLIER_LOGO",
+      "sourceType": "OFFICIAL_MANUFACTURER_PORTFOLIO",
+      "verifiedOn": "2026-10-18",
+      "brandIds": [
+        "BRAND-COSTENO",
+        "BRAND-PAISANA"
+      ],
+      "leadDays": 2,
+      "preferredBackground": "light",
+      "sourcingNote": "Portafolio público verificado. Las alternativas de abastecimiento y plazos son configuración DonPepe; no acreditan un contrato comercial con el fabricante.",
+      "imageSha256": "9d86301bc2af519bf65ad2cd8c8cbbb286205cdd48564cce79bde8d691379ed3",
+      "sourceSha256": "dd7ea3fc5034b79cf83c993b262d376bf2cb3a51b8a542fdb4fb202d8177fe24"
+    },
+    {
+      "id": "PROV-SAN-FERNANDO",
+      "name": "San Fernando",
+      "code": "PROV-SAN-FERNANDO",
+      "zones": [
+        "COLD",
+        "FROZEN"
+      ],
+      "site": "https://corporativo.sanfernando.pe",
+      "referenceUrl": "https://corporativo.sanfernando.pe/contacto/",
+      "preferredBackground": "dark",
+      "kind": "MANUFACTURER",
+      "imageSourceUrl": "https://corporativo.sanfernando.pe/wp-content/uploads/2024/01/unnamed-e1750197336259.webp",
+      "logoUrl": "/images/suppliers/prov-san-fernando.webp",
+      "imageUrl": "/images/suppliers/prov-san-fernando.webp",
+      "imageKind": "OFFICIAL_SUPPLIER_LOGO",
+      "sourceType": "OFFICIAL_MANUFACTURER_PORTFOLIO",
+      "verifiedOn": "2026-10-18",
+      "brandIds": [
+        "BRAND-SAN-FERNANDO"
+      ],
+      "leadDays": 2,
+      "sourcingNote": "Portafolio público verificado. Las alternativas de abastecimiento y plazos son configuración DonPepe; no acreditan un contrato comercial con el fabricante.",
+      "imageSha256": "abe91c5f2efbf4d3358b7854c5a3d2c5d2abfee1827845e324de44449da3190b",
+      "sourceSha256": "48feaacdd97b973c82fa56bc2602684ab381aa2000b613f3f516b5a8071719ff"
+    },
+    {
+      "id": "PROV-FLORALP",
+      "name": "Floralp Perú",
+      "code": "PROV-FLORALP",
+      "zones": [
+        "COLD"
+      ],
+      "site": "https://www.floralpperu.com",
+      "referenceUrl": "https://www.floralpperu.com/",
+      "kind": "MANUFACTURER",
+      "imageSourceUrl": "https://www.floralpperu.com/images/logo_floralp.png",
+      "logoUrl": "/images/suppliers/prov-floralp.webp",
+      "imageUrl": "/images/suppliers/prov-floralp.webp",
+      "imageKind": "OFFICIAL_SUPPLIER_LOGO",
+      "sourceType": "OFFICIAL_MANUFACTURER_PORTFOLIO",
+      "verifiedOn": "2026-10-18",
+      "brandIds": [
+        "BRAND-FLORALP"
+      ],
+      "leadDays": 2,
+      "preferredBackground": "light",
+      "sourcingNote": "Portafolio público verificado. Las alternativas de abastecimiento y plazos son configuración DonPepe; no acreditan un contrato comercial con el fabricante.",
+      "imageSha256": "af4e3fbb46d268ca91725b53e1107d913c1c63d611ada83defe45b6c30e03f47",
+      "sourceSha256": "ea4761b54c45ed88e3326138bbf22901eb94de3ae50988a051d2f13a3017bb45"
+    }
+  ]
+}

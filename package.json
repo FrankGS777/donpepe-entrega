@@ -1,0 +1,53 @@
+{
+  "name": "minimarket-mvc",
+  "version": "3.1.0",
+  "private": true,
+  "description": "DonPepe: centro de distribución automatizado con simulación persistente y tiendas conectadas",
+  "main": "v2/server.js",
+  "scripts": {
+    "dev": "npm run build:v2 && node --watch v2/server.js",
+    "start": "node v2/server.js",
+    "start:v2": "node v2/server.js",
+    "start:legacy": "node server.js",
+    "dev:legacy": "node --watch server.js",
+    "db:seed": "node database/seed.js",
+    "build:map": "esbuild frontend/warehouse-map.js --bundle --minify --format=iife --target=es2022 --outfile=public/js/warehouse-map.js",
+    "build:scanner": "esbuild frontend/scanner.js --bundle --minify --format=iife --target=es2022 --outfile=public/js/scanner.js",
+    "build:network": "esbuild frontend/logistics-network.js --bundle --minify --format=iife --target=es2022 --outfile=public/js/logistics-network.js",
+    "build:v2": "esbuild v2/frontend/app.js --bundle --minify --format=esm --splitting --target=es2022 --outdir=v2/public --chunk-names=chunks/[name]-[hash] && esbuild v2/frontend/app-bundle.css v2/frontend/auth-bundle.css --bundle --minify --external:'/fonts/*' --external:'/images/*' --outdir=v2/public",
+    "build": "npm run build:map && npm run build:scanner && npm run build:network && npm run build:v2",
+    "test:v2": "node --test v2/tests/*.test.js",
+    "test": "node --test",
+    "check": "node --check v2/server.js && node --check v2/frontend/app.js && node --check v2/frontend/governance.js && node --check v2/frontend/avatar.js && node --check v2/frontend/scene.js && node --check v2/public/theme.js && node --check v2/public/login.js && node --check server.js && node --test",
+    "format": "prettier --write . --ignore-unknown",
+    "format:check": "prettier --check . --ignore-unknown"
+  },
+  "engines": {
+    "node": ">=22.13"
+  },
+  "dependencies": {
+    "@zxing/browser": "^0.1.5",
+    "bcryptjs": "^3.0.2",
+    "compression": "^1.8.2",
+    "dotenv": "^17.2.1",
+    "ejs": "^3.1.10",
+    "express": "^5.3.0",
+    "express-ejs-layouts": "^2.5.1",
+    "express-rate-limit": "^8.0.1",
+    "express-session": "^1.18.2",
+    "express-validator": "^7.2.1",
+    "helmet": "^8.1.0",
+    "method-override": "^3.0.0",
+    "morgan": "^1.10.1",
+    "mysql2": "^3.14.3",
+    "nodemailer": "^10.5.0",
+    "pdfkit": "^0.20.2",
+    "pngjs": "5.0.0",
+    "qrcode": "^1.5.4",
+    "three": "^0.180.0"
+  },
+  "devDependencies": {
+    "esbuild": "^0.25.9",
+    "prettier": "^3.6.2"
+  }
+}

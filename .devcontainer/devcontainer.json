@@ -1,0 +1,16 @@
+{
+  "name": "Minimarket MVC",
+  "dockerComposeFile": "../docker-compose.yml",
+  "service": "app",
+  "workspaceFolder": "/app",
+  "forwardPorts": [3000, 8080, 3307],
+  "customizations": {
+    "vscode": {
+      "extensions": [
+        "dbaeumer.vscode-eslint",
+        "ms-azuretools.vscode-docker",
+        "cweijan.vscode-mysql-client2"
+      ]
+    }
+  }
+}

@@ -1,0 +1,8 @@
+<section class="rf-page-head"><a href="/rf">← Mi estación</a><h1>Escanear etiqueta</h1><p>Consulta productos, lotes, ubicaciones y cargas sin modificar existencias.</p></section>
+<section class="rf-scanner" data-scanner>
+  <div class="scanner-viewport"><video playsinline muted aria-label="Vista de cámara para lectura"></video><div class="scan-frame"></div><span class="scanner-live" data-scan-live>Lista para activar</span><p class="rf-camera-hint">Acerca el QR o código de barras al marco</p></div>
+  <div class="rf-scanner-controls"><button class="btn btn-brand btn-lg" type="button" data-scan-start><svg class="icon"><use href="/icons.svg#i-camera"/></svg> Activar cámara</button><button class="btn btn-outline-light" type="button" data-scan-stop disabled>Detener</button></div>
+  <p class="rf-camera-status" role="status" aria-live="polite" data-scan-status>La cámara se activa únicamente cuando tú lo indicas.</p>
+  <details class="rf-camera-settings"><summary>Elegir cámara y permisos <span aria-hidden="true">+</span></summary><div class="camera-picker"><label for="rfCamera">Cámara disponible</label><div class="input-group"><select id="rfCamera" class="form-select" data-native-select="true" data-scan-camera><option value="">Automática · cámara posterior</option></select><button class="btn btn-outline-light" type="button" data-scan-refresh aria-label="Actualizar cámaras">↻</button></div><small>Usa HTTPS o localhost y permite el acceso a la cámara. Si macOS ofrece el iPhone, podrás elegirlo aquí.</small></div></details>
+  <article class="scan-result" data-scan-result aria-live="polite"><span>Sin lectura</span><strong>¿Qué tienes delante?</strong><small>Escanea y revisa el registro encontrado antes de confirmarlo.</small></article>
+</section>

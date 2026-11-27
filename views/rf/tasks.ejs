@@ -1,0 +1,40 @@
+<%
+const moduleNames={checkin:'Ubicar mercancía',picking:'Preparar pedidos',transfer:'Mover mercancía',returns:'Procesar devoluciones'};
+const taskNames={PUTAWAY:'Almacenar',PICKING:'Preparar pedido',REUBICACION:'Reubicar',REABASTECIMIENTO:'Reponer preparación',DEVOLUCION_RUTA:'Devolver a cuarentena'};
+const visibleTasks=[...tasks].sort((a,b)=>({EN_PROCESO:0,PENDIENTE:1,COMPLETADA:2,CANCELADA:3}[a.estado]??4)-({EN_PROCESO:0,PENDIENTE:1,COMPLETADA:2,CANCELADA:3}[b.estado]??4));
+%>
+<section class="rf-page-head">
+  <a href="/rf">← Mi estación</a>
+  <h1><%= moduleNames[module.key] || module.title %></h1>
+  <p>Solo tu trabajo asignado. Empieza por las tareas en curso.</p>
+</section>
+<form class="rf-filter" aria-label="Filtrar mis tareas">
+  <label for="rfTaskStatus">Mostrar</label>
+  <select id="rfTaskStatus" class="form-select" name="status" data-native-select="true" onchange="this.form.submit()">
+    <option value="">Todas mis tareas</option>
+    <% [['PENDIENTE','Por hacer'],['EN_PROCESO','En curso'],['COMPLETADA','Terminadas']].forEach(([value,label])=>{ %><option value="<%= value %>" <%= filters.status===value?'selected':'' %>><%= label %></option><% }) %>
+  </select>
+  <span><%= tasks.length %> <%= tasks.length===1?'tarea':'tareas' %></span>
+</form>
+<section class="rf-task-list">
+  <% if(!tasks.length){ %>
+    <div class="rf-empty"><span class="rf-quiet-check">✓</span><strong>No hay tareas en esta bandeja</strong><small>Cuando tengas trabajo asignado, aparecerá aquí.</small><a href="/rf" class="btn btn-brand">Volver a mi estación</a></div>
+  <% } %>
+  <% visibleTasks.forEach((task,index)=>{ const mine=Number(task.asignado_a)===Number(currentUser.id); %>
+    <article class="rf-task-card <%= task.estado==='EN_PROCESO'?'rf-task-in-progress':'' %>">
+      <header><span class="rf-task-kind"><svg class="icon"><use href="/icons.svg#<%= module.icon %>"/></svg><%= taskNames[task.tipo] || task.tipo %></span><span class="rf-task-priority" data-priority="<%= task.prioridad %>"><%= task.prioridad %></span></header>
+      <div class="rf-task-product"><strong><%= task.producto %></strong><span><b><%= task.cantidad %></b> unidades</span></div>
+      <div class="rf-journey">
+        <div><small>Recoge en</small><%- include('_location',{code:task.loc_origen,zone:task.zona_origen}) %></div>
+        <span class="rf-journey-arrow" aria-hidden="true">↓</span>
+        <div><small>Entrega en</small><%- include('_location',{code:task.loc_destino,zone:task.zona_destino}) %></div>
+      </div>
+      <details class="rf-task-detail"><summary>Ver lote y referencia <span aria-hidden="true">+</span></summary><div><span>Lote</span><strong><%= task.numero_lote %></strong></div><div><span>Producto</span><strong><%= task.sku %></strong></div><div><span>Tarea</span><strong><%= task.codigo_tarea %></strong></div><% if(task.observaciones){ %><p class="rf-note"><%= task.observaciones %></p><% } %></details>
+      <footer>
+        <span class="status-pill <%= task.estado==='COMPLETADA'?'ok':task.estado==='EN_PROCESO'?'pending':'off' %>"><%= ({PENDIENTE:'Por hacer',EN_PROCESO:'En curso',COMPLETADA:'Terminada',CANCELADA:'Cancelada'})[task.estado] || task.estado %></span>
+        <% if(task.estado==='PENDIENTE'&&mine){ %><form method="post" action="/rf/tareas/<%= task.id %>/iniciar"><input type="hidden" name="_csrf" value="<%= csrfToken %>"><button class="btn btn-brand btn-lg w-100">Empezar tarea <span aria-hidden="true">→</span></button></form><% } %>
+        <% if(task.estado==='EN_PROCESO'&&mine){ %><a class="btn btn-brand btn-lg w-100" href="/rf/tareas/<%= task.id %>/ejecutar">Continuar tarea <svg class="icon"><use href="/icons.svg#i-camera"/></svg></a><% } %>
+      </footer>
+    </article>
+  <% }) %>
+</section>

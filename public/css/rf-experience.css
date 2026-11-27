@@ -1,0 +1,1776 @@
+/* Estación RF DonPepe: una acción física, una lectura verificada. */
+body.rf-mode.rf-experience {
+  --rf-ink: #241334;
+  --rf-muted: #746b81;
+  --rf-purple: #6533ae;
+  --rf-purple-deep: #42206f;
+  --rf-yellow: #f7d454;
+  --rf-line: #e7e1ee;
+  --rf-green: #19794e;
+  --rf-green-soft: #edf8f1;
+  --rf-red: #b52d4f;
+  --rf-shadow: 0 2px 4px #2a144608, 0 16px 34px #2a144608;
+  --dp-text: var(--rf-ink);
+  --dp-muted: var(--rf-muted);
+  --dp-surface: #fff;
+  --dp-canvas: #f5f3f8;
+  --white: var(--rf-ink);
+  --muted: var(--rf-muted);
+  --line: var(--rf-line);
+  --ink: #f5f3f8;
+  --ink-2: #fff;
+  --ink-3: #f0ebf7;
+  color: var(--rf-ink);
+  background:
+    radial-gradient(ellipse at 10% 0, #e9e1f380, transparent 48%), #f5f3f8;
+  font-family: var(--ui-font, Arial, sans-serif);
+  letter-spacing: 0;
+  padding-bottom: calc(96px + env(safe-area-inset-bottom));
+  min-width: 0;
+}
+body.rf-experience :is(h1, h2, h3, .eyebrow) {
+  font-family: var(--ui-font, Arial, sans-serif);
+  letter-spacing: -0.035em;
+  text-transform: none;
+}
+body.rf-experience :is(a, button, input, select, textarea) {
+  -webkit-tap-highlight-color: transparent;
+}
+body.rf-experience :is(button, a, input, select, textarea):focus-visible {
+  outline: 3px solid #8a64c2;
+  outline-offset: 4px;
+}
+body.rf-experience .rf-top {
+  position: sticky;
+  top: 0;
+  z-index: 1020;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  min-height: 90px;
+  padding: 12px max(22px, calc((100vw - 840px) / 2));
+  background: #fffefef2;
+  backdrop-filter: blur(18px);
+  border-bottom: 1px solid var(--rf-line);
+  box-shadow: 0 5px 20px #32114704;
+}
+body.rf-experience .rf-brand {
+  gap: 8px;
+  flex-direction: column;
+  align-items: flex-start;
+  min-width: 0;
+  text-decoration: none;
+}
+body.rf-experience .rf-brand small {
+  color: #7b6d88;
+  font-size: 9px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+body.rf-experience .rf-brand .donpepe-logo {
+  width: 178px;
+  padding: 7px 8px;
+  border-radius: 11px;
+}
+body.rf-experience .rf-scan-link {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+  padding: 12px 14px;
+  border: 1px solid var(--rf-line);
+  border-radius: 14px;
+  background: #f5f0fa;
+  color: var(--rf-purple);
+  text-decoration: none;
+  font-size: 12px;
+  font-weight: 800;
+  min-height: 46px;
+}
+body.rf-experience .rf-scan-link .icon {
+  width: 20px;
+  height: 20px;
+}
+body.rf-experience .rf-content {
+  width: min(100%, 840px);
+  min-width: 0;
+  margin: 0 auto;
+  padding: 27px 22px 36px;
+}
+body.rf-experience .rf-welcome {
+  padding: 3px 0 24px;
+}
+body.rf-experience .rf-shift-label {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  font-size: 11px;
+  font-weight: 700;
+  color: var(--rf-muted);
+}
+body.rf-experience .rf-live-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: #3eae7a;
+  box-shadow: 0 0 0 4px #3eae7a12;
+}
+body.rf-experience .rf-welcome h1 {
+  font-size: clamp(30px, 6vw, 42px);
+  line-height: 1.1;
+  margin: 13px 0 8px;
+  font-weight: 850;
+  color: var(--rf-ink);
+}
+body.rf-experience .rf-welcome > p {
+  font-size: 13px;
+  color: var(--rf-muted);
+  line-height: 1.6;
+  margin: 0;
+}
+body.rf-experience .rf-shift-stats {
+  display: flex;
+  gap: 25px;
+  align-items: center;
+  margin-top: 23px;
+}
+body.rf-experience .rf-shift-stats > div {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+}
+body.rf-experience .rf-shift-stats strong {
+  font-size: 23px;
+  line-height: 1;
+  font-weight: 850;
+}
+body.rf-experience .rf-shift-stats span {
+  color: var(--rf-muted);
+  font-size: 10px;
+  max-width: 80px;
+}
+body.rf-experience .rf-shift-stats a {
+  display: flex;
+  gap: 6px;
+  align-items: center;
+  margin-left: auto;
+  color: var(--rf-purple);
+  font-size: 11px;
+  font-weight: 750;
+  text-decoration: none;
+}
+body.rf-experience .rf-shift-stats a .icon {
+  width: 16px;
+  height: 16px;
+}
+body.rf-experience .rf-next-work {
+  display: grid;
+  grid-template-columns: 46px minmax(0, 1fr) 20px;
+  gap: 15px;
+  align-items: center;
+  padding: 22px;
+  border-radius: 23px;
+  color: #fff;
+  text-decoration: none;
+  background:
+    radial-gradient(ellipse at 100% 100%, #8961b4, transparent 70%), #47236e;
+  box-shadow: 0 13px 27px #6533ae28;
+  overflow: hidden;
+  transition:
+    transform 0.2s,
+    box-shadow 0.2s;
+}
+body.rf-experience .rf-next-work:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 16px 30px #6533ae35;
+}
+body.rf-experience .rf-next-icon {
+  display: grid;
+  place-items: center;
+  width: 46px;
+  height: 46px;
+  border: 1px solid #ffffff30;
+  background: #ffffff12;
+  border-radius: 15px;
+  color: #f6d55b;
+}
+body.rf-experience .rf-next-icon .icon {
+  width: 25px;
+  height: 25px;
+}
+body.rf-experience .rf-next-work small {
+  display: block;
+  font-size: 9px;
+  color: #d8c8e8;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  font-weight: 750;
+}
+body.rf-experience .rf-next-work strong {
+  display: block;
+  font-size: 19px;
+  font-weight: 800;
+  margin: 5px 0;
+  letter-spacing: -0.025em;
+}
+body.rf-experience .rf-next-work em {
+  display: block;
+  font-size: 10px;
+  font-style: normal;
+  color: #e3d6f0;
+  line-height: 1.5;
+}
+body.rf-experience .rf-next-work > b {
+  color: #f8d66b;
+  font-size: 24px;
+}
+body.rf-experience .rf-section-heading {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  margin: 29px 0 13px;
+}
+body.rf-experience .rf-section-heading h2 {
+  margin: 0;
+  font-size: 18px;
+  color: var(--rf-ink);
+  font-weight: 800;
+}
+body.rf-experience .rf-section-heading > span {
+  font-size: 10px;
+  color: var(--rf-muted);
+}
+body.rf-experience .rf-menu {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 13px;
+}
+body.rf-experience .rf-menu-card {
+  position: relative;
+  display: block;
+  min-width: 0;
+  min-height: 177px;
+  padding: 18px;
+  border: 1px solid var(--rf-line);
+  border-radius: 20px;
+  background: #fff;
+  color: var(--rf-ink);
+  box-shadow: var(--rf-shadow);
+  text-decoration: none;
+  transition:
+    transform 0.2s,
+    border-color 0.2s;
+  overflow: hidden;
+}
+body.rf-experience .rf-menu-card::before,
+body.rf-experience .rf-menu-card::after {
+  display: none;
+}
+body.rf-experience .rf-menu-card:hover {
+  transform: translateY(-3px);
+  border-color: #bda6d7;
+}
+body.rf-experience .rf-menu-card > .rf-module-symbol {
+  display: grid;
+  place-items: center;
+  width: 41px;
+  height: 41px;
+  margin: 0 0 18px;
+  border-radius: 13px;
+  background: #f0eaf7;
+  color: var(--rf-purple);
+}
+body.rf-experience .rf-module-symbol .icon {
+  width: 23px;
+  height: 23px;
+}
+body.rf-experience .rf-menu-card:nth-child(3n + 2) .rf-module-symbol {
+  color: #986616;
+  background: #fff4d3;
+}
+body.rf-experience .rf-menu-card:nth-child(3n) .rf-module-symbol {
+  color: #267755;
+  background: #eaf6ee;
+}
+body.rf-experience .rf-menu-card > strong {
+  font-size: 15px;
+  font-weight: 800;
+  letter-spacing: -0.02em;
+  margin: 0 0 7px;
+  display: block;
+  line-height: 1.25;
+}
+body.rf-experience .rf-menu-card > small {
+  display: block;
+  font-size: 10px;
+  color: var(--rf-muted);
+  line-height: 1.55;
+  max-width: 88%;
+}
+body.rf-experience .rf-menu-card > .rf-module-count {
+  position: absolute;
+  right: 15px;
+  top: 19px;
+  display: grid;
+  place-items: center;
+  padding: 2px;
+  min-width: 23px;
+  height: 23px;
+  background: #f6f3fa;
+  color: #7b628d;
+  font-size: 10px;
+  font-weight: 800;
+  border: 1px solid #eee7f4;
+  border-radius: 8px;
+}
+body.rf-experience .rf-menu-card > .rf-module-arrow {
+  position: absolute;
+  right: 17px;
+  bottom: 17px;
+  width: auto;
+  height: auto;
+  background: none;
+  border-radius: 0;
+  color: #a993bd;
+  font-size: 20px;
+}
+body.rf-experience .rf-scan-shortcut {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  padding: 20px;
+  margin-top: 18px;
+  border: 1px dashed #ccbada;
+  border-radius: 19px;
+  background: #ffffff80;
+  color: var(--rf-purple);
+  text-decoration: none;
+}
+body.rf-experience .rf-scan-shortcut > .icon {
+  width: 25px;
+  height: 25px;
+  flex-shrink: 0;
+}
+body.rf-experience .rf-scan-shortcut strong {
+  display: block;
+  font-size: 13px;
+}
+body.rf-experience .rf-scan-shortcut small {
+  display: block;
+  font-size: 10px;
+  margin-top: 4px;
+  color: var(--rf-muted);
+  line-height: 1.5;
+}
+body.rf-experience .rf-scan-shortcut b {
+  margin-left: auto;
+}
+body.rf-experience .rf-page-head {
+  display: block;
+  background: none;
+  border: 0;
+  border-radius: 0;
+  box-shadow: none;
+  padding: 0 0 22px;
+  margin: 0;
+}
+body.rf-experience .rf-page-head > a {
+  display: inline-block;
+  margin-bottom: 20px;
+  font-size: 11px;
+  color: var(--rf-purple);
+  text-decoration: none;
+  font-weight: 700;
+}
+body.rf-experience .rf-page-head h1 {
+  font-size: clamp(26px, 5vw, 34px);
+  font-weight: 850;
+  color: var(--rf-ink);
+  line-height: 1.12;
+  margin: 0 0 10px;
+}
+body.rf-experience .rf-page-head p {
+  color: var(--rf-muted);
+  font-size: 12px;
+  line-height: 1.65;
+  margin: 0;
+}
+body.rf-experience .rf-task-reference {
+  float: right;
+  margin-top: 2px;
+  padding: 5px 7px;
+  background: #ebe3f2;
+  color: #805f96;
+  font-size: 9px;
+  border-radius: 6px;
+}
+body.rf-experience .rf-filter {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 11px 14px;
+  background: #fff;
+  border: 1px solid var(--rf-line);
+  border-radius: 15px;
+  margin-bottom: 18px;
+}
+body.rf-experience .rf-filter label,
+body.rf-experience .rf-filter > span {
+  font-size: 10px;
+  color: var(--rf-muted);
+  flex-shrink: 0;
+}
+body.rf-experience .rf-filter select {
+  width: auto;
+  flex: 1;
+  padding: 9px 28px 9px 10px;
+  min-height: 38px;
+  border: 0;
+  background-color: #f7f4fa;
+  font-size: 11px;
+}
+body.rf-experience .rf-task-list {
+  display: grid;
+  gap: 18px;
+}
+body.rf-experience .rf-task-card {
+  background: #fff;
+  border: 1px solid var(--rf-line);
+  border-radius: 22px;
+  padding: 20px;
+  box-shadow: var(--rf-shadow);
+  overflow: hidden;
+}
+body.rf-experience .rf-task-card:hover {
+  border-color: #cdbdde;
+}
+body.rf-experience .rf-task-in-progress {
+  border-color: #a789ce;
+  box-shadow:
+    0 2px 4px #2a144608,
+    0 12px 25px #6837a311;
+}
+body.rf-experience .rf-task-card > header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  margin: 0 0 17px;
+}
+body.rf-experience .rf-task-kind {
+  display: flex;
+  gap: 7px;
+  align-items: center;
+  color: var(--rf-purple);
+  font-size: 10px;
+  font-weight: 800;
+  text-transform: none;
+  letter-spacing: 0;
+}
+body.rf-experience .rf-task-kind .icon {
+  width: 15px;
+  height: 15px;
+}
+body.rf-experience .rf-task-priority {
+  padding: 5px 7px;
+  background: #f5f2f8;
+  color: #7b6a8c;
+  font-size: 8px;
+  font-weight: 800;
+  border-radius: 6px;
+  text-transform: uppercase;
+}
+body.rf-experience .rf-task-priority[data-priority="URGENTE"],
+body.rf-experience .rf-task-priority[data-priority="ALTA"] {
+  background: #fff0df;
+  color: #9b5d16;
+}
+body.rf-experience .rf-task-product {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin: 0 0 19px;
+}
+body.rf-experience .rf-task-product > strong {
+  font-size: 18px;
+  font-weight: 800;
+  line-height: 1.3;
+  letter-spacing: -0.025em;
+  min-width: 0;
+}
+body.rf-experience .rf-task-product > span {
+  display: flex;
+  flex-direction: column;
+  text-align: right;
+  font-size: 9px;
+  color: var(--rf-muted);
+  margin-left: auto;
+}
+body.rf-experience .rf-task-product > span b {
+  font-size: 30px;
+  line-height: 1;
+  font-weight: 850;
+  color: var(--rf-purple);
+}
+body.rf-experience .rf-journey {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 8px;
+  padding: 16px;
+  border-radius: 14px;
+  background: #f7f5fa;
+  border: 1px solid #eee8f4;
+}
+body.rf-experience .rf-journey > div > small:first-child {
+  display: block;
+  font-size: 8px;
+  font-weight: 800;
+  color: #a18cab;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  margin-bottom: 5px;
+}
+body.rf-experience .rf-location-zone {
+  display: block;
+  color: var(--rf-ink);
+  font-size: 13px;
+  font-weight: 800;
+  margin: 0 0 4px;
+  line-height: 1.3;
+}
+body.rf-experience .rf-location-human {
+  display: block;
+  color: #6e5a7f;
+  font-size: 10px;
+  font-weight: 650;
+  line-height: 1.55;
+}
+body.rf-experience .rf-location-code {
+  display: block;
+  color: #9b8ca9;
+  font-size: 8px;
+  line-height: 1.6;
+  font-family: var(--ui-mono, monospace);
+  overflow-wrap: anywhere;
+  margin-top: 4px;
+}
+body.rf-experience .rf-journey-arrow {
+  color: #bba5cf;
+  margin: -1px 0;
+  font-size: 16px;
+}
+body.rf-experience .rf-task-detail {
+  border: 0;
+  border-top: 1px solid #eee7f3;
+  margin-top: 16px;
+  padding-top: 0;
+  background: none;
+}
+body.rf-experience .rf-task-detail summary {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 14px 0;
+  color: #7b678d;
+  font-size: 10px;
+  font-weight: 700;
+  cursor: pointer;
+  list-style: none;
+}
+body.rf-experience .rf-task-detail summary::-webkit-details-marker {
+  display: none;
+}
+body.rf-experience .rf-task-detail > div {
+  display: flex;
+  gap: 8px;
+  justify-content: space-between;
+  padding: 7px 0;
+  border: 0;
+  font-size: 10px;
+}
+body.rf-experience .rf-task-detail strong {
+  color: var(--rf-ink);
+  overflow-wrap: anywhere;
+}
+body.rf-experience .rf-task-detail span {
+  color: var(--rf-muted);
+}
+body.rf-experience .rf-task-card footer {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  align-items: center;
+  border: 0;
+  margin-top: 4px;
+  padding: 0;
+}
+body.rf-experience .rf-task-card footer > form,
+body.rf-experience .rf-task-card footer > a {
+  flex: 1 1 180px;
+}
+body.rf-experience .status-pill {
+  font-size: 9px;
+  font-weight: 750;
+  padding: 6px 9px;
+  min-height: 0;
+  border: 0;
+  background: #f1edf6;
+  color: #786487;
+}
+body.rf-experience .status-pill.ok {
+  background: #e9f6ee;
+  color: #24784e;
+}
+body.rf-experience .status-pill.pending {
+  background: #fff4d6;
+  color: #906115;
+}
+body.rf-experience .btn {
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  gap: 9px;
+  font-size: 12px;
+  line-height: 1.4;
+  font-weight: 800;
+  letter-spacing: -0.01em;
+  border-radius: 13px;
+  min-height: 49px;
+  padding: 12px 16px;
+  text-decoration: none;
+  transition:
+    background 0.18s,
+    transform 0.18s,
+    box-shadow 0.18s;
+}
+body.rf-experience .btn-brand {
+  background: var(--rf-purple);
+  color: #fff;
+  border: 1px solid var(--rf-purple);
+  box-shadow: 0 5px 10px #6533ae15;
+}
+body.rf-experience .btn-brand:not(:disabled):hover {
+  background: var(--rf-purple-deep);
+  color: #fff;
+  border-color: var(--rf-purple-deep);
+  transform: translateY(-1px);
+}
+body.rf-experience .btn-success {
+  background: var(--rf-green);
+  color: #fff;
+  border: 1px solid var(--rf-green);
+  box-shadow: 0 6px 14px #19794e14;
+}
+body.rf-experience .btn-outline-light {
+  color: #746183;
+  background: #fff;
+  border: 1px solid #ded2e9;
+  box-shadow: none;
+}
+body.rf-experience .btn-outline-warning {
+  color: #80561a;
+  background: #fff8e6;
+  border: 1px solid #e7d6a7;
+}
+body.rf-experience :is(.btn, .rf-camera-action):disabled {
+  background: #efebf3;
+  border-color: #e3dce9;
+  color: #9e91ab;
+  opacity: 1;
+  box-shadow: none;
+  cursor: not-allowed;
+  transform: none;
+}
+body.rf-experience .btn .icon {
+  width: 17px;
+  height: 17px;
+}
+body.rf-experience .rf-quiet-state {
+  display: flex;
+  gap: 14px;
+  align-items: center;
+  background: #fff;
+  border: 1px solid var(--rf-line);
+  border-radius: 20px;
+  padding: 21px;
+}
+body.rf-experience .rf-quiet-check {
+  display: grid;
+  place-items: center;
+  width: 42px;
+  height: 42px;
+  flex-shrink: 0;
+  border: 1px solid #d7efdf;
+  background: #edf8f1;
+  color: #32916c;
+  border-radius: 15px;
+  font-size: 21px;
+}
+body.rf-experience .rf-quiet-state strong {
+  font-size: 14px;
+}
+body.rf-experience .rf-quiet-state p {
+  font-size: 11px;
+  color: var(--rf-muted);
+  margin: 5px 0 0;
+  line-height: 1.5;
+}
+body.rf-experience .rf-empty {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+  padding: 36px 23px;
+  background: #fff;
+  border: 1px solid var(--rf-line);
+  border-radius: 23px;
+  text-align: center;
+}
+body.rf-experience .rf-empty strong {
+  font-size: 17px;
+  color: var(--rf-ink);
+}
+body.rf-experience .rf-empty small {
+  max-width: 270px;
+  font-size: 12px;
+  line-height: 1.65;
+  color: var(--rf-muted);
+}
+body.rf-experience .rf-order-metrics {
+  display: flex;
+  gap: 30px;
+  margin-bottom: 17px;
+}
+body.rf-experience .rf-order-metrics > div {
+  display: flex;
+  align-items: baseline;
+  gap: 6px;
+}
+body.rf-experience .rf-order-metrics b {
+  font-size: 25px;
+  font-weight: 850;
+}
+body.rf-experience .rf-order-metrics span {
+  font-size: 10px;
+  color: var(--rf-muted);
+}
+body.rf-experience .rf-order-reference {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  justify-content: space-between;
+  border-top: 1px solid var(--rf-line);
+  margin-bottom: 13px;
+  padding-top: 12px;
+  color: #9b8aa8;
+  font-size: 9px;
+}
+body.rf-experience .rf-cargo-card {
+  display: grid;
+  grid-template-columns: 40px minmax(0, 1fr) auto;
+  align-items: center;
+  gap: 13px;
+  background: #fff;
+  border: 1px solid var(--rf-line);
+  border-radius: 19px;
+  padding: 17px;
+  box-shadow: var(--rf-shadow);
+}
+body.rf-experience .rf-cargo-icon {
+  display: grid;
+  place-items: center;
+  width: 40px;
+  height: 44px;
+  background: #fff2c8;
+  border: 1px solid #f4e7b5;
+  border-radius: 11px;
+  color: #9d741f;
+}
+body.rf-experience .rf-cargo-icon .icon {
+  width: 24px;
+  height: 24px;
+}
+body.rf-experience .rf-cargo-card > div > small {
+  font-size: 9px;
+  font-weight: 700;
+  color: #9b8aa9;
+}
+body.rf-experience .rf-cargo-card > div > strong {
+  display: block;
+  font-size: 13px;
+  line-height: 1.4;
+  font-weight: 800;
+  margin: 3px 0;
+}
+body.rf-experience .rf-cargo-card > div > span {
+  display: block;
+  font-size: 9px;
+  color: var(--rf-muted);
+}
+body.rf-experience .rf-cargo-card > b {
+  color: var(--rf-purple);
+  font-size: 29px;
+  font-weight: 850;
+  text-align: right;
+  line-height: 1;
+}
+body.rf-experience .rf-cargo-card > b > small {
+  display: block;
+  font-size: 8px;
+  font-weight: 650;
+  color: var(--rf-muted);
+  margin-top: 5px;
+}
+body.rf-experience .rf-confirm-form {
+  display: grid;
+  gap: 15px;
+  margin-top: 24px;
+}
+body.rf-experience .rf-execution-progress {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  gap: 8px;
+  margin-bottom: 0;
+}
+body.rf-experience .rf-execution-progress > span {
+  font-size: 10px;
+  color: var(--rf-muted);
+}
+body.rf-experience .rf-execution-progress > b {
+  font-size: 10px;
+  color: var(--rf-purple);
+}
+body.rf-experience .rf-execution-progress [role="progressbar"] {
+  grid-column: 1 / -1;
+  height: 5px;
+  border-radius: 5px;
+  background: #e9e2f0;
+  overflow: hidden;
+}
+body.rf-experience .rf-execution-progress i {
+  display: block;
+  width: 0;
+  height: 100%;
+  border-radius: 5px;
+  background: #8062ac;
+  transition: width 0.4s;
+}
+body.rf-experience .rf-stepper {
+  display: flex;
+  justify-content: space-between;
+  list-style: none;
+  gap: 6px;
+  margin: 1px 0 6px;
+  padding: 0;
+}
+body.rf-experience .rf-stepper li {
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 0;
+  flex: 1;
+  font-size: 9px;
+  color: #a79ab4;
+  font-weight: 700;
+}
+body.rf-experience .rf-stepper li:not(:last-child)::after {
+  display: none;
+}
+body.rf-experience .rf-stepper b {
+  width: 22px;
+  height: 22px;
+  display: grid;
+  place-items: center;
+  font-size: 9px;
+  border-radius: 50%;
+  background: #e9e2ef;
+  color: #9d8bac;
+  border: 1px solid #dfd5e8;
+}
+body.rf-experience .rf-stepper .is-active {
+  color: var(--rf-purple);
+}
+body.rf-experience .rf-stepper .is-active b {
+  background: #6e3bb1;
+  color: #fff;
+  border-color: #6e3bb1;
+}
+body.rf-experience .rf-stepper .is-done {
+  color: #27784f;
+}
+body.rf-experience .rf-stepper .is-done b {
+  color: #fff;
+  background: #25845b;
+  border-color: #25845b;
+}
+body.rf-experience .rf-scan-step {
+  display: block;
+  margin: 0;
+  padding: 20px;
+  background: #fff;
+  border: 1px solid var(--rf-line);
+  border-radius: 22px;
+  box-shadow: var(--rf-shadow);
+  transition:
+    border-color 0.25s,
+    background 0.25s,
+    box-shadow 0.25s;
+}
+body.rf-experience .rf-scan-step.is-active {
+  border-color: #ac88d1;
+  box-shadow:
+    0 0 0 3px #e7dbee55,
+    var(--rf-shadow);
+}
+body.rf-experience .rf-scan-step.is-locked {
+  background: #fbf9fd;
+  box-shadow: none;
+}
+body.rf-experience .rf-scan-step.is-locked > :not(header) {
+  display: none;
+}
+body.rf-experience .rf-scan-step header {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+}
+body.rf-experience .rf-scan-step header > div {
+  flex: 1;
+}
+body.rf-experience .rf-scan-step header small {
+  font-size: 9px;
+  color: var(--rf-muted);
+  line-height: 1.4;
+  display: block;
+}
+body.rf-experience .rf-scan-step h2 {
+  color: var(--rf-ink);
+  font-size: 15px;
+  line-height: 1.35;
+  letter-spacing: -0.025em;
+  font-weight: 800;
+  margin: 3px 0 0;
+}
+body.rf-experience .rf-scan-step-number {
+  display: grid;
+  place-items: center;
+  width: 32px;
+  height: 32px;
+  border-radius: 11px;
+  color: var(--rf-purple);
+  background: #eee7f5;
+  flex-shrink: 0;
+  font-size: 13px;
+  font-weight: 850;
+}
+body.rf-experience .rf-scan-step.is-active .rf-scan-step-number {
+  background: #f8d754;
+  color: #5b4518;
+}
+body.rf-experience .rf-step-check {
+  display: none;
+  color: #318c5b;
+  font-size: 20px;
+}
+body.rf-experience .rf-scan-step.is-done {
+  border-color: #cde4d6;
+  background: #fbfefc;
+}
+body.rf-experience .rf-scan-step.is-done .rf-step-check {
+  display: block;
+}
+body.rf-experience .rf-scan-step.is-done .rf-scan-step-number {
+  background: #e7f5ed;
+  color: #25845b;
+}
+body.rf-experience
+  .rf-scan-step.is-done
+  > :is(p, .rf-cargo-reference, .rf-step-location, label) {
+  display: none;
+}
+body.rf-experience .rf-scan-step.is-done .form-control {
+  margin-top: 12px;
+  min-height: 37px;
+  font-size: 10px;
+  background: #eef8f2;
+  border-color: #d7ebde;
+  color: #397856;
+}
+body.rf-experience .rf-scan-step.is-done .rf-camera-action {
+  min-height: 35px;
+  font-size: 10px;
+  background: none;
+  color: #7c6a8b;
+  border: 0;
+  box-shadow: none;
+  margin: 4px 0 -8px;
+  padding: 5px;
+}
+body.rf-experience .rf-scan-step.is-done .rf-camera-action .icon {
+  width: 14px;
+  height: 14px;
+}
+body.rf-experience .rf-step-location {
+  border: 1px solid #ece4f2;
+  border-radius: 12px;
+  padding: 13px;
+  background: #f8f5fb;
+  margin: 17px 0 13px;
+}
+body.rf-experience .rf-step-location .rf-location-human {
+  font-size: 11px;
+}
+body.rf-experience .rf-scan-step > p {
+  color: var(--rf-muted);
+  font-size: 11px;
+  line-height: 1.65;
+  margin: 15px 0 10px;
+}
+body.rf-experience .rf-cargo-reference {
+  display: grid;
+  gap: 4px;
+  font-size: 9px;
+  color: #8f7b9f;
+  padding: 10px 0;
+}
+body.rf-experience .rf-cargo-reference b {
+  font-weight: 750;
+  color: #614776;
+  margin-left: 3px;
+}
+body.rf-experience :is(.rf-scan-step, .rf-count-form) label {
+  font-size: 9px;
+  color: #9b8baa;
+  font-weight: 700;
+  margin-bottom: 6px;
+  display: block;
+}
+body.rf-experience .form-control,
+body.rf-experience .form-select {
+  background-color: #fbf9fd;
+  border: 1px solid #e3d9ed;
+  color: var(--rf-ink);
+  border-radius: 11px;
+  min-height: 47px;
+  padding: 12px 13px;
+  font-size: 12px;
+  box-shadow: none;
+  max-width: 100%;
+}
+body.rf-experience .form-control::placeholder {
+  color: #a89ab4;
+}
+body.rf-experience .form-control:focus,
+body.rf-experience .form-select:focus {
+  border-color: #a882cc;
+  box-shadow: 0 0 0 3px #eee6f5;
+}
+body.rf-experience [data-rf-scan-only] {
+  background: #f8f5fb;
+  font-family: var(--ui-mono, monospace);
+  font-size: 10px;
+  text-overflow: ellipsis;
+  cursor: default;
+}
+body.rf-experience .rf-camera-action {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+  width: 100%;
+  min-height: 53px;
+  margin-top: 11px;
+  padding: 13px;
+  border: 1px solid #6b38ad;
+  border-radius: 13px;
+  color: #fff;
+  background: #6b38ad;
+  box-shadow: 0 5px 12px #6533ae19;
+  font-size: 12px;
+  font-weight: 800;
+  transition:
+    transform 0.18s,
+    background 0.18s,
+    box-shadow 0.18s;
+}
+body.rf-experience .rf-camera-action:not(:disabled):hover {
+  background: #4d207f;
+  transform: translateY(-1px);
+  box-shadow: 0 7px 15px #6533ae26;
+}
+body.rf-experience .rf-camera-action .icon {
+  width: 20px;
+  height: 20px;
+}
+body.rf-experience .rf-finish-card {
+  border: 1px dashed #d7cce3;
+  padding: 22px 18px 17px;
+  border-radius: 21px;
+  text-align: center;
+  background: #ffffff80;
+}
+body.rf-experience .rf-finish-card > strong {
+  display: block;
+  font-size: 14px;
+  color: #7d6c8e;
+}
+body.rf-experience .rf-finish-card > p {
+  color: #9a89a8;
+  font-size: 10px;
+  line-height: 1.6;
+  margin: 8px 0 15px;
+}
+body.rf-experience .rf-finish-check {
+  display: grid;
+  place-items: center;
+  width: 36px;
+  height: 36px;
+  border: 1px solid #e4dbea;
+  border-radius: 50%;
+  margin: 0 auto 12px;
+  color: #b3a5bf;
+  background: #f4f0f7;
+  font-size: 19px;
+}
+body.rf-experience .rf-finish-card.is-ready {
+  border-style: solid;
+  border-color: #c5dfce;
+  background: #f1faf4;
+}
+body.rf-experience .rf-finish-card.is-ready > strong {
+  color: #28754d;
+}
+body.rf-experience .rf-finish-card.is-ready > p {
+  color: #6a9278;
+}
+body.rf-experience .rf-finish-card.is-ready .rf-finish-check {
+  background: #dff1e6;
+  color: #2c8254;
+  border-color: #b8d9c4;
+}
+body.rf-experience .rf-task-detail-wide {
+  padding: 0 18px;
+  background: #fff;
+  border: 1px solid var(--rf-line);
+  border-radius: 16px;
+  margin-top: 18px;
+}
+body.rf-experience .rf-count-location {
+  margin: 12px 0 18px;
+}
+body.rf-experience .rf-count-guidance {
+  font-size: 11px;
+  color: var(--rf-muted);
+  line-height: 1.6;
+}
+body.rf-experience .rf-count-form {
+  background: #fff;
+  padding: 21px;
+  border: 1px solid var(--rf-line);
+  border-radius: 22px;
+}
+body.rf-experience .rf-count-step {
+  display: flex;
+  gap: 11px;
+  padding: 0;
+  border: 0;
+  margin: 25px 0 15px;
+  background: none;
+  align-items: flex-start;
+}
+body.rf-experience .rf-count-step:first-of-type {
+  margin-top: 0;
+}
+body.rf-experience .rf-count-step b {
+  display: grid;
+  place-items: center;
+  width: 30px;
+  height: 30px;
+  background: #f8d85c;
+  color: #6f521d;
+  border-radius: 10px;
+  flex-shrink: 0;
+  font-size: 12px;
+}
+body.rf-experience .rf-count-step strong {
+  color: var(--rf-ink);
+  display: block;
+  font-size: 14px;
+  margin: 0 0 4px;
+}
+body.rf-experience .rf-count-step small {
+  color: var(--rf-muted);
+  font-size: 10px;
+  line-height: 1.6;
+  display: block;
+}
+body.rf-experience .rf-count-form label {
+  margin-top: 15px;
+}
+body.rf-experience .rf-quantity-input {
+  font-size: 25px;
+  min-height: 62px;
+  font-weight: 800;
+}
+body.rf-experience .rf-count-extra {
+  padding: 13px;
+  background: #f9f6fc;
+  border: 1px solid #ece4f3;
+  border-radius: 13px;
+  margin: 18px 0;
+}
+body.rf-experience .rf-count-extra summary {
+  color: #806b92;
+  font-size: 10px;
+  font-weight: 700;
+  display: flex;
+  justify-content: space-between;
+  cursor: pointer;
+}
+body.rf-experience .rf-inline-error {
+  background: #fff0f3;
+  border: 1px solid #f4d2db;
+  padding: 12px;
+  margin: 12px 0;
+  border-radius: 10px;
+  color: var(--rf-red);
+  font-size: 11px;
+  line-height: 1.5;
+  text-align: left;
+}
+body.rf-experience .rf-scanner {
+  padding: 16px;
+  border: 1px solid var(--rf-line);
+  border-radius: 24px;
+  background: #fff;
+  overflow: hidden;
+  box-shadow: var(--rf-shadow);
+}
+body.rf-experience .scanner-viewport {
+  position: relative;
+  min-height: 260px;
+  aspect-ratio: 4 / 3;
+  background: radial-gradient(circle at 50% 45%, #312340, #171021);
+  border: 0;
+  border-radius: 17px;
+  overflow: hidden;
+}
+body.rf-experience .scanner-viewport video {
+  display: block;
+  width: 100%;
+  height: 100%;
+  min-height: 260px;
+  position: absolute;
+  inset: 0;
+  object-fit: cover;
+  border-radius: 0;
+  background: transparent;
+  border: 0;
+}
+body.rf-experience .scan-frame {
+  position: absolute;
+  inset: 21% 15%;
+  width: auto;
+  height: auto;
+  border: 2px solid #f6d65b;
+  border-radius: 14px;
+  box-shadow: 0 0 0 110px #0c07164f;
+  pointer-events: none;
+}
+body.rf-experience .scan-frame::after {
+  content: "";
+  display: block;
+  position: absolute;
+  inset: 45% 8% auto;
+  height: 1px;
+  background: #f6d65b;
+  box-shadow: 0 0 10px #f6d65b80;
+  animation: rfScanSweep 2.8s ease-in-out infinite;
+}
+body.rf-experience .scanner-live {
+  position: absolute;
+  top: 14px;
+  left: 14px;
+  padding: 6px 8px;
+  border: 1px solid #ffffff20;
+  border-radius: 7px;
+  background: #ffffff0c;
+  color: #dcd0e6;
+  font-size: 8px;
+  z-index: 2;
+}
+body.rf-experience .rf-camera-hint {
+  position: absolute;
+  bottom: 12px;
+  inset-inline: 15px;
+  margin: 0;
+  font-size: 9px;
+  text-align: center;
+  color: #ccc0d7;
+}
+body.rf-experience .rf-scanner-controls {
+  display: flex;
+  gap: 9px;
+  margin-top: 14px;
+}
+body.rf-experience .rf-scanner-controls > :first-child {
+  flex: 1;
+}
+body.rf-experience .rf-camera-status {
+  color: #8b7899;
+  font-size: 10px;
+  line-height: 1.65;
+  margin: 13px 0;
+  padding: 0;
+}
+body.rf-experience .rf-camera-status[data-state="error"] {
+  color: var(--rf-red);
+  background: #fff1f4;
+  border: 1px solid #f2d1db;
+  border-radius: 10px;
+  padding: 11px;
+}
+body.rf-experience .rf-camera-status[data-state="live"] {
+  color: var(--rf-green);
+}
+body.rf-experience .rf-camera-settings {
+  margin-top: 12px;
+  border-top: 1px solid var(--rf-line);
+  padding-top: 12px;
+}
+body.rf-experience .rf-camera-settings summary {
+  display: flex;
+  justify-content: space-between;
+  color: #7d688f;
+  font-size: 10px;
+  font-weight: 750;
+  list-style: none;
+  cursor: pointer;
+  padding: 6px 0;
+}
+body.rf-experience .rf-camera-settings summary::-webkit-details-marker {
+  display: none;
+}
+body.rf-experience .rf-camera-settings label {
+  display: block;
+  color: #8b7a98;
+  font-size: 9px;
+  margin: 13px 0 7px;
+}
+body.rf-experience .rf-camera-settings small,
+body.rf-experience .camera-picker small {
+  display: block;
+  font-size: 10px;
+  line-height: 1.6;
+  color: #9784a4;
+  margin-top: 11px;
+}
+body.rf-experience .camera-picker {
+  background: transparent;
+  border: 0;
+  border-radius: 0;
+  padding: 0;
+  margin: 0;
+}
+body.rf-experience .scan-result {
+  padding: 19px;
+  border: 1px solid #e6ddec;
+  background: #f9f6fc;
+  border-radius: 16px;
+  margin-top: 18px;
+}
+body.rf-experience .scan-result > span {
+  color: #9b86aa;
+  font-size: 9px;
+  font-weight: 750;
+}
+body.rf-experience .scan-result > strong {
+  font-size: 18px;
+  line-height: 1.3;
+  color: var(--rf-ink);
+  margin: 9px 0;
+  overflow-wrap: anywhere;
+}
+body.rf-experience .scan-result > small {
+  font-size: 11px;
+  color: #84708f;
+  line-height: 1.6;
+  overflow-wrap: anywhere;
+}
+body.rf-experience .rf-footer {
+  position: fixed;
+  display: flex;
+  align-items: stretch;
+  justify-content: space-between;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: min(calc(100% - 28px), 812px);
+  padding: 8px 7px calc(8px + env(safe-area-inset-bottom));
+  gap: 3px;
+  background: #fffefef5;
+  border: 1px solid #e9e0ef;
+  border-bottom: 0;
+  border-radius: 22px 22px 0 0;
+  box-shadow: 0 -5px 25px #35114c0a;
+  backdrop-filter: blur(18px);
+  z-index: 1030;
+  min-height: 70px;
+}
+body.rf-experience .rf-footer > a,
+body.rf-experience .rf-footer > form {
+  flex: 1;
+  min-width: 0;
+}
+body.rf-experience .rf-footer > form {
+  display: flex;
+  padding: 0;
+  margin: 0;
+}
+body.rf-experience .rf-footer a,
+body.rf-experience .rf-footer button {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 6px;
+  min-height: 52px;
+  border-radius: 13px;
+  padding: 8px 3px;
+  border: 0;
+  background: transparent;
+  color: #a292ae;
+  font-size: 8px;
+  font-weight: 750;
+  text-decoration: none;
+  width: 100%;
+  line-height: 1;
+}
+body.rf-experience .rf-footer a.active {
+  background: #f0e8f8;
+  color: var(--rf-purple);
+}
+body.rf-experience .rf-footer .icon {
+  width: 20px;
+  height: 20px;
+}
+body.rf-experience .rf-footer button {
+  color: #a08b9a;
+}
+body.rf-experience .rf-camera-modal .modal-dialog {
+  width: min(calc(100% - 24px), 470px);
+  margin: 4vh auto;
+}
+body.rf-experience .rf-camera-modal .modal-content,
+body.rf-experience .scan-review-modal .modal-content {
+  background: #fff;
+  color: var(--rf-ink);
+  border: 1px solid #e2d5ec;
+  border-radius: 25px;
+  box-shadow: 0 30px 90px #17082655;
+  overflow: hidden;
+}
+body.rf-experience .rf-camera-modal .modal-header {
+  display: flex;
+  align-items: center;
+  padding: 21px;
+  background: #faf7fd;
+  border-bottom: 1px solid var(--rf-line);
+}
+body.rf-experience .rf-camera-modal .modal-header small {
+  font-size: 8px;
+  color: #a08aae;
+  font-weight: 800;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+body.rf-experience .rf-camera-modal .modal-header h2 {
+  color: var(--rf-ink);
+  font-size: 17px;
+  font-weight: 800;
+  line-height: 1.3;
+  margin: 5px 0 0;
+}
+body.rf-experience .rf-camera-modal .modal-body {
+  padding: 17px;
+}
+body.rf-experience .rf-camera-modal .modal-footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background: #faf7fd;
+  border-top: 1px solid var(--rf-line);
+  padding: 13px 17px;
+  gap: 12px;
+}
+body.rf-experience .rf-camera-modal .modal-footer > span {
+  color: #9b86a8;
+  font-size: 9px;
+  max-width: 150px;
+  line-height: 1.5;
+}
+body.rf-experience .rf-camera-tag {
+  position: absolute;
+  top: 13px;
+  left: 13px;
+  padding: 6px 8px;
+  font-size: 7px;
+  font-weight: 800;
+  letter-spacing: 0.1em;
+  color: #d6c3e6;
+  border: 1px solid #ffffff18;
+  background: #ffffff0c;
+  border-radius: 6px;
+}
+body.rf-experience .btn-close {
+  width: 32px;
+  height: 32px;
+  border-radius: 10px;
+  background-color: #efe7f7;
+  border: 1px solid #e0d4ea;
+  color: #765188;
+  opacity: 1;
+}
+body.rf-experience .scan-review-modal .modal-header {
+  background: #f9f5fc;
+  color: var(--rf-ink);
+  border-color: var(--rf-line);
+}
+body.rf-experience .scan-review-modal .modal-header h2 {
+  color: var(--rf-ink);
+  font-size: 19px;
+}
+body.rf-experience .scan-review-modal .scan-confirm-preview {
+  background: #f9f5fd;
+  border-color: #e4d6ef;
+  color: var(--rf-ink);
+}
+body.rf-experience .scan-review-modal .scan-confirm-preview :is(strong, code) {
+  color: var(--rf-ink);
+}
+body.rf-experience .scan-review-modal .scan-confirm-preview p {
+  color: #82708f;
+}
+body.rf-experience .scan-review-modal .modal-footer {
+  background: #fcfaff;
+  border-color: var(--rf-line);
+}
+body.rf-experience #quickScanModal {
+  display: none !important;
+}
+/* La recepción compartida conserva su contrato de datos, no su rejilla de escritorio. */
+body.rf-experience #receiveForm > .panel {
+  background: transparent;
+  border: 0;
+  padding: 0;
+  box-shadow: none;
+}
+body.rf-experience .receive-row {
+  background: #fff;
+  border: 1px solid var(--rf-line);
+  border-radius: 20px;
+  padding: 20px;
+  margin-bottom: 17px;
+  box-shadow: var(--rf-shadow);
+}
+body.rf-experience .receive-row .row {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 16px;
+  margin: 0;
+}
+body.rf-experience .receive-row .row > [class*="col-"] {
+  padding: 0;
+  width: auto;
+  margin: 0;
+  max-width: none;
+  grid-column: auto !important;
+}
+body.rf-experience .receive-row .row > .col-12 {
+  grid-column: 1 / -1 !important;
+}
+body.rf-experience .receive-row .row > .col-md-3:has(.lot),
+body.rf-experience .receive-row .row > .col-md-3:has(.location) {
+  grid-column: 1 / -1 !important;
+}
+body.rf-experience .receive-row h3 {
+  font-size: 18px;
+  line-height: 1.3;
+  font-weight: 800;
+  margin: 10px 0;
+  color: var(--rf-ink);
+}
+body.rf-experience .receive-row .sku-chip {
+  background: #eee7f6;
+  color: #88699b;
+  font-size: 8px;
+  padding: 4px 6px;
+  border-radius: 5px;
+}
+body.rf-experience .receive-row .form-label {
+  color: #8b779a;
+  font-size: 10px;
+  line-height: 1.5;
+}
+body.rf-experience .receive-row :is(small, .field-help, .form-text) {
+  color: #9a85a9;
+  font-size: 10px;
+  line-height: 1.5;
+}
+body.rf-experience .receive-row .scan-input-group {
+  display: block;
+}
+body.rf-experience .receive-row .scan-input-group > input {
+  padding-right: 13px;
+}
+body.rf-experience .receive-row select.location,
+body.rf-experience .receive-row [data-rf-location] {
+  display: none !important;
+}
+body.rf-experience .receive-row.scanned {
+  border-color: #badfc7;
+  box-shadow: 0 0 0 3px #e7f5ed;
+}
+body.rf-experience .page-head {
+  background: none;
+  border: 0;
+  padding: 0;
+  margin-bottom: 20px;
+  display: block;
+}
+body.rf-experience .page-head::before {
+  display: none;
+}
+body.rf-experience .page-head h1 {
+  font-size: 27px;
+  letter-spacing: -0.035em;
+  color: var(--rf-ink);
+}
+body.rf-experience .page-head p {
+  color: var(--rf-muted);
+  font-size: 11px;
+  line-height: 1.6;
+}
+body.rf-experience .page-head > a {
+  margin-top: 10px;
+}
+body.rf-experience .process-ribbon,
+body.rf-experience .workflow-note {
+  display: none;
+}
+body.rf-experience .alert {
+  color: var(--rf-ink);
+  border-color: #e6d8f0;
+  border-radius: 15px;
+  font-size: 12px;
+}
+body.rf-experience .alert-success {
+  background: #ecf8f0;
+  color: #28784f;
+  border-color: #d3e9dc;
+}
+body.rf-experience .alert-danger {
+  background: #fff0f3;
+  color: #a53954;
+  border-color: #f0ccd6;
+}
+/* Los datos secundarios siguen siendo legibles al sol, no son decoración gris. */
+body.rf-experience
+  :is(
+    .rf-location-code,
+    .rf-camera-status,
+    .rf-camera-settings small,
+    .camera-picker small,
+    .rf-order-reference,
+    .rf-count-form label,
+    .rf-scan-step label,
+    .receive-row .form-label,
+    .receive-row small,
+    .receive-row .field-help,
+    .receive-row .form-text
+  ) {
+  color: #786487;
+}
+body.rf-experience
+  :is(
+    .rf-menu-card > small,
+    .rf-shift-stats span,
+    .rf-journey .rf-location-human,
+    .rf-step-location .rf-location-human
+  ) {
+  font-size: 11px;
+}
+body.rf-experience
+  :is(.rf-scan-step header small, .rf-count-step small, .rf-camera-status) {
+  font-size: 11px;
+}
+body.rf-experience .rf-task-reference {
+  white-space: nowrap;
+}
+@keyframes rfScanSweep {
+  0%,
+  100% {
+    transform: translateY(-32px);
+    opacity: 0.45;
+  }
+  50% {
+    transform: translateY(32px);
+    opacity: 1;
+  }
+}
+@media (min-width: 650px) {
+  body.rf-experience .rf-menu {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+  body.rf-experience .rf-task-list {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    align-items: start;
+  }
+  body.rf-experience .rf-task-list > .rf-empty {
+    grid-column: 1 / -1;
+  }
+  body.rf-experience .rf-confirm-form,
+  body.rf-experience .rf-cargo-card,
+  body.rf-experience .rf-task-detail-wide {
+    max-width: 620px;
+    margin-inline: auto;
+  }
+  body.rf-experience .rf-scanner {
+    max-width: 600px;
+    margin-inline: auto;
+  }
+}
+@media (max-width: 380px) {
+  body.rf-experience .rf-content {
+    padding-inline: 16px;
+  }
+  body.rf-experience .rf-top {
+    padding-inline: 16px;
+    min-height: 81px;
+  }
+  body.rf-experience .rf-brand .donpepe-logo {
+    width: 151px;
+  }
+  body.rf-experience .rf-scan-link {
+    padding: 11px;
+  }
+  body.rf-experience .rf-menu-card {
+    padding: 15px;
+    min-height: 170px;
+  }
+  body.rf-experience .rf-menu-card > strong {
+    font-size: 14px;
+  }
+  body.rf-experience .rf-shift-stats {
+    gap: 15px;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  body.rf-experience *,
+  body.rf-experience *::after {
+    animation: none !important;
+    transition: none !important;
+    scroll-behavior: auto !important;
+  }
+}

@@ -1,0 +1,24 @@
+<div class="commerce-page">
+<div class="page-head"><div><h1>Abastecer una sucursal</h1><p>Elige el destino y los productos. El almacén se encarga de localizar las cargas.</p></div><a class="btn btn-outline-light" href="/wms/sucursales">Volver a pedidos</a></div>
+<%- include('../partials/errors') %>
+<form method="post" action="/wms/sucursales" id="branchOrderForm" class="distribution-form commerce-order" data-commerce-flow>
+  <input type="hidden" name="_csrf" value="<%= csrfToken %>"><input type="hidden" name="items" id="branchOrderItems" value="<%= form.items||'[]' %>">
+  <section class="panel" data-flow-panel data-flow-label="Destino">
+    <div class="wizard-heading"><span>1</span><div><h2>¿A qué sucursal enviaremos?</h2><p>Un pedido reúne la mercancía para un único destino.</p></div></div>
+    <label class="form-label" for="branchDestination">Sucursal</label><select class="form-select" id="branchDestination" name="sucursal_id" required><option value="">Selecciona una sucursal</option><% branches.forEach(branch=>{ %><option value="<%= branch.id %>" data-name="<%= branch.nombre %>" data-address="<%= branch.direccion %>" <%= Number(form.sucursal_id)===Number(branch.id)?'selected':'' %>><%= branch.nombre %> · <%= branch.direccion %></option><% }) %></select>
+    <div class="commerce-destinations"><% branches.forEach((branch,i)=>{ %><button type="button" data-branch-choice="<%= branch.id %>" class="commerce-destination"><span><svg class="icon"><use href="/icons.svg#i-store"/></svg></span><strong><%= branch.nombre %></strong><small><%= branch.direccion %></small><b>Elegir destino →</b></button><% }) %></div>
+  </section>
+  <section class="panel" data-flow-panel data-flow-label="Productos" data-flow-items="#branchOrderItems">
+    <div class="wizard-heading"><span>2</span><div><h2>Prepara la lista de la tienda</h2><p>No necesitas elegir códigos de ubicación ni lotes.</p></div></div>
+    <div class="row g-3 align-items-end"><div class="col-lg-8"><label class="form-label" for="branchProduct">Producto</label><select class="form-select" id="branchProduct" data-complex-select data-resource="product"><option value="">Buscar por nombre o marca</option><% products.forEach(product=>{ %><option value="<%= product.id %>" data-sku="<%= product.sku %>" data-name="<%= product.nombre %>" data-image="<%= product.imagen_url||'' %>" data-unit="<%= product.unidad_medida %>" data-quantity="<%= product.disponible_picking %>" data-reference="Disponible para preparar"><%= product.nombre %> · <%= product.disponible_picking %> <%= product.unidad_medida %> disponibles</option><% }) %></select></div><div class="col-lg-2"><label class="form-label" for="branchQty">Cantidad</label><input class="form-control" id="branchQty" type="number" min="1" max="100000" value="1"></div><div class="col-lg-2"><button type="button" class="btn btn-brand w-100" id="branchAdd">Agregar</button></div></div>
+    <div id="branchLines" class="distribution-lines" aria-live="polite"></div><p class="commerce-hint" id="branchFeedback" role="status">Solicita lo necesario. Si falta mercancía disponible, habrá que reponer antes de preparar.</p>
+  </section>
+  <section class="panel" data-flow-panel data-flow-label="Confirmar" data-flow-items="#branchOrderItems">
+    <div class="wizard-heading"><span>3</span><div><h2>Todo listo para solicitar</h2><p>Crear el pedido no descuenta inventario ni confirma una entrega.</p></div></div>
+    <div id="branchReview" class="distribution-lines"></div>
+    <label class="form-label" for="branchNotes">Instrucción de entrega <small>(opcional)</small></label><textarea class="form-control" id="branchNotes" name="observaciones" maxlength="500" rows="3" placeholder="Ej.: recibir por la puerta de carga"><%= form.observaciones||'' %></textarea>
+  </section>
+  <aside class="commerce-order-summary"><span class="commerce-summary-icon"><svg class="icon"><use href="/icons.svg#i-truck"/></svg></span><h2>Tu envío</h2><small>DESDE</small><strong>Centro de distribución</strong><span class="commerce-route-dots">↓</span><small>HACIA</small><strong id="branchSummaryName">Elige una sucursal</strong><p id="branchSummaryAddress"></p><div><span>Productos</span><b id="branchSummaryLines">0</b></div><div><span>Unidades solicitadas</span><b id="branchSummaryUnits">0</b></div><button class="btn btn-brand w-100" id="branchSubmit" data-flow-submit disabled>Crear pedido de sucursal</button><p class="commerce-summary-note">Después podrás preparar y asignar el trabajo al equipo en una sola acción.</p></aside>
+</form>
+<script defer src="/js/distribution.js"></script>
+</div>

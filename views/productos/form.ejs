@@ -1,0 +1,51 @@
+<% const logisticsOnly=currentUser.rol==='jefe_operaciones'&&product.id; %>
+<div class="page-head">
+  <div><h1><%= logisticsOnly?'CONFIGURACIÓN LOGÍSTICA':title %></h1><% if(product.id){ %><p>SKU #<%= product.id %> · creado <%= date(product.creado_en,true) %> · actualizado <%= date(product.actualizado_en,true) %></p><% } %></div>
+  <a href="/productos" class="btn btn-outline-light">Volver</a>
+</div>
+<% if(logisticsOnly){ %>
+  <%- include('logistics-form') %>
+<% } else { %>
+<div class="panel form-panel">
+  <%- include('../partials/errors') %>
+  <% if(logisticsOnly){ %>
+    <div class="workflow-note permission-note"><svg class="icon"><use href="/icons.svg#i-shield"/></svg><div><strong>Edición logística protegida</strong><small>Puedes cambiar dimensiones, controles, mínimos y estrategia LOC. Identidad, clasificación, proveedor, precios y estado pertenecen al administrador.</small></div></div>
+  <% } %>
+  <form method="post" action="<%= product.id?'/productos/'+product.id+'?_method=PUT':'/productos' %>">
+    <input type="hidden" name="_csrf" value="<%= csrfToken %>">
+    <div class="form-section"><div><span>01</span><h2>IDENTIDAD DEL SKU</h2></div><p>Identificadores utilizados en recepción, almacenamiento y picking.</p></div>
+    <div class="row g-3">
+      <div class="col-md-4"><label class="form-label">SKU interno</label><input class="form-control text-uppercase" name="sku" maxlength="40" required value="<%= product.sku||'' %>" placeholder="SKU-BEB-0001" <%= logisticsOnly?'readonly':'' %>><div class="form-text">Único, estable y distinto al código de barras.</div></div>
+      <div class="col-md-4"><label class="form-label">Código de barras</label><input class="form-control" name="codigo_barras" maxlength="50" value="<%= product.codigo_barras||'' %>" <%= logisticsOnly?'readonly':'' %>></div>
+      <div class="col-md-4"><label class="form-label">Unidad base</label><select class="form-select" name="unidad_medida"><% ['UND','CAJA','PAQUETE','KG','L'].forEach(u=>{ %><option value="<%= u %>" <%= product.unidad_medida===u?'selected':'' %>><%= u %></option><% }) %></select></div>
+      <div class="col-md-8"><label class="form-label">Descripción</label><input class="form-control" name="nombre" maxlength="100" required value="<%= product.nombre||'' %>" <%= logisticsOnly?'readonly':'' %>></div>
+      <div class="col-md-4"><label class="form-label">Estado</label><% if(logisticsOnly){ %><input type="hidden" name="activo" value="<%= product.activo?'1':'' %>"><% } %><div class="form-switch-box protected-field"><input class="form-check-input" type="checkbox" name="<%= logisticsOnly?'activo_visible':'activo' %>" value="1" <%= product.activo?'checked':'' %> <%= logisticsOnly?'disabled':'' %>><span>SKU habilitado</span></div></div>
+      <div class="col-md-7"><label class="form-label">Imagen exacta de la presentación</label><input class="form-control" type="url" name="imagen_url" maxlength="500" value="<%= product.imagen_url||'' %>" placeholder="https://retailer.pe/producto-900ml.jpg" <%= logisticsOnly?'readonly':'' %>><div class="form-text">Debe corresponder a marca, formato y contenido declarados en la descripción.</div></div>
+      <div class="col-md-5"><label class="form-label">Ficha pública de referencia</label><input class="form-control" type="url" name="referencia_url" maxlength="500" value="<%= product.referencia_url||'' %>" placeholder="https://retailer.pe/producto-900ml/p" <%= logisticsOnly?'readonly':'' %>><div class="form-text">Permite auditar la imagen y presentación usadas.</div></div>
+    </div>
+
+    <div class="form-section mt-4"><div><span>02</span><h2>CLASIFICACIÓN Y DIMENSIONES</h2></div><p>Gobierno comercial protegido y atributos físicos para capacidad.</p></div>
+    <div class="row g-3">
+      <div class="col-md-4"><label class="form-label">Categoría</label><% if(logisticsOnly){ %><input type="hidden" name="categoria_id" value="<%= product.categoria_id %>"><% } %><select class="form-select" data-complex-select data-resource="category" name="<%= logisticsOnly?'categoria_visible':'categoria_id' %>" required <%= logisticsOnly?'disabled':'' %>><% categorias.forEach(x=>{ %><option value="<%= x.id %>" data-reference="Catálogo WMS" data-meta="Vida útil: <%= x.vida_util_dias||365 %> días" data-description="<%= x.descripcion||'Sin descripción' %>" <%= Number(product.categoria_id)===x.id?'selected':'' %>><%= x.nombre %></option><% }) %></select></div>
+      <div class="col-md-4"><label class="form-label">Marca</label><% if(logisticsOnly){ %><input type="hidden" name="marca_id" value="<%= product.marca_id %>"><% } %><select class="form-select" data-complex-select data-resource="brand" name="<%= logisticsOnly?'marca_visible':'marca_id' %>" required <%= logisticsOnly?'disabled':'' %>><% marcas.forEach(x=>{ %><option value="<%= x.id %>" data-reference="Marca de catálogo" data-description="<%= x.descripcion||'Sin descripción' %>" <%= Number(product.marca_id)===x.id?'selected':'' %>><%= x.nombre %></option><% }) %></select></div>
+      <div class="col-md-4"><label class="form-label">Proveedor sugerido</label><% if(logisticsOnly){ %><input type="hidden" name="proveedor_id" value="<%= product.proveedor_id||'' %>"><% } %><select class="form-select" data-complex-select data-resource="provider" name="<%= logisticsOnly?'proveedor_visible':'proveedor_id' %>" <%= logisticsOnly?'disabled':'' %>><option value="">Sin asignar</option><% proveedores.forEach(x=>{ %><option value="<%= x.id %>" data-reference="Proveedor homologado" data-ruc="<%= x.ruc||'N/D' %>" data-telefono="<%= x.telefono||'No registrado' %>" data-email="<%= x.email||'No registrado' %>" data-image="<%= x.logo_url||'' %>" data-reference-url="<%= x.sitio_web||'' %>" <%= Number(product.proveedor_id)===x.id?'selected':'' %>><%= x.nombre %></option><% }) %></select></div>
+      <div class="col-md-3"><label class="form-label">Peso por unidad (kg)</label><input class="form-control" type="number" step=".001" min="0" name="peso_kg" required value="<%= product.peso_kg??0 %>"></div>
+      <div class="col-md-3"><label class="form-label">Volumen por unidad (m³)</label><input class="form-control" type="number" step=".000001" min="0" name="volumen_m3" required value="<%= product.volumen_m3??0 %>"></div>
+      <div class="col-md-3"><label class="form-label">Costo (S/)</label><input class="form-control" type="number" step=".01" min="0" name="precio_compra" required value="<%= product.precio_compra??'' %>" <%= logisticsOnly?'readonly':'' %>></div>
+      <div class="col-md-3"><label class="form-label">PVP referencial (S/)</label><input class="form-control" type="number" step=".01" min="0" name="precio_venta" required value="<%= product.precio_venta??'' %>" <%= logisticsOnly?'readonly':'' %>></div>
+    </div>
+
+    <div class="form-section mt-4"><div><span>03</span><h2>ESTRATEGIA WMS</h2></div><p>Define la cara de picking y la trazabilidad obligatoria.</p></div>
+    <div class="row g-3">
+      <div class="col-md-4"><label class="form-label">LOC primaria de picking</label><select class="form-select" data-complex-select data-resource="location" name="ubicacion_picking_id"><option value="">Sin LOC fija</option><% pickingLocations.forEach(x=>{ %><option value="<%= x.id %>" data-reference="Dirección WMS" data-location="<%= x.codigo_loc %>" data-zone="<%= x.zona %>" data-type="PICKING" data-condition="<%= x.condicion_almacenamiento %>" data-capacity="<%= x.capacidad_hu %> HU" <%= Number(product.ubicacion_picking_id)===x.id?'selected':'' %>><%= x.codigo_loc %> · <%= x.zona %> · <%= x.condicion_almacenamiento %></option><% }) %></select><div class="form-text">También define la condición térmica exigida por put-away y traslados.</div></div>
+      <div class="col-md-4"><label class="form-label">Stock mínimo global</label><input class="form-control" type="number" min="0" name="stock_minimo" required value="<%= product.stock_minimo??10 %>"></div>
+      <div class="col-md-4"><label class="form-label">Rotación ABC planificada</label><select class="form-select" name="clase_abc"><% ['A','B','C'].forEach(x=>{ %><option value="<%= x %>" <%= (product.clase_abc||'B')===x?'selected':'' %>><%= x %> · <%= x==='A'?'alta':x==='B'?'media':'baja' %> rotación</option><% }) %></select></div>
+      <div class="col-md-4"><label class="form-label">Objetivo en LOC de picking</label><input class="form-control" type="number" min="0" name="stock_objetivo_pick" required value="<%= product.stock_objetivo_pick??0 %>"><div class="form-text">Activa sugerencias de reabastecimiento.</div></div>
+      <div class="col-md-6"><div class="form-switch-box"><input class="form-check-input" type="checkbox" name="control_lote" value="1" <%= product.control_lote?'checked':'' %>><span><strong>Control por lote</strong><small>Trazabilidad desde recepción hasta salida/staging.</small></span></div></div>
+      <div class="col-md-6"><div class="form-switch-box"><input class="form-check-input" type="checkbox" name="control_vencimiento" value="1" <%= product.control_vencimiento?'checked':'' %>><span><strong>Control de vencimiento</strong><small>FEFO y bloqueo de unidades vencidas.</small></span></div></div>
+      <div class="col-12"><button class="btn btn-brand"><%= logisticsOnly?'Guardar estrategia WMS':'Guardar maestro SKU' %></button></div>
+    </div>
+  </form>
+  <% if(product.id&&product.activo&&can('products.deactivate')){ %><div class="danger-zone"><div><strong>Descontinuar SKU</strong><small>Se oculta de nuevas operaciones, pero conserva compras, posiciones, lotes y kardex.</small></div><form method="post" action="/productos/<%= product.id %>?_method=DELETE"><input type="hidden" name="_csrf" value="<%= csrfToken %>"><button class="btn btn-outline-danger" data-confirm="¿Descontinuar este SKU sin borrar su historial?">Desactivar</button></form></div><% } %>
+</div>
+<% } %>

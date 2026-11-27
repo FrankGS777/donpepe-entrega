@@ -1,0 +1,609 @@
+.wmap-page {
+  --wmap-line: #41334f;
+  --wmap-soft: #aa9ab5;
+  max-width: 1660px;
+  margin: 0 auto;
+  color: #f8f4fb;
+}
+.wmap-heading {
+  display: flex;
+  justify-content: space-between;
+  align-items: end;
+  gap: 2rem;
+  padding: 1rem 0 1.55rem;
+}
+.wmap-heading h1 {
+  font-size: clamp(2rem, 3.5vw, 3.5rem);
+  letter-spacing: -0.035em;
+  margin: 0.25rem 0 0.45rem;
+  color: #23172b;
+}
+.wmap-heading p {
+  max-width: 850px;
+  color: #60536b;
+  margin: 0;
+  line-height: 1.55;
+}
+.wmap-heading p strong {
+  color: #61268e;
+}
+.wmap-eyebrow {
+  font-size: 0.75rem;
+  letter-spacing: 0.18em;
+  font-weight: 800;
+  color: #61268e;
+}
+.wmap-heading-actions {
+  display: flex;
+  gap: 0.65rem;
+  flex-wrap: wrap;
+  flex-shrink: 0;
+}
+.wmap-link,
+.wmap-reset,
+.wmap-inspector-footer button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 42px;
+  border: 1px solid #715c82;
+  border-radius: 10px;
+  background: #21172d;
+  color: #fff;
+  padding: 0.65rem 0.95rem;
+  font-weight: 750;
+  transition:
+    background 0.16s,
+    transform 0.16s,
+    border-color 0.16s;
+  cursor: pointer;
+}
+.wmap-link:hover,
+.wmap-reset:hover,
+.wmap-inspector-footer button:hover {
+  border-color: #ffd400;
+  background: #352443;
+  transform: translateY(-1px);
+}
+.wmap-link-primary {
+  background: #ffd400;
+  color: #201329;
+  border-color: #ffd400;
+}
+.wmap-link-primary:hover {
+  background: #ffe362;
+  color: #201329;
+}
+.wmap-shell {
+  position: relative;
+  display: block;
+  min-height: 650px;
+}
+.wmap-explorer,
+.wmap-inspector {
+  min-width: 0;
+  border: 1px solid var(--wmap-line);
+  border-radius: 18px;
+  background: #191322;
+  box-shadow: 0 18px 55px #08050f44;
+  overflow: hidden;
+}
+.wmap-explorer {
+  display: flex;
+  flex-direction: column;
+}
+.wmap-inspector {
+  position: absolute;
+  z-index: 5;
+  right: 1rem;
+  top: 5.6rem;
+  width: min(350px, 38%);
+  max-height: min(590px, calc(100% - 7rem));
+  overflow-y: auto;
+  transform: translateX(calc(100% + 2rem));
+  opacity: 0;
+  pointer-events: none;
+  transition: transform .28s ease, opacity .2s ease;
+  box-shadow: 0 25px 60px #130d1b9e;
+}
+.wmap-shell.has-inspection .wmap-inspector {
+  transform: translateX(0);
+  opacity: 1;
+  pointer-events: auto;
+}
+.wmap-inspector-close {
+  position: absolute;
+  top: .75rem;
+  right: .75rem;
+  border: 1px solid #766187;
+  border-radius: .6rem;
+  background: #2a1d38;
+  color: #fff;
+  min-width: 2rem;
+  min-height: 2rem;
+  cursor: pointer;
+}
+.wmap-toolbar {
+  display: grid;
+  grid-template-columns: 1.15fr 0.8fr 0.8fr 1.25fr auto;
+  gap: 0.7rem;
+  padding: 1rem;
+  border-bottom: 1px solid var(--wmap-line);
+  background: #21182c;
+}
+.wmap-toolbar label {
+  display: flex;
+  flex-direction: column;
+  gap: 0.3rem;
+  min-width: 0;
+  color: #ccbdda;
+  text-transform: uppercase;
+  font-size: 0.7rem;
+  font-weight: 850;
+  letter-spacing: 0.08em;
+}
+.wmap-toolbar select {
+  height: 44px;
+  min-width: 0;
+  width: 100%;
+  border: 1px solid #5d4a6d;
+  border-radius: 9px;
+  background: #100d17;
+  color: #fff;
+  padding: 0 0.8rem;
+  font-size: 0.87rem;
+  text-transform: none;
+  letter-spacing: normal;
+  cursor: pointer;
+}
+.wmap-toolbar select:focus-visible,
+.wmap-reset:focus-visible,
+.wmap-view-switch button:focus-visible,
+.wmap-list-loc:focus-visible,
+.wmap-inspector a:focus-visible {
+  outline: 3px solid #ffd400;
+  outline-offset: 2px;
+}
+.wmap-reset {
+  align-self: end;
+  white-space: nowrap;
+}
+.wmap-stage {
+  height: 560px;
+  position: relative;
+  isolation: isolate;
+  background: radial-gradient(circle at 50% 45%, #e2e8ea 0, #b7c7d0 75%);
+  overflow: hidden;
+}
+.wmap-canvas,
+.wmap-canvas canvas {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+.wmap-stage-top,
+.wmap-stage-bottom {
+  position: absolute;
+  left: 1rem;
+  right: 1rem;
+  z-index: 2;
+  pointer-events: none;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.8rem;
+}
+.wmap-stage-top {
+  top: 1rem;
+}
+.wmap-stage-bottom {
+  bottom: 1rem;
+  max-width: max-content;
+  background: #110c18dc;
+  border: 1px solid #5b476c;
+  border-radius: 8px;
+  color: #ded4e5;
+  padding: 0.5rem 0.7rem;
+  font-size: 0.75rem;
+}
+.wmap-stage-top > span {
+  display: inline-flex;
+  background: #110c18e5;
+  border: 1px solid #6d5a7b;
+  border-radius: 999px;
+  color: #fff;
+  padding: 0.45rem 0.8rem;
+  font-size: 0.75rem;
+  font-weight: 750;
+}
+.wmap-view-switch {
+  pointer-events: auto;
+  display: flex;
+  gap: 0.2rem;
+  padding: 0.2rem;
+  border-radius: 10px;
+  background: #100b17e6;
+  border: 1px solid #725c82;
+}
+.wmap-view-switch button {
+  border: 0;
+  background: none;
+  color: #cbbdd5;
+  padding: 0.5rem 0.72rem;
+  border-radius: 7px;
+  font-size: 0.8rem;
+  font-weight: 800;
+  cursor: pointer;
+}
+.wmap-view-switch button.active {
+  background: #ffd400;
+  color: #211329;
+}
+.wmap-loading {
+  position: absolute;
+  inset: 0;
+  z-index: 3;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.8rem;
+  background: #171021e8;
+  color: #fff;
+  flex-direction: column;
+  text-align: center;
+  padding: 2rem;
+}
+.wmap-loading[hidden] {
+  display: none;
+}
+.wmap-loading-orbit {
+  width: 48px;
+  height: 48px;
+  border: 4px solid #5b466c;
+  border-top-color: #ffd400;
+  border-radius: 50%;
+  animation: wmap-spin 1s linear infinite;
+}
+@keyframes wmap-spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+.wmap-legend {
+  display: flex;
+  gap: 0.85rem 1.2rem;
+  align-items: center;
+  flex-wrap: wrap;
+  padding: 0.8rem 1rem;
+  border-top: 1px solid var(--wmap-line);
+  color: #d5c9de;
+  font-size: 0.78rem;
+}
+.wmap-legend > span:not(.wmap-legend-note) {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  white-space: nowrap;
+}
+.wmap-legend-note {
+  margin-left: auto;
+  color: #92839e;
+  font-size: 0.71rem;
+  max-width: 350px;
+}
+.wmap-legend-dot {
+  display: inline-block;
+  width: 11px;
+  height: 11px;
+  border-radius: 3px;
+  background: #42c795;
+}
+.wmap-legend-dot.partial {
+  background: #e7ad37;
+}
+.wmap-legend-dot.full {
+  background: #e35e67;
+}
+.wmap-legend-dot.active {
+  background: #53aef2;
+}
+.wmap-inspector {
+  display: flex;
+  flex-direction: column;
+}
+.wmap-inspector-head {
+  padding: 1.1rem;
+  border-bottom: 1px solid var(--wmap-line);
+  background: linear-gradient(125deg, #382149, #211529);
+}
+.wmap-inspector-head span {
+  display: block;
+  color: #ffd400;
+  letter-spacing: 0.12em;
+  font-size: 0.7rem;
+  font-weight: 900;
+  margin-bottom: 0.45rem;
+}
+.wmap-inspector-head strong {
+  display: block;
+  font-size: 1.3rem;
+  line-height: 1.2;
+  overflow-wrap: anywhere;
+}
+.wmap-inspect-body {
+  padding: 1.1rem;
+  overflow: auto;
+  flex: 1;
+}
+.wmap-inspect-body > p {
+  color: #b5a7c0;
+  line-height: 1.6;
+  margin: 0;
+}
+.wmap-inspect-tags {
+  display: flex;
+  gap: 0.4rem;
+  flex-wrap: wrap;
+  margin-bottom: 1rem;
+}
+.wmap-inspect-tags span {
+  border-radius: 999px;
+  padding: 0.3rem 0.55rem;
+  background: #30253d;
+  color: #e5d7ed;
+  font-size: 0.72rem;
+  font-weight: 800;
+}
+.wmap-inspect-metrics {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0.6rem;
+}
+.wmap-inspect-metrics div {
+  border: 1px solid #493653;
+  border-radius: 10px;
+  padding: 0.7rem;
+  background: #23192c;
+}
+.wmap-inspect-metrics small {
+  display: block;
+  color: #a99ab3;
+  text-transform: uppercase;
+  font-size: 0.64rem;
+  font-weight: 800;
+  letter-spacing: 0.08em;
+}
+.wmap-inspect-metrics strong {
+  display: block;
+  color: #fff;
+  font-size: 1.12rem;
+  margin-top: 0.25rem;
+}
+.wmap-inspect-occupancy {
+  height: 8px;
+  border-radius: 999px;
+  overflow: hidden;
+  background: #493c52;
+  margin: 1rem 0;
+}
+.wmap-inspect-occupancy span {
+  height: 100%;
+  display: block;
+  background: #ffd400;
+  border-radius: inherit;
+}
+.wmap-inspect-section {
+  border-top: 1px solid #45354f;
+  padding-top: 0.9rem;
+  margin-top: 0.9rem;
+}
+.wmap-inspect-section h3 {
+  font-size: 0.76rem;
+  letter-spacing: 0.1em;
+  color: #ffd400;
+  margin: 0 0 0.55rem;
+}
+.wmap-inspect-section p {
+  font-size: 0.83rem;
+  color: #b8aabe;
+  margin: 0.4rem 0;
+}
+.wmap-inspect-stock,
+.wmap-inspect-task {
+  display: block;
+  padding: 0.55rem 0.62rem;
+  margin: 0.45rem 0;
+  border: 1px solid #49384f;
+  border-radius: 9px;
+  background: #211729;
+  font-size: 0.78rem;
+  line-height: 1.4;
+}
+.wmap-inspect-stock strong,
+.wmap-inspect-task strong {
+  display: block;
+  color: #fff;
+}
+.wmap-inspect-stock small,
+.wmap-inspect-task small {
+  display: block;
+  color: #b8aabd;
+  margin-top: 0.2rem;
+}
+.wmap-inspect-action {
+  display: block;
+  margin-top: 0.85rem;
+  padding: 0.72rem;
+  border-radius: 9px;
+  background: #ffd400;
+  color: #24122e;
+  text-align: center;
+  font-weight: 900;
+  font-size: 0.83rem;
+}
+.wmap-inspect-action:hover {
+  background: #ffe26b;
+  color: #24122e;
+}
+.wmap-inspector-footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.6rem;
+  border-top: 1px solid var(--wmap-line);
+  padding: 0.75rem 1rem;
+}
+.wmap-inspector-footer span {
+  color: #9c8daa;
+  font-size: 0.68rem;
+}
+.wmap-inspector-footer button {
+  min-height: 35px;
+  padding: 0.4rem 0.65rem;
+  font-size: 0.75rem;
+}
+.wmap-accessible-list {
+  margin: 1rem 0 2rem;
+  border: 1px solid #3d3048;
+  border-radius: 16px;
+  padding: 1.1rem;
+  background: #1b1523;
+}
+.wmap-accessible-head {
+  display: flex;
+  justify-content: space-between;
+  gap: 1rem;
+  align-items: baseline;
+}
+.wmap-accessible-head h2 {
+  letter-spacing: 0;
+  color: #f8f4fb;
+  font-size: 1rem;
+  margin: 0;
+}
+.wmap-accessible-head p {
+  margin: 0;
+  color: #b7a9c0;
+  font-size: 0.75rem;
+}
+.wmap-list {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+  gap: 0.7rem;
+  margin-top: 0.85rem;
+}
+.wmap-list-zone {
+  padding: 0.7rem;
+  border: 1px solid #463751;
+  border-radius: 11px;
+  background: #241a2c;
+}
+.wmap-list-zone h3 {
+  font-size: 0.83rem;
+  margin: 0 0 0.5rem;
+  color: #fff;
+}
+.wmap-list-zone h3 small {
+  font-size: 0.7rem;
+  color: #ffd400;
+}
+.wmap-list-zone > div {
+  display: flex;
+  gap: 0.4rem;
+  flex-wrap: wrap;
+}
+.wmap-list-loc {
+  display: inline-flex;
+  gap: 0.45rem;
+  align-items: center;
+  border: 1px solid #5c4769;
+  border-radius: 7px;
+  padding: 0.38rem 0.5rem;
+  color: #f7f1fb;
+  background: #302339;
+  font-size: 0.7rem;
+  cursor: pointer;
+}
+.wmap-list-loc:hover,
+.wmap-list-loc.active {
+  border-color: #ffd400;
+  background: #493157;
+}
+.wmap-list-loc span {
+  color: #bdb0c7;
+}
+body:not(.auth-body) .wmap-page .wmap-accessible-head h2,
+body:not(.auth-body) .wmap-page .wmap-list-zone h3 {
+  color: #f8f4fb;
+}
+body:not(.auth-body) .wmap-page .wmap-inspect-section h3 {
+  color: #ffd400;
+}
+@media (max-width: 1100px) {
+  .wmap-inspector {
+    min-height: 250px;
+  }
+  .wmap-inspect-body {
+    max-height: 420px;
+  }
+}
+@media (max-width: 680px) {
+  .wmap-heading {
+    display: block;
+  }
+  .wmap-heading-actions {
+    margin-top: 1rem;
+  }
+  .wmap-toolbar {
+    grid-template-columns: 1fr 1fr;
+  }
+  .wmap-reset {
+    grid-column: 1/3;
+  }
+  .wmap-inspector {
+    position: fixed;
+    top: auto;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    width: 100%;
+    max-height: 68dvh;
+    border-radius: 18px 18px 0 0;
+    transform: translateY(110%);
+  }
+  .wmap-shell.has-inspection .wmap-inspector {
+    transform: translateY(0);
+  }
+  .wmap-stage {
+    height: 490px;
+  }
+  .wmap-stage-top {
+    align-items: flex-start;
+  }
+  .wmap-stage-top > span {
+    max-width: 135px;
+  }
+  .wmap-stage-bottom {
+    font-size: 0.66rem;
+    max-width: calc(100% - 2rem);
+  }
+  .wmap-legend-note {
+    margin-left: 0;
+  }
+  .wmap-accessible-head {
+    display: block;
+  }
+  .wmap-accessible-head p {
+    margin-top: 0.25rem;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .wmap-loading-orbit {
+    animation: none;
+  }
+  .wmap-link,
+  .wmap-reset,
+  .wmap-inspector-footer button {
+    transition: none;
+  }
+}

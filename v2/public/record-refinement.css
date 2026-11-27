@@ -1,0 +1,497 @@
+/* Shared rhythm for records, filtering and readable operational context. */
+/* Hidden structural nodes must not occupy a flex slot in the header. */
+.topbar > [hidden] {
+  display: none !important;
+}
+body[data-role="admin"] .topbar-right {
+  margin-left: auto;
+}
+body[data-role="operations"]:not([data-view="overview"]) #workspace-nav {
+  flex: 1 1 auto;
+}
+.topbar-right {
+  min-width: 0;
+}
+.admin-person > div {
+  display: grid;
+  gap: 5px;
+  min-width: 0;
+}
+.admin-person :is(strong, small) {
+  display: block;
+  overflow-wrap: anywhere;
+  white-space: normal;
+}
+.admin-person small {
+  font-size: 11px;
+  line-height: 1.5;
+  color: var(--muted);
+}
+.user-chip > span:not(.user-avatar) {
+  min-width: 0;
+}
+.user-chip strong {
+  display: block;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  max-width: 190px;
+}
+.page-heading {
+  flex-wrap: wrap;
+  align-items: center;
+}
+.heading-actions {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 10px;
+}
+html[data-theme] .document-code,
+html[data-theme] .master-record-footer > small {
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--ink);
+  line-height: 1.5;
+  overflow-wrap: anywhere;
+}
+html[data-theme] .record-id {
+  font-size: 12px;
+  font-weight: 500;
+  line-height: 1.6;
+  color: var(--ink);
+  overflow-wrap: anywhere;
+}
+.kardex-table {
+  table-layout: fixed;
+  width: 100%;
+  min-width: 1080px;
+}
+.kardex-table :is(th, td):nth-child(1) {
+  width: 17%;
+}
+.kardex-table :is(th, td):nth-child(2) {
+  width: 26%;
+}
+.kardex-table :is(th, td):nth-child(3) {
+  width: 27%;
+}
+.kardex-table :is(th, td):nth-child(4) {
+  width: 7%;
+}
+.kardex-table :is(th, td):nth-child(5) {
+  width: 14%;
+}
+.kardex-table :is(th, td):nth-child(6) {
+  width: 9%;
+}
+.kardex-table td {
+  white-space: normal;
+  overflow-wrap: anywhere;
+}
+.kardex-table .kardex-product {
+  min-width: 0;
+  max-width: none;
+}
+.kardex-product > div {
+  min-width: 0;
+}
+.kardex-table .kardex-route {
+  min-width: 0;
+  max-width: none;
+}
+.kardex-route > :is(span, strong) {
+  min-width: 0;
+  white-space: normal;
+  overflow-wrap: anywhere;
+}
+.kardex-filters {
+  grid-template-columns: minmax(220px, 1fr) minmax(220px, 0.7fr);
+}
+@media (max-width: 640px) {
+  .kardex-filters {
+    grid-template-columns: minmax(0, 1fr);
+  }
+  .page-heading {
+    gap: 16px;
+  }
+  .heading-actions {
+    width: 100%;
+  }
+}
+.sidebar-caption {
+  display: none;
+}
+.page-heading > h1 {
+  margin: 0;
+}
+.page-heading .heading-actions:empty {
+  display: none;
+}
+html[data-theme]
+  body[data-role]
+  #main
+  :is(
+    .store-filter-bar,
+    .record-filter-bar,
+    .master-filter-row,
+    .master-filter-bar,
+    .document-toolbar,
+    .audit-filter-form,
+    .kardex-filters
+  )
+  :is(input, select):not(.entity-original-select),
+html[data-theme]
+  body[data-role]
+  #main
+  :is(
+    .store-filter-bar,
+    .record-filter-bar,
+    .master-filter-row,
+    .master-filter-bar,
+    .document-toolbar,
+    .audit-filter-form,
+    .kardex-filters
+  )
+  .entity-picker-trigger {
+  height: 44px;
+  min-height: 44px;
+  box-sizing: border-box;
+}
+html[data-theme]
+  :is(.master-filter-row, .master-filter-bar, .document-toolbar)
+  :is(input, select):not(.entity-original-select),
+html[data-theme]
+  :is(.master-filter-row, .master-filter-bar, .document-toolbar)
+  .entity-picker-trigger {
+  min-height: 44px;
+  height: 44px;
+  box-sizing: border-box;
+}
+:is(.master-filter-row, .master-filter-bar, .document-toolbar)
+  .entity-select-wrapper {
+  width: 100%;
+  min-width: 0;
+}
+:is(.master-filter-row, .master-filter-bar, .document-toolbar)
+  .entity-picker-trigger {
+  min-height: 44px;
+  height: 44px;
+  padding: 8px 12px;
+  border-radius: 10px;
+}
+:is(.master-filter-row, .master-filter-bar, .document-toolbar)
+  .entity-picker-trigger
+  small {
+  display: none;
+}
+:is(.master-filter-row, .master-filter-bar, .document-toolbar)
+  .entity-picker-trigger
+  img {
+  width: 24px;
+  height: 24px;
+}
+[hidden] {
+  display: none !important;
+}
+.record-filter-bar {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-end;
+  gap: 14px;
+  padding: 20px;
+  margin: 0 0 24px;
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: 18px;
+}
+.record-filter-bar > label {
+  display: grid;
+  flex: 1 1 150px;
+  gap: 8px;
+  margin: 0;
+  min-width: 0;
+}
+.record-filter-bar > label > span {
+  font-size: 10px;
+  font-weight: 600;
+  color: var(--muted);
+}
+.record-filter-bar .record-filter-search {
+  flex: 2 1 260px;
+}
+.record-filter-search > div {
+  display: flex;
+  align-items: center;
+  padding-left: 12px;
+  gap: 8px;
+  background: var(--surface-input);
+  border: 1px solid var(--line-strong);
+  border-radius: 10px;
+}
+.record-filter-search > .icon {
+  display: none;
+}
+.record-filter-search > div input {
+  border: 0;
+  box-shadow: none;
+  background: transparent;
+}
+.record-filter-bar input,
+.record-filter-bar select,
+.record-filter-bar > .btn {
+  height: 44px;
+  min-height: 44px;
+  border-radius: 10px;
+  width: 100%;
+  padding: 10px 12px;
+  font-size: 12px;
+}
+.record-filter-bar > .btn {
+  width: auto;
+  flex: 0 0 auto;
+}
+.record-filter-count {
+  align-self: center;
+  font-size: 10px;
+  color: var(--muted);
+  margin-left: auto;
+  padding-top: 19px;
+}
+.record-filter-bar > .form-error {
+  flex: 1 1 100%;
+  margin: 0;
+}
+html[data-theme]
+  :is(
+    .store-filter-bar,
+    .record-filter-bar,
+    .audit-filter-form,
+    .kardex-filters
+  )
+  :is(input, select):not(.entity-original-select),
+html[data-theme]
+  :is(
+    .store-filter-bar,
+    .record-filter-bar,
+    .audit-filter-form,
+    .kardex-filters
+  )
+  .entity-picker-trigger {
+  min-height: 44px;
+  height: 44px;
+  box-sizing: border-box;
+}
+:is(.store-filter-bar, .record-filter-bar, .audit-filter-form, .kardex-filters)
+  .entity-select-wrapper {
+  width: 100%;
+  min-width: 0;
+}
+:is(.store-filter-bar, .record-filter-bar, .audit-filter-form, .kardex-filters)
+  .entity-picker-trigger {
+  padding: 9px 12px;
+  font-size: 11px;
+  border-radius: 10px;
+}
+:is(.store-filter-bar, .record-filter-bar, .audit-filter-form, .kardex-filters)
+  .entity-picker-trigger
+  small {
+  display: none;
+}
+:is(.store-filter-bar, .record-filter-bar, .audit-filter-form, .kardex-filters)
+  .entity-picker-trigger
+  img {
+  width: 24px;
+  height: 24px;
+  object-fit: contain;
+}
+.record-local-date {
+  color: var(--muted);
+  font-size: 10px;
+  margin: -4px 0 20px;
+  font-variant-numeric: tabular-nums;
+}
+.record-filter-empty {
+  text-align: center;
+  padding: 35px;
+  background: var(--surface);
+  border: 1px dashed var(--line-strong);
+  border-radius: 18px;
+  margin-bottom: 22px;
+}
+.record-filter-empty h3 {
+  font-size: 18px;
+  margin-bottom: 10px;
+}
+.record-filter-empty p {
+  font-size: 12px;
+  color: var(--muted);
+  margin: 0;
+}
+.document-toolbar {
+  display: flex;
+  align-items: stretch;
+  flex-wrap: wrap;
+  gap: 14px;
+}
+.document-toolbar .search-field {
+  flex: 1 1 280px;
+  min-width: 0;
+}
+.document-toolbar > select {
+  flex: 0 1 260px;
+  min-height: 48px;
+  height: auto;
+  padding: 12px 16px;
+  font-size: 12px;
+  border-radius: 12px;
+}
+.audit-filter-form,
+.kardex-filters,
+.master-filter-bar {
+  align-items: end;
+  gap: 14px;
+}
+.audit-filter-form > label,
+.kardex-filters > label {
+  min-width: 0;
+  margin: 0;
+  display: grid;
+  gap: 8px;
+  font-size: 11px;
+}
+.audit-filter-form input,
+.audit-filter-form select,
+.audit-filter-form > .row-actions .btn,
+.kardex-filters input,
+.kardex-filters select,
+.kardex-filters > .btn {
+  min-height: 44px;
+  height: 44px;
+  font-size: 12px;
+  border-radius: 10px;
+}
+.audit-filter-form .master-search {
+  align-self: end;
+}
+.audit-filter-form > .row-actions {
+  align-self: end;
+  min-height: 44px;
+}
+.kardex-advanced > div {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 14px;
+  align-items: end;
+}
+.kardex-advanced > div > label {
+  flex: 1 1 165px;
+  min-width: 0;
+  display: grid;
+  gap: 8px;
+  margin: 0;
+  font-size: 11px;
+}
+.table-scroll td time {
+  display: block;
+  min-width: 110px;
+  font-size: 11px;
+  font-variant-numeric: tabular-nums;
+}
+.info-row strong {
+  overflow-wrap: anywhere;
+  line-height: 1.55;
+}
+.info-row:has(strong) {
+  gap: 24px;
+  align-items: flex-start;
+}
+.audit-context pre,
+.audit-change-table pre {
+  font-family: inherit;
+  line-height: 1.65;
+  white-space: pre-wrap;
+  overflow-wrap: anywhere;
+}
+.record-description {
+  display: grid;
+  gap: 7px;
+  padding: 18px 20px;
+  border: 1px solid var(--line);
+  border-radius: 14px;
+  margin: 16px 0;
+  background: var(--surface-input);
+}
+.record-description > span {
+  font-size: 10px;
+  color: var(--muted);
+}
+.record-description > strong {
+  font-size: 12px;
+  line-height: 1.65;
+  font-weight: 500;
+}
+.record-description code {
+  font-size: 10px;
+  color: var(--gold);
+}
+.operation-meta {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 10px;
+  margin: 18px 0;
+}
+.operation-meta > div {
+  background: var(--surface-input);
+  border: 1px solid var(--line);
+  padding: 13px 15px;
+  border-radius: 10px;
+  display: grid;
+  gap: 7px;
+  min-width: 0;
+}
+.operation-meta span {
+  color: var(--muted);
+  font-size: 10px;
+}
+.operation-meta strong {
+  color: var(--ink);
+  font-size: 11px;
+  font-weight: 500;
+  overflow-wrap: anywhere;
+}
+@media (max-width: 700px) {
+  .record-filter-bar {
+    padding: 16px;
+    gap: 12px;
+  }
+  .record-filter-bar > label {
+    flex-basis: 130px;
+  }
+  .record-filter-count {
+    flex: 1 1 100%;
+    margin: 0;
+    padding: 0;
+  }
+  .document-toolbar > select {
+    flex: 1 1 180px;
+    width: 100%;
+  }
+  .audit-filter-form {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+  .audit-filter-form .master-search,
+  .audit-filter-form .row-actions {
+    grid-column: 1 / -1;
+  }
+  .kardex-filters {
+    display: flex;
+    flex-wrap: wrap;
+  }
+  .kardex-filters > label {
+    flex: 1 1 150px;
+  }
+  .operation-meta {
+    grid-template-columns: 1fr;
+  }
+}

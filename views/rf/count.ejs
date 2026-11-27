@@ -1,0 +1,12 @@
+<section class="rf-page-head"><a href="/rf">← Mi estación</a><h1>Contar existencias</h1><p>Acércate a la posición. Escanea sus etiquetas y registra lo que encuentres.</p></section>
+<section class="rf-task-list">
+  <% if(!locations.length){ %><div class="rf-empty"><strong>No hay posiciones para contar</strong><small>Consulta con tu jefe de operaciones.</small></div><% } %>
+  <% locations.forEach(location=>{ %>
+    <article class="rf-task-card rf-loc-card">
+      <header><span class="rf-task-kind"><svg class="icon"><use href="/icons.svg#i-clipboard"/></svg> Verificación física</span><span class="rf-task-priority"><%= location.tipo %></span></header>
+      <div class="rf-count-location"><%- include('_location',{code:location.codigo_loc,zone:location.zona}) %></div>
+      <p class="rf-count-guidance">Confirma la ubicación con el escáner antes de registrar cantidades.</p>
+      <a class="btn btn-brand btn-lg w-100" href="/rf/count/<%= location.ubicacion_id %>">Contar esta posición <span aria-hidden="true">→</span></a>
+    </article>
+  <% }) %>
+</section>

@@ -1,0 +1,25 @@
+<div class="page-head">
+  <div><h1>RECIBIR <%= order.codigo_orden %></h1><p>Registra solo las unidades entregadas hoy; los faltantes siguen abiertos en la orden.</p></div>
+  <% if(can('rf.checkin')||can('wms.tasks')){ %><a href="<%= (currentUser.perfil||currentUser.rol)==='operador_rf'?'/rf/check-in':'/wms/tareas' %>" class="btn btn-outline-warning">Ver tareas WMS</a><% } %>
+</div>
+<%- include('../partials/errors') %>
+<div class="process-ribbon mb-3"><div><span>1</span><p><strong>Cuenta</strong><small>Unidades físicas por SKU</small></p></div><i>→</i><div><span>2</span><p><strong>Identifica</strong><small>Lote y LOC térmica de recepción</small></p></div><i>→</i><div><span>3</span><p><strong>Confirma</strong><small>Ingreso y put-away solo de lo recibido</small></p></div></div>
+<form method="post" action="<%= typeof actionUrl==='string'?actionUrl:'/compras/'+order.id+'/recibir' %>" id="receiveForm">
+  <input type="hidden" name="_csrf" value="<%= csrfToken %>"><input type="hidden" name="items" id="receiveItems">
+  <div class="panel">
+    <div class="workflow-note"><svg class="icon"><use href="/icons.svg#i-truck"/></svg><div><strong>Flujo dirigido: OC → REC → PUT-AWAY → LOC</strong><small>Al confirmar se crea la posición en recepción. El WMS sugiere destino según cara de picking, capacidad y secuencia.</small></div></div>
+    <% order.items.forEach(i=>{ %>
+      <div class="receive-row" data-detail="<%= i.id %>" data-sku="<%= i.sku %>" data-ean="<%= i.codigo_barras||'' %>" data-product="<%= i.producto %>" data-category="<%= i.categoria %>" data-shelf-life="<%= i.vida_util_dias %>" data-control-expiry="<%= i.control_vencimiento?1:0 %>" data-control-lot="<%= i.control_lote?1:0 %>">
+        <div class="row g-3">
+          <div class="col-12"><span class="sku-chip"><%= i.sku %></span><h3><%= i.producto %></h3><small>Solicitado: <strong><%= i.cantidad_solicitada %></strong> · Recibido antes: <strong><%= i.cantidad_recibida %></strong> · Pendiente: <strong><%= i.cantidad_solicitada-i.cantidad_recibida %></strong></small></div>
+          <div class="col-md-3"><label class="form-label">Unidades recibidas ahora</label><input class="form-control received-qty" type="number" inputmode="numeric" min="0" max="<%= i.cantidad_solicitada-i.cantidad_recibida %>" step="1" value="<%= i.cantidad_solicitada-i.cantidad_recibida %>" required><small class="field-help">Escribe 0 si este SKU no llegó.</small></div>
+          <div class="col-md-3"><label class="form-label">QR / lote proveedor</label><input class="form-control lot" data-scan-input data-scan-autoload="receive" value="" placeholder="<%= i.control_lote?'Escanea o ingresa el lote real':'WMS generará uno interno' %>"><small class="field-help">Usa el lote que figura en la etiqueta física; no inventes un código.</small></div>
+          <div class="col-md-3"><label class="form-label">LOC de recepción · <%= i.condicion_requerida %></label><select class="form-select location" data-complex-select data-resource="location"><option value="">Selecciona LOC compatible</option><% locations.filter(l=>l.condicion_almacenamiento===i.condicion_requerida).forEach(l=>{ %><option value="<%= l.id %>" data-reference="Recepción <%= l.condicion_almacenamiento %>" data-location="<%= l.codigo_loc %>" data-zone="<%= l.zona %>" data-type="RECEPCION"><%= l.codigo_loc %> · <%= l.zona %></option><% }) %></select></div>
+          <div class="col-md-3"><label class="form-label">Fecha ingreso</label><input class="form-control admission" type="date"></div>
+          <div class="col-12"><label class="form-label">Vencimiento impreso en el envase <%= i.control_vencimiento?'· obligatorio':'' %></label><input class="form-control expiry" type="date"><div class="form-text"><%= i.control_vencimiento?'Escanea el QR con EXP o confirma la fecha física. La vida útil de la categoría es orientativa; no reemplaza el dato del fabricante.':'SKU sin control obligatorio de caducidad' %></div></div>
+        </div>
+      </div>
+    <% }) %>
+    <button class="btn btn-brand mt-3">Recibir y generar put-away</button>
+  </div>
+</form>

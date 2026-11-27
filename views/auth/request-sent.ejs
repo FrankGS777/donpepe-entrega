@@ -1,0 +1,12 @@
+<div class="auth-shell">
+  <%- include('../partials/authBrand', {context: 'access'}) %>
+  <main class="auth-stage">
+    <section class="auth-card auth-result" aria-labelledby="sentTitle">
+      <%- include('../partials/authWordmark') %>
+      <span class="auth-result-icon">✓</span>
+      <h1 id="sentTitle">Solicitud registrada</h1>
+      <p>Si el correo pertenece a una cuenta activa, recibirás el enlace cuando el administrador apruebe la solicitud.</p>
+      <a class="btn auth-primary" href="/login">Volver al inicio</a>
+    </section>
+  </main>
+</div>

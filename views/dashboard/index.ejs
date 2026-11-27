@@ -1,0 +1,56 @@
+<% const maxFlow=Math.max(...data.daily.map(row=>Math.max(Number(row.entradas)||0,Number(row.salidas)||0)),1); const totalCategory=Math.max(data.categories.reduce((sum,row)=>sum+Number(row.stock||0),0),1); %>
+<section class="executive-hero">
+  <div><h1>Visión ejecutiva del almacén</h1><p>Excepciones, capacidad y ritmo operativo que requieren atención.</p></div>
+  <div class="executive-actions"><a href="/reportes" class="btn btn-outline-dark">Abrir analítica</a><a href="/auditorias?status=PENDIENTE" class="btn btn-brand">Revisar ajustes</a></div>
+</section>
+
+<div class="command-strip">
+  <div><span class="command-live"><i></i>OPERACIÓN EN LÍNEA</span><b><%= new Intl.DateTimeFormat('es-PE',{weekday:'long',day:'2-digit',month:'long',timeZone}).format(new Date()) %></b></div>
+  <a href="/compras"><strong><%= data.stats.recepciones_pendientes %></strong><span>recepciones pendientes</span></a>
+  <a href="/wms/tareas?status=PENDIENTE"><strong><%= data.stats.tareas_pendientes %></strong><span>tareas pendientes · consulta</span></a>
+  <a href="/auditorias"><strong><%= data.stats.auditorias_pendientes %></strong><span>conteos por aprobar</span></a>
+  <a href="/solicitudes"><strong><%= pendingRequestCount %></strong><span>recuperaciones pendientes</span></a>
+</div>
+
+<% if(data.stats.auditorias_pendientes||pendingRequestCount){ %><div class="exception-stack"><% if(data.stats.auditorias_pendientes){ %><a class="exception-card critical" href="/auditorias"><svg class="icon"><use href="/icons.svg#i-shield"></use></svg><div><strong><%= data.stats.auditorias_pendientes %> ajuste(s) de inventario esperan aprobación</strong><small>Valida evidencia y diferencia antes de afectar stock y kardex.</small></div><span>Revisar →</span></a><% } %><% if(pendingRequestCount){ %><a class="exception-card access" href="/solicitudes"><svg class="icon"><use href="/icons.svg#i-users"></use></svg><div><strong><%= pendingRequestCount %> solicitud(es) de identidad necesitan decisión</strong><small>Confirma necesidad, rol mínimo y canal de entrega del enlace.</small></div><span>Atender →</span></a><% } %></div><% } %>
+
+<section class="executive-kpis" aria-label="Indicadores principales">
+  <a href="/productos"><span class="kpi-icon purple"><svg class="icon"><use href="/icons.svg#i-package"></use></svg></span><div><small>CATÁLOGO ACTIVO</small><strong><%= Number(data.stats.productos).toLocaleString('es-PE') %></strong><p>SKU gobernados</p></div><b>→</b></a>
+  <a href="/inventario/movimientos"><span class="kpi-icon green"><svg class="icon"><use href="/icons.svg#i-layers"></use></svg></span><div><small>INVENTARIO FÍSICO</small><strong><%= Number(data.stats.unidades).toLocaleString('es-PE') %></strong><p>unidades disponibles</p></div><b>→</b></a>
+  <a href="/reportes"><span class="kpi-icon yellow"><svg class="icon"><use href="/icons.svg#i-chart"></use></svg></span><div><small>VALOR EN STOCK</small><strong><%= money(data.stats.valor_stock) %></strong><p>costo de adquisición</p></div><b>→</b></a>
+  <a href="/inventario/lotes"><span class="kpi-icon coral"><svg class="icon"><use href="/icons.svg#i-calendar"></use></svg></span><div><small>RIESGO FEFO</small><strong><%= data.stats.lotes_por_vencer %></strong><p>lotes vencen ≤ 30 días</p></div><b>→</b></a>
+</section>
+
+<div class="executive-grid">
+  <section class="panel flow-panel">
+    <div class="panel-title"><div><h2>FLUJO DE UNIDADES · 7 DÍAS</h2></div><div class="chart-legend"><span><i class="in"></i>Entradas</span><span><i class="out"></i>Salidas</span></div></div>
+    <div class="flow-chart" role="img" aria-label="Entradas y salidas de los últimos siete días"><% if(!data.daily.length){ %><div class="empty refined-empty"><strong>Aún no hay movimientos esta semana</strong><small>El gráfico se activará al confirmar la primera operación.</small></div><% } %><% data.daily.forEach(row=>{ %><div class="flow-day"><div class="flow-values"><b>+<%= row.entradas||0 %></b><span>−<%= row.salidas||0 %></span></div><div class="flow-columns"><i class="in" style="height:<%= Math.max(10,(Number(row.entradas)||0)/maxFlow*170) %>px"></i><i class="out" style="height:<%= Math.max(10,(Number(row.salidas)||0)/maxFlow*170) %>px"></i></div><small><%= weekday(row.fecha) %></small></div><% }) %></div>
+  </section>
+
+  <section class="panel operation-pulse">
+    <div class="panel-title"><div><h2>PULSO DE TAREAS RF</h2></div><a href="/wms/tareas">Ver cola</a></div>
+    <div class="task-pulse-list"><% data.taskStatus.forEach(row=>{ const stateClass={PENDIENTE:'pending',EN_PROCESO:'progressing',COMPLETADA:'complete',CANCELADA:'cancelled'}[row.estado]||'pending'; %><a href="/wms/tareas?status=<%= row.estado %>"><span class="task-state <%= stateClass %>"></span><div><strong><%= row.estado.replaceAll('_',' ') %></strong><small><%= Number(row.unidades||0).toLocaleString('es-PE') %> unidades</small></div><b><%= row.tareas %></b></a><% }) %></div>
+    <div class="pulse-footer"><span><b><%= data.stats.tareas_en_proceso %></b> en ejecución</span><span><b><%= data.stats.tareas_pendientes %></b> en espera</span></div>
+  </section>
+
+  <section class="panel category-panel">
+    <div class="panel-title"><div><h2>STOCK POR CATEGORÍA</h2></div><a href="/productos">Ver SKU</a></div>
+    <div class="category-bars"><% data.categories.slice(0,7).forEach((row,index)=>{ const pct=Math.max(2,Number(row.stock||0)/totalCategory*100); %><div><span><i class="c<%= index%5 %>"></i><%= row.nombre %></span><b><%= Number(row.stock||0).toLocaleString('es-PE') %></b><em><i style="width:<%= pct %>%"></i></em></div><% }) %></div>
+  </section>
+
+  <section class="panel capacity-panel">
+    <div class="panel-title"><div><h2>LOC CON MAYOR OCUPACIÓN</h2></div><a href="/wms/posiciones">Abrir mapa</a></div>
+    <div class="capacity-list"><% data.hotLocations.forEach(row=>{ const pct=Math.min(Number(row.porcentaje_ocupacion||0),100); %><a href="/wms/posiciones"><div><strong><%= row.codigo_loc %></strong><small><%= row.zona %> · <%= row.tipo %></small></div><span><b><%= pct %>%</b><em><i style="width:<%= pct %>%"></i></em></span></a><% }) %></div>
+  </section>
+
+  <section class="panel movement-panel">
+    <div class="panel-title"><div><h2>ACTIVIDAD RECIENTE</h2></div><a href="/inventario/movimientos">Abrir kardex</a></div>
+    <div class="movement-feed"><% data.movements.forEach(row=>{ const inbound=row.tipo_movimiento==='ENTRADA'; %><div><span class="movement <%= inbound?'in':'out' %>"><%= inbound?'↓':'↑' %></span><p><strong><%= row.producto %></strong><small><%= date(row.creado_en,true) %> · <%= row.usuario %></small></p><b class="<%= inbound?'text-success':'text-danger' %>"><%= inbound?'+':'−' %><%= row.cantidad %></b></div><% }) %></div>
+  </section>
+
+  <section class="panel risk-panel">
+    <div class="panel-title"><div><h2>STOCK BAJO MÍNIMO</h2></div><span class="risk-count"><%= data.stats.alertas %> alertas</span></div>
+    <% if(!data.critical.length){ %><div class="empty refined-empty"><strong>Sin quiebres de stock</strong><small>Todos los SKU se encuentran sobre su mínimo.</small></div><% } %>
+    <div class="risk-list"><% data.critical.forEach(row=>{ const pct=Math.min(100,Number(row.stock_total)/Math.max(1,Number(row.stock_minimo))*100); %><a href="/productos/<%= row.id %>/editar"><div><strong><%= row.nombre %></strong><small><%= row.stock_total %> disponibles · mínimo <%= row.stock_minimo %></small></div><span><b><%= Math.round(pct) %>%</b><em><i style="width:<%= pct %>%"></i></em></span></a><% }) %></div>
+  </section>
+</div>

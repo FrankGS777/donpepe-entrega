@@ -1,0 +1,108 @@
+{
+  "version": 1,
+  "createdOn": "2026-10-18",
+  "heroExport": {
+    "native": {
+      "width": 1672,
+      "height": 941
+    },
+    "export4k": {
+      "width": 3840,
+      "height": 2160,
+      "method": "Lanczos3 resampling from native image; not native 4K."
+    },
+    "responsiveWidths": [
+      1920,
+      3840
+    ]
+  },
+  "assets": [
+    {
+      "key": "hero",
+      "assetType": "LOGIN_HERO",
+      "imageKind": "GENERATED_ARCHITECTURAL_REPRESENTATION",
+      "workspaceSource": "v2/assets/autonomy-visuals-2026-10-18/hero.png",
+      "imageUrl": "/images/auth/donpepe-lima-exterior-v2.webp",
+      "nativeDimensions": {
+        "width": 1672,
+        "height": 941
+      }
+    },
+    {
+      "key": "auto_unloader",
+      "assetType": "AUTO_UNLOADER",
+      "imageKind": "GENERATED_REPRESENTATION",
+      "workspaceSource": "v2/assets/autonomy-visuals-2026-10-18/auto_unloader.png",
+      "imageUrl": "/images/representations/equipment-auto_unloader.webp",
+      "nativeDimensions": {
+        "width": 1536,
+        "height": 1024
+      }
+    },
+    {
+      "key": "auto_id_gate",
+      "assetType": "AUTO_ID_GATE",
+      "imageKind": "GENERATED_REPRESENTATION",
+      "workspaceSource": "v2/assets/autonomy-visuals-2026-10-18/auto_id_gate.png",
+      "imageUrl": "/images/representations/equipment-auto_id_gate.webp",
+      "nativeDimensions": {
+        "width": 1536,
+        "height": 1024
+      }
+    },
+    {
+      "key": "pie_station",
+      "assetType": "PIE_STATION",
+      "imageKind": "GENERATED_REPRESENTATION",
+      "workspaceSource": "v2/assets/autonomy-visuals-2026-10-18/pie_station.png",
+      "imageUrl": "/images/representations/equipment-pie_station.webp",
+      "nativeDimensions": {
+        "width": 1536,
+        "height": 1024
+      }
+    },
+    {
+      "key": "inbound_conveyor",
+      "assetType": "INBOUND_CONVEYOR",
+      "imageKind": "GENERATED_REPRESENTATION",
+      "workspaceSource": "v2/assets/autonomy-visuals-2026-10-18/inbound_conveyor.png",
+      "imageUrl": "/images/representations/equipment-inbound_conveyor.webp",
+      "nativeDimensions": {
+        "width": 1536,
+        "height": 1024
+      },
+      "history": [
+        {
+          "reason": "Framing corrected to avoid clipped machinery."
+        }
+      ]
+    },
+    {
+      "key": "case_picking_cell",
+      "assetType": "CASE_PICKING_CELL",
+      "imageKind": "GENERATED_REPRESENTATION",
+      "workspaceSource": "v2/assets/autonomy-visuals-2026-10-18/case_picking_cell.png",
+      "imageUrl": "/images/representations/equipment-case_picking_cell.webp",
+      "nativeDimensions": {
+        "width": 1536,
+        "height": 1024
+      },
+      "history": [
+        {
+          "reason": "Framing corrected to avoid clipped machinery."
+        }
+      ]
+    },
+    {
+      "key": "store_receiving_station",
+      "assetType": "STORE_RECEIVING_STATION",
+      "imageKind": "GENERATED_REPRESENTATION",
+      "workspaceSource": "v2/assets/autonomy-visuals-2026-10-18/store_receiving_station.png",
+      "imageUrl": "/images/representations/equipment-store_receiving_station.webp",
+      "nativeDimensions": {
+        "width": 1536,
+        "height": 1024
+      }
+    }
+  ]
+}

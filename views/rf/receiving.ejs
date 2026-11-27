@@ -1,0 +1,13 @@
+<section class="rf-page-head"><a href="/rf">← Mi estación</a><h1>Recibir mercancía</h1><p>Abre la entrega que tienes delante. Verifica las cantidades y escanea sus lotes.</p></section>
+<section class="rf-task-list">
+  <% if(!orders.length){ %><div class="rf-empty"><span class="rf-quiet-check">✓</span><strong>Sin entregas pendientes</strong><small>Las compras pendientes o parcialmente recibidas aparecerán aquí.</small><a href="/rf" class="btn btn-brand">Volver a mi estación</a></div><% } %>
+  <% orders.forEach(order=>{ %>
+    <article class="rf-task-card rf-order-card">
+      <header><span class="rf-task-kind"><svg class="icon"><use href="/icons.svg#i-truck"/></svg> Entrada de proveedor</span><span class="status-pill pending"><%= order.estado==='PARCIAL'?'Entrega parcial':'Por recibir' %></span></header>
+      <div class="rf-task-product"><strong><%= order.proveedor %></strong></div>
+      <div class="rf-order-metrics"><div><b><%= order.lineas %></b><span>productos</span></div><div><b><%= order.unidades %></b><span>unidades pendientes</span></div></div>
+      <div class="rf-order-reference"><span><%= order.codigo_orden %></span><time><%= date(order.fecha_emision,true) %></time></div>
+      <a class="btn btn-brand btn-lg w-100" href="/rf/recepcion/<%= order.id %>">Revisar y recibir <span aria-hidden="true">→</span></a>
+    </article>
+  <% }) %>
+</section>

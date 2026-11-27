@@ -1,0 +1,21 @@
+<div class="page-head page-head-premium"><div><h1>USUARIOS Y ROLES</h1><p>Cuentas internas, estado de acceso y responsabilidad operativa.</p></div><div class="page-head-actions"><a class="btn btn-outline-dark" href="/solicitudes">Recuperaciones<% if(pendingRequestCount){ %> <span class="badge text-bg-danger"><%= pendingRequestCount %></span><% } %></a><a class="btn btn-brand" href="/usuarios/nuevo">Crear usuario</a></div></div>
+
+<section class="identity-kpis" aria-label="Resumen de usuarios">
+  <article><span class="identity-kpi-icon purple"><svg class="icon"><use href="/icons.svg#i-users"></use></svg></span><div><small>CUENTAS REGISTRADAS</small><strong><%= stats.total %></strong><p>Incluye cuentas inactivas</p></div></article>
+  <article><span class="identity-kpi-icon green"><svg class="icon"><use href="/icons.svg#i-shield"></use></svg></span><div><small>ACCESO HABILITADO</small><strong><%= stats.active %></strong><p><%= stats.total-stats.active %> bloqueadas</p></div></article>
+  <article><span class="identity-kpi-icon yellow"><svg class="icon"><use href="/icons.svg#i-user"></use></svg></span><div><small>ADMINISTRADORES</small><strong><%= stats.administrators %></strong><p>Gobierno y seguridad</p></div></article>
+  <article><span class="identity-kpi-icon coral"><svg class="icon"><use href="/icons.svg#i-qr"></use></svg></span><div><small>OPERADORES RF</small><strong><%= stats.rf %></strong><p>Ejecución móvil</p></div></article>
+</section>
+
+<section class="panel identity-directory">
+  <div class="panel-title directory-head"><div><h2>CUENTAS DEL WMS</h2></div><div class="directory-search"><svg class="icon"><use href="/icons.svg#i-search"></use></svg><input class="form-control" type="search" placeholder="Buscar por nombre, correo o rol..." data-table-filter="#userDirectory"></div></div>
+  <div class="identity-policy"><svg class="icon"><use href="/icons.svg#i-shield"></use></svg><p>Solo un administrador crea cuentas, asigna roles y restablece claves. Las contraseñas actuales nunca son visibles.</p></div>
+  <div class="table-responsive"><table class="table table-darkish identity-table" id="userDirectory"><thead><tr><th>Persona</th><th>Responsabilidad</th><th>Acceso</th><th>Trazabilidad</th><th><span class="visually-hidden">Acciones</span></th></tr></thead><tbody><% users.forEach(u=>{ const roleLabel=u.rol_etiqueta||{administrador_wms:'Administrador WMS',jefe_operaciones:'Jefe de operaciones',operador_rf:'Operador RF'}[u.rol]||u.rol; %><tr>
+    <td><div class="user-identity"><span><%= u.nombre.charAt(0).toUpperCase() %></span><div><strong><%= u.nombre %></strong><small><%= u.correo %></small><small>Recuperación: <%= u.correo_recuperacion||'No configurado' %></small><b>ID <%= String(u.id).padStart(3,'0') %></b></div></div></td>
+    <td><span class="role-tag role-<%= u.perfil||u.rol %>"><%= roleLabel %></span><small class="role-description"><%= u.rol_descripcion %></small></td>
+    <td><span class="status-pill <%= u.activo?'ok':'off' %>"><%= u.activo?'Habilitada':'Bloqueada' %></span><small><%= u.activo?'Puede autenticarse':'Inicio de sesión denegado' %></small></td>
+    <td><small>Alta: <%= date(u.creado_en,true) %></small><small>Último cambio: <%= date(u.actualizado_en,true) %></small></td>
+    <td class="text-end"><a class="btn btn-sm btn-outline-dark" href="/usuarios/<%= u.id %>/editar"><%= u.id===currentUser.id?'Mi cuenta':'Editar / clave' %></a></td>
+  </tr><% }) %></tbody></table></div>
+  <div class="empty refined-empty d-none" data-filter-empty><strong>No encontramos coincidencias</strong><small>Prueba con otro nombre, correo o rol.</small></div>
+</section>

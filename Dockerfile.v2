@@ -1,0 +1,26 @@
+FROM node:24-alpine AS builder
+WORKDIR /app
+COPY package*.json ./
+RUN npm ci --no-audit --no-fund
+COPY v2/frontend ./v2/frontend
+COPY v2/core ./v2/core
+COPY v2/public/*.css ./v2/public/
+RUN npm run build:v2
+
+FROM node:24-alpine
+ENV NODE_ENV=production TZ=America/Lima DONPEPE_HOST=0.0.0.0 DONPEPE_MODE=cloud
+WORKDIR /app
+RUN apk add --no-cache su-exec
+COPY package*.json ./
+RUN npm ci --omit=dev --no-audit --no-fund
+COPY v2 ./v2
+COPY public/images ./public/images
+COPY public/fonts ./public/fonts
+COPY public/icons.svg ./public/icons.svg
+COPY --from=builder /app/v2/public/app.js ./v2/public/app.js
+COPY --from=builder /app/v2/public/chunks ./v2/public/chunks
+COPY --from=builder /app/v2/public/*-bundle.css ./v2/public/
+RUN mkdir -p /app/v2/data && chown node:node /app/v2/data
+EXPOSE 3010
+ENTRYPOINT ["/app/v2/scripts/docker-entrypoint.sh"]
+CMD ["node", "v2/server.js"]

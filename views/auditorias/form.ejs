@@ -1,0 +1,33 @@
+<% const values=typeof form==='object'&&form?form:{}; %>
+<div class="page-head"><div><h1>NUEVO CONTEO</h1><p>Identifica SKU, lote real y LOC antes de registrar la cantidad física.</p></div><a href="/auditorias" class="btn btn-outline-light">Cancelar y volver</a></div>
+<%- include('../partials/errors') %>
+<form method="post" action="/auditorias" id="auditForm" class="audit-workflow" data-counts="<%= JSON.stringify(countMatrix) %>" data-products="<%= JSON.stringify(products) %>">
+  <input type="hidden" name="_csrf" value="<%= csrfToken %>">
+  <section class="panel audit-step">
+    <div class="wizard-heading"><span>1</span><div><h2>IDENTIFICA QUÉ POSICIÓN CONTARÁS</h2><p>SKU + lote de fabricante + LOC evita mezclar caducidades y mercancía de distinto origen.</p></div></div>
+    <div class="row g-3">
+      <div class="col-lg-6"><label class="form-label" for="auditProduct">SKU / producto</label><select id="auditProduct" data-complex-select data-resource="product" class="form-select" name="producto_id" required><option value="">Selecciona un SKU</option><% products.forEach(p=>{ %><option value="<%= p.id %>" data-reference="SKU activo" data-sku="<%= p.sku %>" data-name="<%= p.nombre %>" data-category="<%= p.categoria %>" data-brand="<%= p.marca||'' %>" data-provider="<%= p.proveedor||'' %>" data-barcode="<%= p.codigo_barras||'' %>" data-image="<%= p.imagen_url||'' %>" data-reference-url="<%= p.referencia_url||'' %>" <%= Number(values.producto_id)===Number(p.id)?'selected':'' %>><%= p.sku %> · <%= p.nombre %></option><% }) %></select></div>
+      <div class="col-lg-6"><label class="form-label" for="auditLocation">LOC a contar</label><select id="auditLocation" data-complex-select data-resource="location" class="form-select" name="ubicacion_id" required><option value="">Selecciona una dirección física</option><% locations.forEach(l=>{ %><option value="<%= l.id %>" data-reference="Dirección física" data-location="<%= l.codigo_loc %>" data-zone="<%= l.zona %>" data-type="<%= l.tipo %>" <%= Number(values.ubicacion_id)===Number(l.id)?'selected':'' %>><%= l.codigo_loc %> · <%= l.zona %> · <%= l.tipo %></option><% }) %></select></div>
+    </div>
+    <div class="row g-3 mt-1"><div class="col-lg-6"><label class="form-label" for="auditBatch">Lote impreso por el fabricante</label><input id="auditBatch" class="form-control" name="codigo_lote" maxlength="50" required list="auditBatches" value="<%= values.codigo_lote||'' %>" placeholder="Escanea o ingresa el código exacto"><datalist id="auditBatches"></datalist><small class="field-help">Si el lote no está registrado, confirma también su vencimiento impreso.</small></div></div>
+  </section>
+  <section class="panel audit-step">
+    <div class="wizard-heading"><span>2</span><div><h2>REGISTRA EL RESULTADO FÍSICO</h2><p>Cuenta sin usar el total del sistema; la comparación aparecerá después.</p></div></div>
+    <div class="row g-3 align-items-end">
+      <div class="col-lg-5"><label class="form-label" for="auditPhysical">Cantidad física de ese lote en la LOC</label><input id="auditPhysical" class="form-control quantity-control" type="number" min="0" max="10000000" name="stock_fisico" required value="<%= values.stock_fisico??'' %>" placeholder="Unidades contadas"></div>
+      <div class="col-lg-5"><label class="form-label" for="auditExpiry">Vencimiento del stock no registrado</label><input id="auditExpiry" class="form-control" type="date" name="fecha_vencimiento" value="<%= values.fecha_vencimiento||'' %>"><small class="field-help" id="auditExpiryHelp">Solo se exige si aparece stock adicional de un SKU con caducidad.</small></div>
+    </div>
+  </section>
+  <section class="panel audit-step">
+    <div class="wizard-heading"><span>3</span><div><h2>DOCUMENTA Y ENVÍA</h2><p>Una diferencia requiere evidencia clara y revisión por otra persona.</p></div></div>
+    <label class="form-label" for="auditNotes">Observaciones y evidencia</label><textarea id="auditNotes" class="form-control" name="observaciones" maxlength="2000" rows="4" placeholder="Ej.: recuento de dos personas, empaque abierto, merma o unidades halladas..."><%= values.observaciones||'' %></textarea>
+    <small class="field-help">Si existe diferencia, describe el hallazgo en al menos 10 caracteres.</small>
+  </section>
+  <aside class="audit-preview" id="auditPreview" aria-live="polite">
+    <h2>RESULTADO</h2>
+    <div class="audit-preview-empty">Completa SKU, LOC y cantidad para calcular el resultado.</div>
+    <div class="audit-preview-result" hidden><small>STOCK DEL SISTEMA EN ESA LOC</small><strong data-audit="system">0</strong><span>→</span><small>CONTEO FÍSICO</small><strong data-audit="physical">0</strong><div class="audit-difference"><small>DIFERENCIA</small><b data-audit="difference">0</b><p data-audit="decision">Cuadre perfecto: se registra sin ajuste.</p></div></div>
+    <div class="workflow-note mt-3"><svg class="icon"><use href="/icons.svg#i-shield"></use></svg><div><strong>Doble control</strong><small>Si hay diferencia, quien registró no podrá aprobarla.</small></div></div>
+    <button class="btn btn-brand btn-lg w-100" id="submitAudit" disabled>Registrar para revisión</button>
+  </aside>
+</form>

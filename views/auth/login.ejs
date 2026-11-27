@@ -1,0 +1,16 @@
+<div class="auth-shell">
+  <%- include('../partials/authBrand', {context: 'login'}) %>
+  <main class="auth-stage">
+    <section class="auth-card" aria-labelledby="loginTitle">
+      <%- include('../partials/authWordmark') %>
+      <div class="auth-card-head"><h1 id="loginTitle">Bienvenido</h1></div>
+      <% if(error){ %><div class="auth-alert" role="alert"><span>!</span><div><strong>No pudimos iniciar la sesión</strong><small><%= error %></small></div></div><% } %>
+      <form method="post" action="/login" class="auth-form">
+        <input type="hidden" name="_csrf" value="<%= csrfToken %>">
+        <div class="auth-field"><label for="loginEmail">Correo de acceso</label><div class="auth-input"><svg class="icon"><use href="/icons.svg#i-user"></use></svg><input id="loginEmail" type="email" name="correo" autocomplete="username" inputmode="email" placeholder="nombre@empresa.com" required autofocus></div></div>
+        <div class="auth-field"><div class="auth-label-row"><label for="loginPassword">Contraseña</label><a href="/cuenta/recuperar">¿Olvidaste tu contraseña?</a></div><div class="auth-input"><svg class="icon"><use href="/icons.svg#i-shield"></use></svg><input id="loginPassword" type="password" name="password" autocomplete="current-password" placeholder="Ingresa tu contraseña" required><button type="button" data-toggle-password="loginPassword" aria-label="Mostrar contraseña">Mostrar</button></div></div>
+        <button class="btn auth-primary" type="submit"><span>Ingresar</span><span aria-hidden="true">→</span></button>
+      </form>
+    </section>
+  </main>
+</div>

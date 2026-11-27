@@ -1,0 +1,35 @@
+<% const pending=requests.filter(item=>item.estado==='PENDIENTE'); const approved=requests.filter(item=>item.estado==='APROBADA'); const delivered=requests.filter(item=>item.envio_estado==='ENVIADO'); const failed=requests.filter(item=>item.envio_estado==='ERROR'); %>
+<div class="page-head page-head-premium"><div><h1>RECUPERACIÓN DE CONTRASEÑAS</h1><p>Aprueba la identidad y controla la entrega por correo.</p></div><a class="btn btn-outline-dark" href="/usuarios">Usuarios</a></div>
+
+<section class="request-kpis" aria-label="Resumen de solicitudes">
+  <article class="attention"><span>PENDIENTES</span><strong><%= pending.length %></strong></article>
+  <article><span>ENLACES ACTIVOS</span><strong><%= approved.length %></strong></article>
+  <article><span>CORREOS ENVIADOS</span><strong><%= delivered.length %></strong></article>
+  <article class="<%= failed.length?'delivery-error':'' %>"><span>ERROR DE ENVÍO</span><strong><%= failed.length %></strong></article>
+</section>
+
+<form class="filter-bar light-filter-bar" method="get">
+  <div><label for="requestStatus">Estado</label><select id="requestStatus" class="form-select" name="status"><option value="">Todos</option><% ['PENDIENTE','APROBADA','COMPLETADA','RECHAZADA','EXPIRADA'].forEach(value=>{ %><option value="<%= value %>" <%= filters.status===value?'selected':'' %>><%= value %></option><% }) %></select></div>
+  <button class="btn btn-dark">Aplicar</button><a href="/solicitudes" class="btn btn-link">Limpiar</a>
+</form>
+
+<section class="request-worklist panel light-panel">
+  <div class="panel-title"><h2>SOLICITUDES</h2><span class="request-total"><%= requests.length %> registros</span></div>
+  <% if(!requests.length){ %><div class="empty refined-empty"><strong>No hay solicitudes</strong></div><% } %>
+  <div class="request-list">
+    <% requests.forEach(item=>{ const isPending=item.estado==='PENDIENTE'; %>
+      <article class="request-item request-<%= item.estado.toLowerCase() %>">
+        <div class="request-kind"><span>RESET</span><svg class="icon"><use href="/icons.svg#i-shield"></use></svg></div>
+        <div class="request-main"><div class="request-title-row"><div><strong><%= item.nombre||item.usuario_nombre||'Usuario registrado' %></strong><span>Cuenta: <%= item.correo %></span><span>Recuperación: <%= item.correo_recuperacion||'Pendiente de configurar' %></span></div><span class="status-pill <%= item.estado==='PENDIENTE'?'pending':item.estado==='COMPLETADA'?'ok':item.estado==='APROBADA'?'info':'off' %>"><%= item.estado %></span></div>
+          <div class="request-meta"><span><b>Folio</b><%= item.codigo %></span><span><b>Recibida</b><%= date(item.creado_en,true) %></span><span><b>Actualizada</b><%= date(item.actualizado_en,true) %></span><span class="delivery-state delivery-<%= String(item.envio_estado||'NO_APLICA').toLowerCase() %>"><b>Entrega</b><%= item.envio_estado==='ENVIADO'?'Correo enviado':item.envio_estado==='ERROR'?'Error de correo':item.envio_estado==='PENDIENTE'?'Preparando envío':'Sin envío' %></span></div>
+          <% if(item.observacion_admin){ %><div class="request-admin-note"><b>Decisión:</b> <%= item.observacion_admin %></div><% } %>
+          <% if(item.envio_estado==='ERROR'&&item.envio_error){ %><div class="request-delivery-error"><strong>No se entregó el enlace</strong><span><%= item.envio_error %></span></div><% } %>
+          <% if(isPending){ %><details class="request-decision"><summary>Revisar solicitud <span>→</span></summary><div class="request-decision-grid">
+            <form method="post" action="/solicitudes/<%= item.id %>/aprobar" class="request-approve-form"><input type="hidden" name="_csrf" value="<%= csrfToken %>"><div><strong>Aprobar y enviar</strong><small>El enlace se enviará al Gmail de recuperación y vencerá en una hora.</small></div><label>Nota administrativa<input class="form-control" name="observacion" maxlength="500" placeholder="Validación realizada"></label><button class="btn btn-success">Aprobar y enviar correo</button></form>
+            <form method="post" action="/solicitudes/<%= item.id %>/rechazar" class="request-reject-form"><input type="hidden" name="_csrf" value="<%= csrfToken %>"><div><strong>Rechazar</strong></div><label>Motivo<textarea class="form-control" name="observacion" maxlength="500" rows="3" required></textarea></label><button class="btn btn-outline-danger">Rechazar</button></form>
+          </div></details><% } else if(['APROBADA','EXPIRADA'].includes(item.estado)){ %><form method="post" action="/solicitudes/<%= item.id %>/regenerar" class="request-inline-action"><input type="hidden" name="_csrf" value="<%= csrfToken %>"><span><%= item.envio_estado==='ERROR'?'Corrige la configuración SMTP y vuelve a intentarlo.':item.estado==='EXPIRADA'?'El enlace venció.':'Enlace vigente hasta '+date(item.token_expira_en,true) %></span><button class="btn btn-sm btn-outline-warning"><%= item.envio_estado==='ERROR'?'Reintentar envío':'Generar y enviar nuevo enlace' %></button></form><% } %>
+        </div>
+      </article>
+    <% }) %>
+  </div>
+</section>

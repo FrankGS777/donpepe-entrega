@@ -1,0 +1,16 @@
+<div class="page-head">
+  <div><h1>Vincular correo</h1><p>Confirma el cambio que solicitaste desde Mi cuenta.</p></div>
+</div>
+<section class="panel account-settings">
+  <%- include('../partials/errors') %>
+  <h2>¿Este es tu nuevo correo de recuperación?</h2>
+  <div class="account-linked"><svg class="icon" aria-hidden="true"><use href="/icons.svg#i-shield"/></svg><div><small>Nuevo correo personal</small><strong><%= proposedEmail %></strong></div></div>
+  <p>Al confirmar, las próximas recuperaciones aprobadas llegarán a esta dirección. El correo anterior dejará de recibirlas y sus enlaces pendientes quedarán invalidados.</p>
+  <form method="post" action="/mi-cuenta/verificar/<%= token %>">
+    <input type="hidden" name="_csrf" value="<%= csrfToken %>">
+    <div class="form-actions">
+      <a class="btn btn-outline-light" href="/mi-cuenta">Cancelar</a>
+      <button class="btn btn-brand">Confirmar mi correo</button>
+    </div>
+  </form>
+</section>

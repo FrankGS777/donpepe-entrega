@@ -1,0 +1,19 @@
+'use strict';
+const {createApp}=require('../server'),{once}=require('events'),assert=require('node:assert/strict'),fs=require('fs'),path=require('path');
+const {chromium}=require(process.env.PLAYWRIGHT_MODULE||'playwright');
+(async()=>{const out=path.resolve(__dirname,'../../../../work/facturas-20261108/qa');fs.mkdirSync(out,{recursive:true});const r=createApp({identityFile:':memory:',simulationFile:':memory:',startClock:false,mailEnv:{}}),server=r.app.listen(0,'127.0.0.1');await once(server,'listening');const base=`http://127.0.0.1:${server.address().port}`,browser=await chromium.launch({executablePath:process.env.CHROME_PATH||'/Applications/Google Chrome.app/Contents/MacOS/Google Chrome',headless:true});const errors=[];try{
+ const ops=await browser.newContext({viewport:{width:1440,height:1000}});assert.equal((await ops.request.post(base+'/api/login',{data:{email:'operaciones@donpepe.local',password:'DonPepe2026!'}})).status(),200);const me=await(await ops.request.get(base+'/api/me')).json();const state=await(await ops.request.get(base+'/api/state')).json(),sku=state.catalog.skus[0];
+ const payload={type:'purchase.create',payload:{supplierId:sku.supplierId,lines:[{skuId:sku.id,cases:4}],commandId:'browser-autoinvoice-1'}};
+ const response=await ops.request.post(base+'/api/commands',{headers:{'X-CSRF-Token':me.csrf},data:payload});assert.equal(response.status(),200);const result=await response.json(),bill=result.state.finance.bills[0];assert.ok(bill.automatic);assert.ok(bill.lines[0].caseUnitNetCents);const pdf=await ops.request.get(base+bill.pdfUrl);assert.equal(pdf.status(),200);assert.match(pdf.headers()['content-type'],/application\/pdf/);assert.equal((await pdf.body()).subarray(0,5).toString(),'%PDF-');fs.writeFileSync(path.join(out,'Factura-automatica-DonPepe.pdf'),await pdf.body());
+ const again=await ops.request.post(base+'/api/commands',{headers:{'X-CSRF-Token':me.csrf},data:payload});assert.equal((await again.json()).state.finance.bills.length,1);
+ for(const [role,email] of [['operations','operaciones@donpepe.local'],['admin','admin@donpepe.local'],['store','tienda@donpepe.local']]){
+  const c=role==='operations'?ops:await browser.newContext({viewport:{width:1440,height:1000}});if(c!==ops)await c.request.post(base+'/api/login',{data:{email,password:'DonPepe2026!'}});
+  const page=await c.newPage();page.on('pageerror',e=>errors.push(e.message));await page.goto(base+'/#finance');await page.getByRole('heading',{name:'Documentos y pagos'}).waitFor();await page.waitForTimeout(800);assert.equal(await page.locator('#new-bill').count(),0);
+  if(role==='store'){assert.equal((await c.request.get(base+bill.pdfUrl)).status(),403);assert.equal(await page.getByRole('link',{name:'Ver factura PDF'}).count(),0);}else{assert.ok(await page.getByRole('link',{name:'Ver factura PDF'}).count());assert.equal((await c.request.get(base+bill.pdfUrl+'?download=1')).headers()['content-disposition'].startsWith('attachment'),true);}
+  await page.screenshot({path:path.join(out,`${role}-facturas.png`),fullPage:true});
+  if(role==='admin'){await page.goto(base+'/#settings');await page.locator('#company-billing-form').waitFor();await page.screenshot({path:path.join(out,'datos-facturacion.png'),fullPage:true});}
+  if(role==='operations'){await page.goto(base+'/#purchases');await page.getByRole('heading',{name:'Recepción de proveedores'}).waitFor();assert.ok(await page.locator(`a[href="${bill.pdfUrl}"]`).count());await page.screenshot({path:path.join(out,'recepcion-factura.png'),fullPage:true});}
+  await page.close();if(c!==ops)await c.close();
+ }
+ assert.deepEqual(errors,[]);console.log('PASS: compra API genera factura, repetición no duplica, PDF real, permisos de tres perfiles, enlace en recepción y datos maestros.');
+}finally{await browser.close();server.close();r.close();}})().catch(e=>{console.error(e);process.exitCode=1;});

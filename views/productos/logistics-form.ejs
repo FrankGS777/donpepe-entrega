@@ -1,0 +1,26 @@
+<div class="panel form-panel logistics-form">
+  <%- include('../partials/errors') %>
+  <header class="logistics-form-head">
+    <img src="<%= product.imagen_url||'/images/resource-fallback.svg' %>" alt="" loading="lazy" referrerpolicy="no-referrer">
+    <div><small><%= product.sku %></small><h2><%= product.nombre %></h2><p>El jefe ajusta la estrategia física. La identidad, proveedor y precios permanecen bajo administración.</p></div>
+  </header>
+  <form method="post" action="/productos/<%= product.id %>?_method=PUT">
+    <input type="hidden" name="_csrf" value="<%= csrfToken %>">
+    <div class="form-section"><div><span>01</span><h2>CAPACIDAD Y UNIDAD</h2></div><p>Datos necesarios para almacenar y contar correctamente.</p></div>
+    <div class="row g-3">
+      <div class="col-md-4"><label class="form-label" for="logAbc">Rotación ABC planificada</label><select id="logAbc" class="form-select" name="clase_abc"><% ['A','B','C'].forEach(x=>{ %><option value="<%= x %>" <%= product.clase_abc===x?'selected':'' %>><%= x %> · <%= x==='A'?'alta':x==='B'?'media':'baja' %> rotación</option><% }) %></select><small class="field-help">Revisar con demanda real de sucursales; no equivale a volumen de stock.</small></div>
+      <div class="col-md-4"><label class="form-label" for="logUnit">Unidad base</label><select id="logUnit" class="form-select" name="unidad_medida"><% ['UND','CAJA','PAQUETE','KG','L'].forEach(u=>{ %><option value="<%= u %>" <%= product.unidad_medida===u?'selected':'' %>><%= u %></option><% }) %></select></div>
+      <div class="col-md-4"><label class="form-label" for="logWeight">Peso por unidad (kg)</label><input id="logWeight" class="form-control" type="number" step=".001" min="0" name="peso_kg" required value="<%= product.peso_kg??0 %>"></div>
+      <div class="col-md-4"><label class="form-label" for="logVolume">Volumen por unidad (m³)</label><input id="logVolume" class="form-control" type="number" step=".000001" min="0" name="volumen_m3" required value="<%= product.volumen_m3??0 %>"></div>
+    </div>
+    <div class="form-section mt-4"><div><span>02</span><h2>RUTA DE PICKING</h2></div><p>La LOC primaria define el destino de la reposición y su condición ambiental.</p></div>
+    <div class="row g-3">
+      <div class="col-md-6"><label class="form-label" for="logPicking">LOC primaria de picking</label><select id="logPicking" class="form-select" data-complex-select data-resource="location" name="ubicacion_picking_id"><option value="">Sin LOC fija</option><% pickingLocations.forEach(x=>{ %><option value="<%= x.id %>" data-location="<%= x.codigo_loc %>" data-zone="<%= x.zona %>" data-type="PICKING" data-condition="<%= x.condicion_almacenamiento %>" data-capacity="<%= x.capacidad_hu %> HU" <%= Number(product.ubicacion_picking_id)===x.id?'selected':'' %>><%= x.codigo_loc %> · <%= x.zona %> · <%= x.condicion_almacenamiento %></option><% }) %></select></div>
+      <div class="col-md-3"><label class="form-label" for="logMinimum">Mínimo global</label><input id="logMinimum" class="form-control" type="number" min="0" name="stock_minimo" required value="<%= product.stock_minimo??0 %>"></div>
+      <div class="col-md-3"><label class="form-label" for="logTarget">Objetivo en picking</label><input id="logTarget" class="form-control" type="number" min="0" name="stock_objetivo_pick" required value="<%= product.stock_objetivo_pick??0 %>"></div>
+      <div class="col-md-6"><label class="form-switch-box"><input class="form-check-input" type="checkbox" name="control_lote" value="1" <%= product.control_lote?'checked':'' %>><span><strong>Control por lote</strong><small>Rastrea cada posición física.</small></span></label></div>
+      <div class="col-md-6"><label class="form-switch-box"><input class="form-check-input" type="checkbox" name="control_vencimiento" value="1" <%= product.control_vencimiento?'checked':'' %>><span><strong>Control de vencimiento</strong><small>Habilita prioridad FEFO.</small></span></label></div>
+    </div>
+    <div class="mt-4"><button class="btn btn-brand">Guardar estrategia logística</button></div>
+  </form>
+</div>

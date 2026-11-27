@@ -1,0 +1,1448 @@
+/* Capa final de compatibilidad con los componentes antiguos.
+   Superficies y texto siempre cambian juntos; la etiqueta imprimible es independiente. */
+body[class] {
+  --dp-surface-2: var(--dp-raised);
+  --role-deep: var(--dp-text);
+}
+body.role-jefe_operaciones {
+  color-scheme: light;
+}
+body.role-jefe_operaciones .sidebar {
+  background: #fff;
+  box-shadow: 4px 0 24px #36214b08;
+}
+body.role-jefe_operaciones .topbar {
+  background: #ffffffed;
+  border-bottom: 1px solid var(--dp-border);
+  box-shadow: 0 4px 20px #39204706;
+}
+body.role-jefe_operaciones :is(.dropdown-menu, .ui-drawer) {
+  background: var(--dp-surface);
+  color: var(--dp-text);
+  border-color: var(--dp-border);
+}
+body.role-jefe_operaciones .sidebar .nav-link.active {
+  background: #eee7f7;
+  color: #502680;
+  border-color: #d2bee8;
+  box-shadow: inset 4px 0 0 #733bb1;
+}
+body.role-jefe_operaciones .sidebar .nav-link .icon,
+body.role-jefe_operaciones .sidebar .nav-link.active .icon {
+  color: #733bb1;
+}
+body.role-jefe_operaciones .shift-signal {
+  background: #e9f5ef;
+  border-color: #b6d8c7;
+  color: #226344;
+  font-size: 10px;
+}
+body.role-jefe_operaciones .shift-signal span {
+  color: #226344;
+}
+body.role-jefe_operaciones .sidebar .brand {
+  padding-block: 18px;
+}
+body.role-jefe_operaciones .warehouse-hero {
+  border: 1px solid #d7cbe7;
+  border-left: 5px solid #7739b6;
+  background: linear-gradient(115deg, #fff, #f3eef9);
+  padding: 28px;
+}
+body.role-jefe_operaciones .warehouse-clock strong {
+  color: #6630a2;
+}
+body.role-jefe_operaciones .warehouse-clock small {
+  color: var(--dp-muted);
+}
+body[class]
+  .main-content
+  :is(.warehouse-hero, .executive-hero, .analytics-hero)
+  h1 {
+  color: var(--dp-text);
+}
+body[class]
+  .main-content
+  :is(.warehouse-hero, .executive-hero, .analytics-hero)
+  p {
+  color: var(--dp-muted);
+  opacity: 1;
+}
+body[class] .main-content .btn-link {
+  color: var(--dp-purple);
+}
+body[class]
+  .main-content
+  :is(
+    .warehouse-board,
+    .warehouse-kpi,
+    .zone-card,
+    .loc-card,
+    .light-filter-bar,
+    .request-kpis article,
+    .identity-kpis article,
+    .distribution-order,
+    .distribution-branch-grid article,
+    .distribution-task-list article,
+    .wms-task,
+    .task-purpose,
+    .task-instruction,
+    .task-route,
+    .workflow-note,
+    .replenishment-banner,
+    .location-master-row,
+    .location-console-toolbar,
+    .permission-note,
+    .health-guide,
+    .stock-ticket,
+    .expiry-ticket
+  ) {
+  background: var(--dp-surface);
+  color: var(--dp-text);
+  border-color: var(--dp-border);
+}
+body[class]
+  .main-content
+  :is(
+    .task-summary a,
+    .warehouse-kpi,
+    .work-order,
+    .stock-ticket,
+    .expiry-ticket,
+    .replenishment-banner,
+    .distribution-order,
+    .distribution-task-list article
+  )
+  :is(strong, b) {
+  color: var(--dp-text);
+}
+body[class] .main-content .task-summary a {
+  background: var(--dp-surface);
+  border-top-color: var(--dp-purple);
+  color: var(--dp-text);
+}
+body[class] .main-content .task-summary :is(span, small) {
+  color: var(--dp-muted);
+}
+body[class] .main-content .request-kpis article {
+  border-top: 3px solid var(--dp-purple);
+  box-shadow: var(--dp-shadow);
+}
+body[class] .main-content .request-kpis article.attention {
+  background: var(--dp-surface);
+  border-color: var(--dp-warning);
+}
+body[class] .main-content .request-kpis article.delivery-error {
+  background: var(--dp-surface) !important;
+  border-color: var(--dp-danger);
+}
+body[class] .main-content .request-kpis strong {
+  color: var(--dp-text);
+}
+body[class] .main-content .identity-kpis strong {
+  color: var(--dp-text);
+}
+body[class] .main-content .identity-kpis :is(small, p) {
+  color: var(--dp-muted);
+}
+body[class]
+  .main-content
+  :is(
+    .request-kpis span,
+    .request-total,
+    .request-title-row > div span,
+    .request-inline-action > span
+  ) {
+  color: var(--dp-muted);
+}
+body[class] .main-content .request-title-row strong {
+  color: var(--dp-text);
+}
+body[class]
+  .main-content
+  :is(
+    .request-meta span,
+    .request-admin-note,
+    .request-decision summary,
+    .request-kind
+  ) {
+  background: var(--dp-raised);
+  color: var(--dp-muted);
+  border-color: var(--dp-border);
+}
+body[class]
+  .main-content
+  :is(
+    .request-meta b,
+    .request-decision summary,
+    .request-kind,
+    .request-admin-note b
+  ) {
+  color: var(--dp-purple);
+}
+body[class] .main-content .request-meta .delivery-enviado b {
+  color: #16643f;
+}
+body[class] .main-content .request-meta .delivery-error b {
+  color: #9e243c;
+}
+body[class]
+  .main-content
+  :is(
+    .request-item,
+    .request-decision,
+    .request-decision-grid,
+    .request-reject-form
+  ) {
+  border-color: var(--dp-border);
+}
+body[class] .main-content .request-title-row > div {
+  min-width: 0;
+  overflow-wrap: anywhere;
+}
+body[class] .main-content .light-filter-bar :is(label, .form-select) {
+  color: var(--dp-text);
+}
+
+/* Ni títulos claros sobre blanco, ni cristal blanco dentro del tema oscuro. */
+body[class] .modal .modal-content {
+  background: var(--dp-surface) !important;
+  color: var(--dp-text) !important;
+  border: 1px solid var(--dp-border) !important;
+  box-shadow: var(--dp-float-shadow) !important;
+}
+body[class] .modal :is(.modal-header, .modal-footer, .modal-body) {
+  background: var(--dp-surface);
+  color: var(--dp-text);
+  border-color: var(--dp-border);
+}
+body[class]
+  .modal
+  :is(.modal-title, .modal-action-heading h5, .selector-modal-heading h5) {
+  color: var(--dp-text);
+}
+body[class] .modal :is(.modal-action-icon, .selector-modal-icon) {
+  color: var(--dp-on-accent);
+}
+body[class] .modal :is(.btn-close, .btn-close-white) {
+  background: var(--dp-raised);
+  color: var(--dp-text);
+  border-color: var(--dp-border);
+  opacity: 1;
+  filter: none;
+}
+body[class] .modal .lot-label-preview {
+  background: #fff;
+  color: #24152e;
+  box-shadow: 0 8px 30px #00000025;
+}
+body[class] .modal .lot-label-preview :is(strong, [data-lot-product]) {
+  color: #24152e;
+}
+body[class] .modal .lot-label-preview small {
+  color: #62566b;
+}
+body[class] .modal .lot-label-preview footer {
+  color: #62566b;
+  background: #f2edf5;
+}
+body[class] .modal .lot-label-brand {
+  background: #48206a;
+}
+body[class] .modal .lot-label-brand b {
+  color: #ffe074;
+}
+body[class] .modal .lot-label-brand span {
+  color: #fff;
+}
+body[class] .modal .lot-label-content canvas {
+  background: #fff;
+  flex-shrink: 0;
+}
+
+/* La ocupación no flota sobre el nombre: código, porcentaje, nombre y capacidad. */
+body[class] .zone-overview {
+  margin: 24px 0;
+}
+body[class] .dashboard-zones {
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 14px;
+}
+body[class] .dashboard-zones .zone-card {
+  padding: 18px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  border-radius: 16px;
+}
+body[class] .dashboard-zones .zone-card header {
+  display: flex;
+  justify-content: space-between;
+  gap: 12px;
+  align-items: center;
+}
+body[class] .dashboard-zones .zone-card header span {
+  font:
+    600 11px GeistMono,
+    monospace;
+  letter-spacing: 0.02em;
+  color: var(--dp-purple);
+}
+body[class] .dashboard-zones .zone-card b {
+  position: static;
+  color: var(--dp-text);
+  font:
+    600 14px GeistMono,
+    monospace;
+}
+body[class] .dashboard-zones .zone-card strong {
+  color: var(--dp-text);
+  font:
+    700 18px Bricolage,
+    sans-serif;
+  line-height: 1.3;
+  margin: 0;
+}
+body[class] .dashboard-zones .zone-card small {
+  color: var(--dp-muted);
+  font-size: 12px;
+}
+body[class] .dashboard-zones .zone-card .zone-meter {
+  margin: auto 0 0;
+  height: 6px;
+  background: var(--dp-raised);
+  border-radius: 6px;
+}
+body[class] .dashboard-zones .zone-card i {
+  background: var(--dp-purple);
+}
+body[class] .dashboard-zones .zone-card footer {
+  display: flex;
+  justify-content: space-between;
+  gap: 8px;
+  flex-wrap: wrap;
+  font-size: 10px;
+  color: var(--dp-muted);
+}
+body[class] .dashboard-zones .zone-card footer span {
+  color: var(--dp-purple);
+  font-size: 11px;
+  letter-spacing: 0;
+}
+body.role-jefe_operaciones .main-content :is(.task-type, .location-type) {
+  background: #eee7f7 !important;
+  color: #542586 !important;
+}
+body.role-jefe_operaciones .main-content .sku-chip {
+  color: #623099;
+  border-color: #d1bce5;
+  background: #f2edf8;
+}
+body.role-jefe_operaciones .main-content .loc-code {
+  color: #623099;
+}
+body.role-jefe_operaciones .main-content .work-number {
+  color: #542586;
+  background: #eee7f7;
+}
+body.role-jefe_operaciones :is(.btn-outline-warning, .btn-outline-primary) {
+  color: #633497;
+  border-color: #bea6d5;
+}
+body.role-jefe_operaciones .main-content .table td small {
+  color: var(--dp-muted);
+}
+body[class] :is(.context-help-panel, .offcanvas-header, .offcanvas-body) {
+  background: var(--dp-surface);
+  color: var(--dp-text);
+  border-color: var(--dp-border);
+}
+body[class] .context-help-panel :is(h2, strong) {
+  color: var(--dp-text);
+}
+body[class] .context-help-panel :is(p, small, .context-help-terms span) {
+  color: var(--dp-muted);
+}
+body[class] .context-help-panel .context-help-terms {
+  background: var(--dp-raised);
+  border-color: var(--dp-purple);
+  border-radius: var(--dp-radius);
+}
+body[class] .context-help-panel .btn-close {
+  color: var(--dp-text);
+  background: var(--dp-raised);
+  border-color: var(--dp-border);
+}
+body.role-jefe_operaciones :is(.status-pill, .priority, .badge) {
+  font-weight: 700;
+}
+body.role-jefe_operaciones .status-pill.pending {
+  color: #79530d;
+  background: #fff2ca;
+  border-color: #dfc170;
+}
+body.role-jefe_operaciones .status-pill.ok {
+  color: #16663e;
+  background: #e5f5ed;
+  border-color: #9bcaaf;
+}
+body.role-jefe_operaciones .status-pill.off {
+  color: #9e2b46;
+  background: #fbe9ee;
+  border-color: #dcb2bf;
+}
+body.role-jefe_operaciones .status-pill.info {
+  color: #245c88;
+  background: #e6f0f9;
+  border-color: #9fc2db;
+}
+@media (max-width: 1200px) {
+  body[class] .dashboard-zones {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+@media (max-width: 600px) {
+  body[class] .dashboard-zones {
+    grid-template-columns: minmax(0, 1fr);
+  }
+  body[class] .light-filter-bar {
+    flex-wrap: wrap;
+  }
+  body[class] .light-filter-bar > div {
+    flex: 1 1 100%;
+    min-width: 0;
+  }
+  body[class] .request-meta span {
+    flex-wrap: wrap;
+    overflow-wrap: anywhere;
+  }
+  body[class] .modal .lot-label-content {
+    flex-wrap: wrap;
+  }
+}
+
+/* Componentes compartidos: identidad visual única, sin colores heredados. */
+body[class] :is(.eyebrow, .wmap-eyebrow, .preview-state > span) {
+  color: var(--dp-accent-ink);
+}
+body[class] :is(.sku-chip, .loc-code) {
+  background: var(--dp-raised);
+  color: var(--dp-purple);
+  border-color: var(--dp-border);
+}
+body[class] .main-content :is(.sku-chip, .loc-code) {
+  background: var(--dp-raised);
+  color: var(--dp-purple);
+}
+body[class] .main-content .table td small {
+  color: var(--dp-muted);
+}
+body[class] :is(.task-type, .location-type, .topology-zone-card header > span) {
+  background: var(--dp-warning-bg);
+  color: var(--dp-warning);
+  border-color: var(--dp-border);
+}
+body[class] .catalog-tabs a.active {
+  color: var(--dp-on-accent);
+  background: var(--dp-accent);
+  border-color: var(--dp-accent);
+}
+body[class] .catalog-tabs a {
+  border-radius: 9px;
+}
+body[class] .resource-choice-image {
+  position: relative;
+  overflow: hidden;
+}
+body[class] .resource-image-placeholder {
+  position: absolute;
+  inset: 0;
+  display: grid;
+  gap: 5px;
+  align-content: center;
+  justify-items: center;
+  background: #f0edf4;
+  color: #573477;
+}
+body[class] .resource-image-placeholder b {
+  font:
+    700 30px/1 Bricolage,
+    sans-serif;
+}
+body[class] .resource-image-placeholder small {
+  color: #65596f;
+  font:
+    500 10px/1.3 Geist,
+    sans-serif;
+}
+body[class] .resource-choice-image img {
+  position: relative;
+  opacity: 0;
+  transition: opacity var(--dp-normal);
+}
+body[class] .resource-choice-image img.is-ready {
+  opacity: 1;
+}
+body[class] .selector-searchbar:focus-within {
+  border-color: var(--dp-purple);
+  box-shadow: 0 0 0 3px color-mix(in srgb, var(--dp-purple) 20%, transparent);
+}
+body[class] .selector-searchbar input:focus-visible {
+  outline: none;
+  box-shadow: none;
+}
+body[class] .resource-choice.selected .resource-choice-check {
+  background: var(--dp-accent);
+  color: var(--dp-on-accent);
+}
+body[class] .selector-trigger-arrow {
+  color: var(--dp-muted);
+}
+body[class] .status-pill.ok {
+  color: var(--dp-success);
+  background: var(--dp-success-bg);
+}
+body[class] .status-pill.pending {
+  color: var(--dp-warning);
+  background: var(--dp-warning-bg);
+}
+body[class] .status-pill.off {
+  color: var(--dp-danger);
+  background: var(--dp-danger-bg);
+}
+body[class] .status-pill.info {
+  color: var(--dp-info);
+  background: var(--dp-info-bg);
+}
+body[class] .priority:is(.alta, .urgente) {
+  color: var(--dp-danger);
+  background: var(--dp-danger-bg);
+}
+body[class] .priority:is(.normal, .baja) {
+  color: var(--dp-muted);
+  background: var(--dp-raised);
+}
+body[class]
+  .main-content
+  :is(
+    .chart-legend,
+    .chart-legend span,
+    .command-strip span,
+    .report-flow-row time,
+    .report-flow-row small,
+    .completion-ring span,
+    .task-report-list span
+  ) {
+  color: var(--dp-muted);
+}
+body[class] .main-content .command-strip .command-live {
+  color: var(--dp-success);
+}
+body[class] .main-content :is(.flow-values b, .pulse-footer b) {
+  color: var(--dp-purple);
+}
+body[class] .main-content .work-order footer b {
+  color: var(--dp-accent-ink);
+}
+body[class] .main-content .movement-stream b {
+  color: var(--dp-accent-ink);
+}
+body[class] .main-content .completion-ring::before {
+  background: var(--dp-surface);
+}
+body[class] .main-content .completion-ring > div {
+  width: 112px;
+  height: 112px;
+  border-radius: 50%;
+  align-content: center;
+  background: var(--dp-surface);
+}
+body[class] .main-content .analytics-kpis > article {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 44px;
+  gap: 8px 12px;
+  padding: 20px;
+}
+body[class] .main-content .analytics-kpis article > small {
+  grid-column: 1;
+  grid-row: 1;
+  align-self: center;
+}
+body[class] .main-content .analytics-kpis article > span {
+  position: static;
+  grid-column: 2;
+  grid-row: 1;
+  width: 44px;
+  height: 44px;
+}
+body[class] .main-content .analytics-kpis article > strong {
+  grid-column: 1 / -1;
+  grid-row: 2;
+  font-size: clamp(22px, 2.1vw, 32px);
+  overflow-wrap: anywhere;
+  margin: 0;
+}
+body[class] .main-content .analytics-kpis article > p {
+  grid-column: 1 / -1;
+  grid-row: 3;
+  margin: 0;
+}
+body[class] .main-content .report-flow-bars {
+  padding-right: 46px;
+}
+body[class] .main-content .report-flow-bars span {
+  position: relative;
+  min-width: 0;
+  height: 18px;
+}
+body[class] .main-content .report-flow-bars span b {
+  position: absolute;
+  left: calc(100% + 5px);
+  top: 0;
+  padding: 0 2px;
+  border-radius: 4px;
+  background: var(--dp-surface);
+  font-size: 10px;
+  line-height: 18px;
+}
+body[class] .main-content .report-flow-bars :is(.in, .out) > b {
+  color: var(--dp-text);
+}
+body[class] :is(.identity-policy, .report-method) {
+  background: var(--dp-raised);
+  color: var(--dp-text);
+  border-color: var(--dp-border);
+}
+body[class] .main-content :is(.identity-policy, .report-method) strong {
+  color: var(--dp-text);
+}
+body[class] .main-content :is(.identity-policy, .report-method) p {
+  color: var(--dp-muted);
+}
+body[class] :is(.identity-policy, .report-method) .icon {
+  color: var(--dp-purple);
+}
+
+/* Asistentes, formularios, pedidos y consultas físicas. */
+body[class] .main-content .form-section {
+  gap: 14px;
+  padding: 0 0 14px;
+  background: none;
+  border: 0;
+  border-bottom: 1px solid var(--dp-border);
+  border-radius: 0;
+  box-shadow: none;
+}
+body[class] .main-content .form-section > div > span {
+  display: grid;
+  place-items: center;
+  width: 32px;
+  height: 32px;
+  flex-shrink: 0;
+  border-radius: 10px;
+}
+body[class] .main-content .distribution-flow ~ .panel {
+  margin-top: 16px;
+}
+body[class]
+  :is(.audit-preview, .process-ribbon, .workflow-note, .health-check) {
+  border-radius: var(--dp-radius);
+}
+body[class]
+  .main-content
+  :is(
+    .zone-card,
+    .warehouse-kpi,
+    .warehouse-board,
+    .identity-kpis article,
+    .request-kpis article,
+    .bin-card
+  ) {
+  box-shadow: var(--dp-shadow);
+}
+body[class]
+  :is(
+    .task-route-preview,
+    .source-insight,
+    .quantity-rule,
+    .audit-preview,
+    .process-ribbon,
+    .workflow-note,
+    .topology-rule,
+    .topology-zone-card,
+    .bin-card,
+    .distribution-lines article,
+    .distribution-flow,
+    .secure-link-rules,
+    .rf-work-card,
+    .rf-scan-step,
+    .rf-task-detail,
+    .rf-count-extra
+  ) {
+  background: var(--dp-surface);
+  color: var(--dp-text);
+  border-color: var(--dp-border);
+}
+body[class]
+  .main-content
+  :is(
+    .task-purpose,
+    .preview-state,
+    .preview-route,
+    .preview-product,
+    .task-route,
+    .task-instruction,
+    .source-insight,
+    .quantity-rule,
+    .audit-preview,
+    .health-check,
+    .distribution-order-summary,
+    .distribution-lines,
+    .bin-card,
+    .bin-stock-line,
+    .secure-link-rules,
+    .topology-zone-card,
+    .process-ribbon,
+    .workflow-note
+  )
+  :is(strong, b) {
+  color: var(--dp-text);
+}
+body[class]
+  :is(
+    .task-purpose,
+    .preview-state,
+    .preview-route,
+    .preview-product,
+    .task-route,
+    .source-insight,
+    .quantity-rule,
+    .distribution-order-summary,
+    .distribution-lines,
+    .bin-card,
+    .bin-stock-line,
+    .secure-link-rules,
+    .topology-zone-card,
+    .process-ribbon,
+    .workflow-note
+  )
+  :is(small, em) {
+  color: var(--dp-muted);
+}
+body[class] .main-content .task-purpose > span,
+body[class] .main-content .task-route div > span {
+  color: var(--dp-muted);
+}
+body[class] .main-content .task-instruction > strong {
+  color: var(--dp-purple);
+}
+body[class]
+  .main-content
+  :is(.preview-route span, .source-insight small, .bin-card > span:last-child) {
+  color: var(--dp-muted);
+}
+body[class] .task-route-preview {
+  border: 1px solid var(--dp-border);
+  border-radius: var(--dp-radius-lg);
+  box-shadow: var(--dp-shadow);
+}
+body[class] .main-content .task-wizard > p.task-instruction {
+  display: block;
+  padding: 14px 18px;
+  border: 1px solid var(--dp-border);
+  border-radius: var(--dp-radius);
+  font-size: 13px;
+  line-height: 1.65;
+}
+body[class] .task-route-preview > .btn:disabled {
+  background: var(--dp-raised);
+  color: var(--dp-muted);
+  border: 1px solid var(--dp-border);
+  opacity: 1;
+  cursor: not-allowed;
+  box-shadow: none;
+}
+body[class] .preview-state > span {
+  color: var(--dp-purple);
+}
+body[class] .distribution-flow > span {
+  background: var(--dp-raised);
+  color: var(--dp-text);
+}
+body[class] .distribution-flow > b {
+  color: var(--dp-purple);
+}
+body[class] .main-content .form-section > div > span {
+  background: var(--dp-warning-bg);
+  color: var(--dp-warning);
+}
+body[class] .main-content .health-metric strong {
+  color: var(--dp-text);
+}
+body[class] .main-content .health-check strong {
+  color: var(--dp-text);
+}
+body[class] .main-content .health-metric .metric-icon {
+  color: var(--dp-purple);
+  background: var(--dp-raised);
+}
+body[class] .main-content .secure-link-rules b {
+  color: var(--dp-purple);
+}
+body[class] .secure-link-rules span {
+  color: var(--dp-muted);
+}
+body[class] .manual-fallback summary {
+  color: var(--dp-purple);
+}
+body[class] .secure-delivery-note.success {
+  color: var(--dp-success);
+  background: var(--dp-success-bg);
+  border-color: var(--dp-success);
+}
+body[class] .secure-delivery-note.success :is(p, strong) {
+  color: var(--dp-success);
+}
+body[class] .delivery-failed .secure-link-status > span {
+  background: var(--dp-danger-bg);
+  color: var(--dp-danger);
+}
+body[class] .delivery-success .secure-link-status > span {
+  background: var(--dp-success-bg);
+  color: var(--dp-success);
+}
+/* La cámara cabe dentro del diálogo; no hereda el video vertical RF. */
+body[class] .quick-scan-modal .scanner-viewport {
+  height: clamp(220px, 32svh, 320px);
+  min-height: 0;
+  padding: 0;
+}
+body[class] .scanner-viewport video {
+  display: block;
+  height: 100%;
+  min-height: 0;
+  aspect-ratio: auto;
+}
+body[class] .quick-scan-modal .scan-frame {
+  inset: 50% auto auto 50%;
+  width: min(72%, 340px);
+  height: 65%;
+  max-height: 210px;
+  transform: translate(-50%, -50%);
+  border-color: var(--dp-accent);
+  border-radius: 12px;
+  box-shadow: 0 0 0 999px #080a143d;
+}
+body[class] .password-rules span {
+  color: var(--dp-muted);
+  background: var(--dp-raised);
+  border: 1px solid var(--dp-border);
+}
+body[class] .password-rules span.passed {
+  color: var(--dp-success);
+  background: var(--dp-success-bg);
+  border-color: var(--dp-success);
+}
+
+/* Las etiquetas físicas siempre imprimen negro sobre papel blanco. */
+body[class] .print-label {
+  background: #fff;
+  color: #24152e;
+  border-color: #cbc2d0;
+}
+body[class] .print-label :is(strong, span) {
+  color: #24152e;
+}
+body[class] .print-label small {
+  color: #605468;
+}
+
+/* RF: superficies claras, objetivos táctiles y flujo que no sale del móvil. */
+body.rf-mode .rf-hero {
+  position: relative;
+}
+body.rf-mode
+  :is(.rf-hero, .rf-menu-card, .rf-process, .rf-work-card, .rf-scan-step) {
+  box-shadow: var(--dp-shadow);
+}
+body.rf-mode .rf-content {
+  min-width: 0;
+}
+body.rf-mode .rf-security-link {
+  margin-bottom: 20px;
+  background: var(--dp-surface);
+  border-color: var(--dp-border);
+}
+body.rf-mode .rf-process {
+  display: grid;
+  grid-template-columns: repeat(5, minmax(0, 1fr));
+  gap: 6px;
+  padding: 12px 8px;
+  background: var(--dp-raised);
+  border: 1px solid var(--dp-border);
+  border-radius: 16px;
+  color: var(--dp-text);
+}
+body.rf-mode .rf-process > span {
+  display: grid;
+  gap: 6px;
+  justify-items: center;
+  min-width: 0;
+  font-size: 9px;
+  color: var(--dp-muted);
+}
+body.rf-mode .rf-process > i {
+  display: none;
+}
+body.rf-mode .rf-process b {
+  background: var(--dp-purple);
+  color: #fff;
+}
+body.rf-mode .rf-footer :is(a, button, span) {
+  color: var(--dp-muted);
+}
+body.rf-mode .rf-footer a.active,
+body.rf-mode .rf-footer a.active span {
+  color: var(--dp-purple);
+}
+body.rf-mode .rf-footer a.active {
+  background: var(--dp-raised);
+  border-radius: 12px;
+}
+body.rf-mode :is(.rf-route > div, .rf-product-focus, .rf-sku-line) {
+  background: var(--dp-raised);
+  color: var(--dp-text);
+  border-color: var(--dp-border);
+}
+body.rf-mode
+  :is(
+    .rf-route,
+    .rf-product-focus,
+    .rf-sku-line,
+    .workflow-note,
+    .process-ribbon
+  )
+  :is(b, strong) {
+  color: var(--dp-text);
+}
+body.rf-mode
+  :is(
+    .rf-route,
+    .rf-product-focus,
+    .rf-sku-line,
+    .workflow-note,
+    .process-ribbon
+  )
+  :is(small, em) {
+  color: var(--dp-muted);
+}
+body.rf-mode .process-ribbon > div > span {
+  background: var(--dp-purple);
+  color: #fff;
+}
+body.rf-mode .workflow-note .icon {
+  color: var(--dp-purple);
+}
+body.rf-mode .rf-route b {
+  overflow-wrap: anywhere;
+}
+body.rf-mode .rf-task-detail :is(summary, strong) {
+  color: var(--dp-text);
+}
+body.rf-mode .rf-task-detail :is(p, small, span) {
+  color: var(--dp-muted);
+}
+body.rf-mode .rf-task-card header > span {
+  color: var(--dp-purple);
+}
+body.rf-mode .rf-scan-step-number {
+  background: var(--dp-purple);
+  color: #fff;
+}
+
+/* Mapa: el entorno se representa en 3D; sus controles siguen el tema del rol. */
+body[class] .wmap-page {
+  --wmap-line: var(--dp-border);
+  --wmap-soft: var(--dp-muted);
+  color: var(--dp-text);
+}
+body[class] .wmap-shell {
+  overflow: clip;
+}
+body[class]
+  :is(
+    .wmap-toolbar,
+    .wmap-explorer,
+    .wmap-accessible-list,
+    .wmap-list-zone,
+    .wmap-inspector-head,
+    .wmap-inspector-footer,
+    .wmap-legend
+  ) {
+  color: var(--dp-text);
+  background: var(--dp-surface);
+  border-color: var(--dp-border);
+}
+body[class] .wmap-list-zone {
+  background: var(--dp-raised);
+}
+body[class] .wmap-page :is(h2, h3, .wmap-inspect-metrics strong) {
+  color: var(--dp-text);
+}
+body[class] .wmap-page :is(p, small, .wmap-list-loc span, .wmap-legend-note) {
+  color: var(--dp-muted);
+}
+body[class]
+  :is(
+    .wmap-toolbar select,
+    .wmap-reset,
+    .wmap-link,
+    .wmap-inspector-close,
+    .wmap-inspector-footer button
+  ) {
+  color: var(--dp-text);
+  background: var(--dp-raised);
+  border-color: var(--dp-border);
+}
+body[class] :is(.wmap-reset, .wmap-link, .wmap-inspector-footer button):hover {
+  background: var(--dp-hover);
+  border-color: var(--dp-purple);
+}
+body[class] .wmap-link-primary {
+  background: var(--dp-accent);
+  color: var(--dp-on-accent);
+}
+body[class] .wmap-inspect-metrics > div {
+  background: var(--dp-raised);
+  border-color: var(--dp-border);
+}
+body[class] .wmap-list-loc {
+  flex-wrap: wrap;
+  min-width: 0;
+  max-width: 100%;
+  text-align: left;
+  overflow-wrap: anywhere;
+}
+body[class] .wmap-inspector {
+  visibility: hidden;
+}
+body[class] .wmap-shell.has-inspection .wmap-inspector {
+  visibility: visible;
+}
+@media (max-width: 680px) {
+  body[class] .wmap-shell {
+    overflow: visible;
+  }
+  body[class] .wmap-inspector {
+    top: auto;
+    bottom: 0;
+    max-height: 68dvh;
+    z-index: 1200;
+  }
+  body[class] .wmap-heading-actions {
+    gap: 8px;
+  }
+  body[class] .wmap-stage-top {
+    flex-wrap: wrap;
+  }
+  body[class] .wmap-stage-top > span {
+    max-width: 100%;
+  }
+  body[class] .wmap-accessible-list {
+    padding: 14px;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  body[class] .main-content > .container-fluid > *,
+  body[class] .rf-content > * {
+    animation: none !important;
+  }
+}
+/* Estados interactivos: un solo par de superficie/texto por componente. */
+body[class] .shellbar :is(.profile-menu, .shell-notifications) {
+  background: var(--dp-surface) !important;
+  color: var(--dp-text) !important;
+  border: 1px solid var(--dp-border);
+  box-shadow: var(--dp-shadow);
+}
+body[class] .shellbar .profile-menu :is(.profile-menu-head, a, strong) {
+  background: transparent !important;
+  color: var(--dp-text) !important;
+}
+body[class] .shellbar .profile-menu :is(small, .icon) {
+  color: var(--dp-muted) !important;
+}
+body[class] .shellbar .profile-menu a:hover {
+  background: var(--dp-surface-2) !important;
+}
+body[class] .shellbar .profile-menu form button {
+  background: transparent !important;
+  color: var(--dp-danger) !important;
+}
+body[class] .shellbar .profile-menu form button:hover {
+  background: var(--dp-surface-2) !important;
+}
+body[class] .shellbar .profile-menu form button .icon {
+  color: inherit !important;
+}
+body[class] .main-content .source-insight > div {
+  background: var(--dp-surface-2) !important;
+  color: var(--dp-text);
+  border-color: var(--dp-border);
+  min-width: 0;
+}
+body[class] .main-content .source-insight :is(strong, [data-value]) {
+  color: var(--dp-text) !important;
+  overflow-wrap: anywhere;
+}
+body[class] .main-content .source-insight small {
+  color: var(--dp-muted) !important;
+}
+body[class] :is(input, select, textarea):disabled {
+  color: var(--dp-muted) !important;
+  -webkit-text-fill-color: var(--dp-muted);
+  background: var(--dp-surface-2) !important;
+  opacity: 1;
+}
+body[class] .main-content input.quantity-control {
+  color: var(--dp-text) !important;
+  -webkit-text-fill-color: var(--dp-text);
+}
+body[class] .brand img {
+  height: auto !important;
+  max-height: 80px;
+}
+body[class] .field-feedback {
+  display: block;
+  color: var(--dp-danger);
+  margin-top: 8px;
+}
+body[class] [aria-invalid="true"] {
+  border-color: var(--dp-danger) !important;
+}
+.field-invalid-pulse {
+  animation: field-nudge 240ms cubic-bezier(0.16, 1, 0.3, 1);
+}
+@keyframes field-nudge {
+  20%,
+  60% {
+    transform: translateX(-3px);
+  }
+  40%,
+  80% {
+    transform: translateX(3px);
+  }
+}
+.ui-saving {
+  position: relative;
+  overflow: hidden;
+}
+.ui-saving::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    105deg,
+    transparent 20%,
+    #ffffff44 50%,
+    transparent 80%
+  );
+  animation: saving-sweep 1.2s linear infinite;
+}
+@keyframes saving-sweep {
+  from {
+    transform: translateX(-100%);
+  }
+  to {
+    transform: translateX(100%);
+  }
+}
+.ui-navigating::after {
+  content: "";
+  position: fixed;
+  z-index: 500;
+  top: 0;
+  left: 0;
+  height: 3px;
+  width: 100%;
+  background: linear-gradient(90deg, #8242ca, #f4c928);
+  transform-origin: left;
+  animation: route-progress 1.2s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+body[class] .action-feedback {
+  align-items: center;
+  gap: 14px;
+  animation: feedback-arrive 360ms cubic-bezier(0.16, 1, 0.3, 1);
+}
+body[class] .validation-summary {
+  animation: feedback-arrive 360ms cubic-bezier(0.16, 1, 0.3, 1);
+}
+.action-feedback > span {
+  flex: 1;
+}
+.action-feedback .feedback-symbol {
+  flex: none;
+  width: 24px;
+  height: 24px;
+}
+@keyframes feedback-arrive {
+  from {
+    opacity: 0;
+    transform: translateY(-10px) scale(0.985);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+@keyframes route-progress {
+  from {
+    transform: scaleX(0.08);
+  }
+  to {
+    transform: scaleX(0.9);
+  }
+}
+body[class] .ui-confirm-dialog .modal-dialog {
+  max-width: 500px;
+}
+body[class] .ui-confirm-dialog .modal-header {
+  gap: 14px;
+}
+body[class] .ui-confirm-dialog .modal-header .icon {
+  color: var(--dp-purple);
+}
+body[class] .account-settings {
+  max-width: 800px;
+  padding: clamp(20px, 3vw, 36px);
+}
+.account-identity {
+  display: flex;
+  gap: 16px;
+  align-items: center;
+  margin-bottom: 24px;
+}
+.account-identity h2,
+.account-identity p {
+  margin: 0;
+}
+body[class] .account-linked {
+  display: flex;
+  gap: 14px;
+  align-items: center;
+  padding: 18px;
+  background: var(--dp-surface-2);
+  border: 1px solid var(--dp-border);
+  border-radius: 16px;
+  margin-bottom: 24px;
+}
+.account-linked strong,
+.account-linked small {
+  display: block;
+  overflow-wrap: anywhere;
+}
+body[class] .account-linked small {
+  color: var(--dp-muted);
+}
+.role-governance-banner {
+  display: flex;
+  gap: 16px;
+  padding: 22px;
+  border: 1px solid var(--dp-border);
+  border-radius: 20px;
+  margin-bottom: 24px;
+  background: var(--dp-surface-2);
+}
+.role-governance-banner p {
+  margin: 6px 0 0;
+  color: var(--dp-muted);
+}
+.role-directory {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 300px), 1fr));
+  gap: 20px;
+}
+.role-directory-card {
+  padding: 26px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+.role-directory-card h2,
+.role-directory-card p {
+  margin: 0;
+}
+.role-directory-card p {
+  color: var(--dp-muted);
+  line-height: 1.6;
+  flex: 1;
+}
+.role-directory-top,
+.role-directory-counts,
+.role-directory-footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+}
+.role-profile-icon {
+  display: grid;
+  place-items: center;
+  width: 48px;
+  height: 48px;
+  background: var(--dp-surface-2);
+  color: var(--dp-purple);
+  border-radius: 14px;
+}
+.role-directory-counts {
+  justify-content: flex-start;
+  gap: 24px;
+}
+.role-directory-counts strong {
+  font-size: 24px;
+  font-variant-numeric: tabular-nums;
+}
+.role-directory-footer {
+  border-top: 1px solid var(--dp-border);
+  padding-top: 18px;
+}
+.role-directory-footer small {
+  color: var(--dp-muted);
+}
+.role-editor {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 310px;
+  align-items: start;
+  gap: 24px;
+}
+.role-editor-main {
+  display: grid;
+  gap: 24px;
+  min-width: 0;
+}
+.role-editor .panel {
+  padding: 24px;
+}
+.role-editor-summary {
+  position: sticky;
+  top: 114px;
+}
+.role-editor .section-top {
+  display: flex;
+  justify-content: space-between;
+  gap: 16px;
+  align-items: center;
+  margin-bottom: 22px;
+}
+.role-editor h2 {
+  font-size: 22px;
+  margin: 0 0 8px;
+}
+.permission-group {
+  margin: 0;
+  padding: 16px 0;
+  border: 0;
+  border-top: 1px solid var(--dp-border);
+}
+.permission-group legend {
+  float: none;
+  width: auto;
+  font-size: 14px;
+  font-weight: 700;
+  padding: 0;
+  color: var(--dp-muted);
+}
+.permission-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 10px;
+}
+.permission-choice {
+  display: flex;
+  gap: 12px;
+  align-items: center;
+  padding: 14px;
+  border: 1px solid var(--dp-border);
+  border-radius: 12px;
+  cursor: pointer;
+  background: var(--dp-surface);
+  transition:
+    background 160ms,
+    border-color 160ms,
+    transform 160ms;
+}
+.permission-choice:has(:checked) {
+  background: var(--dp-surface-2);
+  border-color: var(--dp-purple);
+}
+.permission-choice input {
+  width: 18px;
+  height: 18px;
+  flex: none;
+  accent-color: var(--dp-purple);
+}
+.permission-choice :is(strong, small) {
+  display: block;
+}
+.permission-choice strong {
+  font-size: 13px;
+  color: var(--dp-text);
+}
+.permission-choice small {
+  color: var(--dp-muted);
+  font-size: 11px;
+  margin-top: 4px;
+  overflow-wrap: anywhere;
+}
+.permission-summary-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  max-height: 300px;
+  overflow-y: auto;
+  margin: 16px 0;
+}
+.permission-summary-list span {
+  padding: 6px 9px;
+  border: 1px solid var(--dp-border);
+  border-radius: 8px;
+  background: var(--dp-surface-2);
+  font-size: 11px;
+}
+.role-security-note {
+  padding: 16px 0;
+  border-top: 1px solid var(--dp-border);
+  color: var(--dp-muted);
+}
+.role-security-note p {
+  font-size: 12px;
+  margin: 8px 0;
+}
+[hidden] {
+  display: none !important;
+}
+@media (max-width: 1100px) {
+  .role-editor {
+    grid-template-columns: 1fr;
+  }
+  .role-editor-summary {
+    position: static;
+  }
+}
+@media (max-width: 600px) {
+  .permission-grid {
+    grid-template-columns: 1fr;
+  }
+  .role-editor .panel {
+    padding: 18px;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .action-feedback,
+  .validation-summary,
+  .field-invalid-pulse,
+  .ui-saving::after,
+  .ui-navigating::after {
+    animation: none !important;
+  }
+}

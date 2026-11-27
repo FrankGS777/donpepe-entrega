@@ -1,0 +1,422 @@
+{
+  "version": 1,
+  "generatedOn": "2026-10-18",
+  "brands": [
+    {
+      "id": "BRAND-ALPA",
+      "name": "ALPA",
+      "imageUrl": "/images/brands/illustration-alpa.webp",
+      "imageKind": "GENERATED_BRAND_REPRESENTATION"
+    },
+    {
+      "id": "BRAND-OD-TERRA",
+      "name": "OD TERRA",
+      "imageUrl": "/images/brands/illustration-od-terra.webp",
+      "imageKind": "GENERATED_BRAND_REPRESENTATION"
+    },
+    {
+      "id": "BRAND-OLI21",
+      "name": "OLI21",
+      "imageUrl": "/images/brands/illustration-oli21.webp",
+      "imageKind": "GENERATED_BRAND_REPRESENTATION"
+    },
+    {
+      "id": "BRAND-DELEITE",
+      "name": "Deleite",
+      "imageUrl": "/images/brands/illustration-deleite.webp",
+      "imageKind": "GENERATED_BRAND_REPRESENTATION"
+    },
+    {
+      "id": "BRAND-TERRALE",
+      "name": "TERRALÉ",
+      "imageUrl": "/images/brands/illustration-terrale.webp",
+      "imageKind": "GENERATED_BRAND_REPRESENTATION"
+    },
+    {
+      "id": "BRAND-NORSAL",
+      "name": "Norsal",
+      "imageUrl": "/images/brands/illustration-norsal.webp",
+      "imageKind": "GENERATED_BRAND_REPRESENTATION"
+    },
+    {
+      "id": "BRAND-LOA",
+      "name": "Loa",
+      "imageUrl": "/images/brands/illustration-loa.webp",
+      "imageKind": "GENERATED_BRAND_REPRESENTATION"
+    },
+    {
+      "id": "BRAND-VORAZ",
+      "name": "VORAZ",
+      "imageUrl": "/images/brands/illustration-voraz.webp",
+      "imageKind": "GENERATED_BRAND_REPRESENTATION"
+    },
+    {
+      "id": "BRAND-RIKYTOK",
+      "name": "RIKYTOK",
+      "imageUrl": "/images/brands/illustration-rikytok.webp",
+      "imageKind": "GENERATED_BRAND_REPRESENTATION"
+    },
+    {
+      "id": "BRAND-ECO-FRESH",
+      "name": "Eco Fresh",
+      "category": "Jugo de naranja",
+      "suggestedColors": [
+        "#468438",
+        "#f4a726"
+      ],
+      "searches": [
+        "Eco Fresh jugo naranja Perú sitio oficial",
+        "EcoFresh Perú logotipo"
+      ],
+      "attemptedReferences": [
+        "https://ecofresh.com.pe/",
+        "https://www.ecofresh.com.pe/"
+      ],
+      "reason": "Official Peruvian site identified but unavailable from both hosts. Do not substitute the Brazilian açaí brand.",
+      "imageUrl": "/images/brands/illustration-eco-fresh.webp",
+      "imageKind": "GENERATED_BRAND_REPRESENTATION"
+    },
+    {
+      "id": "BRAND-TIMONEL",
+      "name": "Timonel",
+      "category": "Harinas y abarrotes",
+      "suggestedColors": [
+        "#004079",
+        "#d32727"
+      ],
+      "searches": [
+        "Timonel marca Vega oficial logo",
+        "Timonel harina Corporación Vega"
+      ],
+      "attemptedReferences": [
+        "https://www.vega.pe/nuestras-marcas"
+      ],
+      "reason": "Vega private brand verified, but the official private-brands page does not expose a standalone Timonel logo asset.",
+      "imageUrl": "/images/brands/illustration-timonel.webp",
+      "imageKind": "GENERATED_BRAND_REPRESENTATION"
+    },
+    {
+      "id": "BRAND-FARAON",
+      "name": "Faraon",
+      "category": "Arroz",
+      "suggestedColors": [
+        "#c1292a",
+        "#ecb832"
+      ],
+      "searches": [
+        "Productos Faraón arroz sitio oficial",
+        "Faraon arroz Perú logotipo oficial"
+      ],
+      "attemptedReferences": [
+        "https://linktr.ee/productosfaraon"
+      ],
+      "reason": "Official-profile candidate located; no independently attributable downloadable standalone logo obtained.",
+      "imageUrl": "/images/brands/illustration-faraon.webp",
+      "imageKind": "GENERATED_BRAND_REPRESENTATION"
+    },
+    {
+      "id": "BRAND-VALLENORTE",
+      "name": "Vallenorte",
+      "category": "Arroz",
+      "suggestedColors": [
+        "#24883f",
+        "#f4c336"
+      ],
+      "searches": [
+        "Vallenorte arroz sitio oficial",
+        "Vallenorte arroz www"
+      ],
+      "attemptedReferences": [
+        "https://vallenorte.com.pe/"
+      ],
+      "reason": "The candidate domain returns a generic site without a verifiable food-brand logo. Retail product identity is known, but this domain is not sufficient logo provenance.",
+      "imageUrl": "/images/brands/illustration-vallenorte.webp",
+      "imageKind": "GENERATED_BRAND_REPRESENTATION"
+    },
+    {
+      "id": "BRAND-ANITA",
+      "name": "Anita",
+      "category": "Fideos y alimentos",
+      "suggestedColors": [
+        "#cb2028",
+        "#ffffff"
+      ],
+      "searches": [
+        "Anita Food Perú marca sitio oficial",
+        "Anita fideos Perú logo"
+      ],
+      "attemptedReferences": [
+        "https://www.anita.com.pe/",
+        "https://www.anitafood.com/"
+      ],
+      "reason": "Candidate manufacturer sites unavailable; no attributable standalone official logo obtained. Do not use foreign Anita condiment brands.",
+      "imageUrl": "/images/brands/illustration-anita.webp",
+      "imageKind": "GENERATED_BRAND_REPRESENTATION"
+    },
+    {
+      "id": "BRAND-TARI",
+      "name": "Tari",
+      "category": "Salsas de ají",
+      "suggestedColors": [
+        "#f5ae24",
+        "#1b6a42"
+      ],
+      "searches": [
+        "Tari Alacena Alicorp logo oficial",
+        "Tari marca Alicorp logotipo"
+      ],
+      "attemptedReferences": [
+        "https://www.alicorp.com.pe/pe/es/productos/consumo-masivo"
+      ],
+      "reason": "Alicorp portfolio provides the parent Alacena logo, not a standalone Tari sub-brand asset. Parent logo is not an exact substitute.",
+      "imageUrl": "/images/brands/illustration-tari.webp",
+      "imageKind": "GENERATED_BRAND_REPRESENTATION"
+    },
+    {
+      "id": "BRAND-AJINOMIX",
+      "name": "Ajinomix",
+      "category": "Sazonadores",
+      "suggestedColors": [
+        "#d92529",
+        "#f4cb38"
+      ],
+      "searches": [
+        "Ajinomix Ajinomoto Perú logo oficial",
+        "site:ajinomoto.com.pe Ajinomix"
+      ],
+      "attemptedReferences": [
+        "https://www.ajinomoto.com.pe/",
+        "https://www.ajinomoto.com.pe/productos/ajinomix/",
+        "https://www.ajinomoto.com/es/brands"
+      ],
+      "reason": "Peruvian site is blocked to asset retrieval; global portfolio does not expose this market-specific standalone logo.",
+      "imageUrl": "/images/brands/illustration-ajinomix.webp",
+      "imageKind": "GENERATED_BRAND_REPRESENTATION"
+    },
+    {
+      "id": "BRAND-GLOBO-POP",
+      "name": "Globo Pop",
+      "category": "Chupetines",
+      "suggestedColors": [
+        "#d72e3b",
+        "#96bd24",
+        "#f6d638"
+      ],
+      "searches": [
+        "Globo Pop Confiteca oficial logo",
+        "Globo Pop Perú fabricante"
+      ],
+      "attemptedReferences": [
+        "https://www.confiteca.com/",
+        "https://www.confiteca.com.ec/"
+      ],
+      "reason": "Manufacturer page lists Globopop with a balloon emoji placeholder, not an actual downloadable brand logo; Ecuador host is unavailable.",
+      "imageUrl": "/images/brands/illustration-globo-pop.webp",
+      "imageKind": "GENERATED_BRAND_REPRESENTATION"
+    },
+    {
+      "id": "BRAND-GN",
+      "name": "GN",
+      "category": "Galletas y fideos",
+      "suggestedColors": [
+        "#b72930",
+        "#efc54a"
+      ],
+      "searches": [
+        "GN Galletera del Norte logo oficial",
+        "site:sanjorge.com.pe GN"
+      ],
+      "attemptedReferences": [
+        "https://sanjorge.com.pe/relacionados/marcas/gn/"
+      ],
+      "reason": "Official related-brand page contains product photographs and the parent San Jorge logo, but no standalone GN logo. Product images are not accepted as logos.",
+      "imageUrl": "/images/brands/illustration-gn.webp",
+      "imageKind": "GENERATED_BRAND_REPRESENTATION"
+    },
+    {
+      "id": "BRAND-ALTOMAYO",
+      "name": "Altomayo",
+      "category": "Café",
+      "suggestedColors": [
+        "#cc232d",
+        "#2b6a3e"
+      ],
+      "searches": [
+        "Altomayo Perú café página oficial",
+        "Altomayo Perú logotipo oficial"
+      ],
+      "attemptedReferences": [
+        "https://www.altomayo.com.pe/",
+        "https://www.altomayo.de/"
+      ],
+      "reason": "Peruvian site is inaccessible. German-market related company uses a different visual identity, so its logo is not substituted for the Peruvian retail mark.",
+      "imageUrl": "/images/brands/illustration-altomayo.webp",
+      "imageKind": "GENERATED_BRAND_REPRESENTATION"
+    },
+    {
+      "id": "BRAND-MC-COLLINS",
+      "name": "Mc Collins",
+      "category": "Tés e infusiones",
+      "suggestedColors": [
+        "#c32b31",
+        "#f2bf31"
+      ],
+      "searches": [
+        "McColins té Perú oficial logo",
+        "McColin’s Lipton Teas Infusions oficial"
+      ],
+      "attemptedReferences": [
+        "https://www.mccolins.com.pe/",
+        "https://www.liptonteas.com/our-brands/"
+      ],
+      "reason": "Candidate brand site unavailable and owner portfolio blocked; no attributable downloadable standalone logo obtained. Preserve existing database display name.",
+      "imageUrl": "/images/brands/illustration-mc-collins.webp",
+      "imageKind": "GENERATED_BRAND_REPRESENTATION"
+    },
+    {
+      "id": "BRAND-DURYEA",
+      "name": "Duryea",
+      "category": "Fécula de maíz",
+      "suggestedColors": [
+        "#d33631",
+        "#f1d04a"
+      ],
+      "searches": [
+        "Duryea maizena Perú fabricante oficial",
+        "Duryea Ingredion logotipo Perú"
+      ],
+      "attemptedReferences": [
+        "https://cdn.www.gob.pe/uploads/document/file/2891684/RD%2000891-2021-PRODUCE-DOPIF-ok.pdf.pdf"
+      ],
+      "reason": "Government manufacturer record verifies the product identity, but it is not a source of a standalone official brand logo.",
+      "imageUrl": "/images/brands/illustration-duryea.webp",
+      "imageKind": "GENERATED_BRAND_REPRESENTATION"
+    },
+    {
+      "id": "BRAND-WALIBI",
+      "name": "Walibi",
+      "category": "Salsas y cremas",
+      "suggestedColors": [
+        "#be2630",
+        "#eac944"
+      ],
+      "searches": [
+        "Walibi fabricante Perú sitio oficial",
+        "Walibi Aliex logo"
+      ],
+      "attemptedReferences": [
+        "https://www.b2peru.pe/directorioadex/es/company/1377/alimentos-de-exportacion-sac",
+        "https://www.aliexperu.com/",
+        "https://peruvianusadistribution.com/marcas/walibi/"
+      ],
+      "reason": "ADEX verifies Aliex as manufacturer; its site returns a non-functional script redirect, while the distributor has product packshots only. No packshot will be used as a logo.",
+      "imageUrl": "/images/brands/illustration-walibi.webp",
+      "imageKind": "GENERATED_BRAND_REPRESENTATION"
+    },
+    {
+      "id": "BRAND-GOLPE",
+      "name": "Golpe",
+      "category": "Chocolates y obleas",
+      "suggestedColors": [
+        "#cf302e",
+        "#268345",
+        "#ffffff"
+      ],
+      "searches": [
+        "Golpe Arcor logo oficial",
+        "site:arcor.com Golpe"
+      ],
+      "attemptedReferences": [
+        "https://www.arcor.com/en/our-business-chocolates",
+        "https://www.arcor.com/ar/institucional/arcor-refuerza-su-liderazgo-en-peru-con-la-incorporacion-de-sayon-a-su-portafolio-e-inaugura-una-nueva-linea-de-produccion-en-chancay"
+      ],
+      "reason": "Arcor verifies ownership and Peru portfolio, but the official portfolio has no downloadable individual Golpe logo.",
+      "imageUrl": "/images/brands/illustration-golpe.webp",
+      "imageKind": "GENERATED_BRAND_REPRESENTATION"
+    },
+    {
+      "id": "BRAND-KIRMA",
+      "name": "Kirma",
+      "category": "Café instantáneo",
+      "suggestedColors": [
+        "#9e2526",
+        "#3e2424"
+      ],
+      "searches": [
+        "site:nestle.com.pe Kirma logo",
+        "Kirma marca oficial Nestlé"
+      ],
+      "attemptedReferences": [
+        "https://www.nestle.com.pe/nuestros-productos/cafes",
+        "https://www.nestle.com.pe/nuestros-productos/cafes/kirma",
+        "https://www.nestle.com.pe/sites/g/files/pydnoa276/files/styles/webp_image/public/Kirma_400x400actual.png.webp?itok=30mKJYP_",
+        "https://tiendanestle.pe/collections/kirma"
+      ],
+      "reason": "Official brand identity verified, but Nestlé category image downloads return HTTP 403; the official store only exposes Kirma product photographs, not a standalone brand asset.",
+      "imageUrl": "/images/brands/illustration-kirma.webp",
+      "imageKind": "GENERATED_BRAND_REPRESENTATION"
+    },
+    {
+      "id": "BRAND-BONLE",
+      "name": "Bonle",
+      "category": "Lácteos",
+      "suggestedColors": [
+        "#df1683",
+        "#ffffff"
+      ],
+      "searches": [
+        "Bonlé Gloria logo oficial",
+        "site:gloria.com.pe Bonle logo"
+      ],
+      "attemptedReferences": [
+        "https://www.gloria.com.pe/marca/bonle",
+        "https://www.gloria.com.pe/images/bonle-logo.svg"
+      ],
+      "reason": "Official page shell is public, but the configured static logo is 404 and the public-page data endpoint rejects unauthenticated requests. No restricted endpoint or credential is used.",
+      "imageUrl": "/images/brands/illustration-bonle.webp",
+      "imageKind": "GENERATED_BRAND_REPRESENTATION"
+    },
+    {
+      "id": "BRAND-TORTEES",
+      "name": "Tortees",
+      "category": "Snacks de maíz",
+      "suggestedColors": [
+        "#edcf34",
+        "#bc282f"
+      ],
+      "searches": [
+        "Tortees PepsiCo Perú logo oficial",
+        "site:pepsico.com Tortees"
+      ],
+      "attemptedReferences": [
+        "https://www.pepsico.com/brands",
+        "https://www.vega.pe/api/catalog_system/pub/brand/list",
+        "https://www.makro.plazavea.com.pe/api/catalog_system/pub/brand/list"
+      ],
+      "reason": "Peruvian retail brand verified, but the global manufacturer page lacks this local mark and public retailer brand lists provide no logo URL.",
+      "imageUrl": "/images/brands/illustration-tortees.webp",
+      "imageKind": "GENERATED_BRAND_REPRESENTATION"
+    },
+    {
+      "id": "BRAND-CHEESE-TRIS",
+      "name": "Cheese Tris",
+      "category": "Snacks de queso",
+      "suggestedColors": [
+        "#f3bb2c",
+        "#c93332"
+      ],
+      "searches": [
+        "Cheese Tris PepsiCo Perú logo oficial",
+        "site:pepsico.com Cheese Tris"
+      ],
+      "attemptedReferences": [
+        "https://www.pepsico.com/brands",
+        "https://www.vega.pe/api/catalog_system/pub/brand/list",
+        "https://www.makro.plazavea.com.pe/api/catalog_system/pub/brand/list"
+      ],
+      "reason": "Peruvian retail brand verified, but the global manufacturer page lacks this local mark and public retailer brand lists provide no logo URL.",
+      "imageUrl": "/images/brands/illustration-cheese-tris.webp",
+      "imageKind": "GENERATED_BRAND_REPRESENTATION"
+    }
+  ]
+}

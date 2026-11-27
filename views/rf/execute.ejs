@@ -1,0 +1,32 @@
+<% const traceable=task.control_lote!==0; const taskNames={PUTAWAY:'Almacenar mercancía',PICKING:'Preparar pedido',REUBICACION:'Mover mercancía',REABASTECIMIENTO:'Reponer preparación',DEVOLUCION_RUTA:'Retorno a cuarentena'}; %>
+<section class="rf-page-head rf-execute-head"><a href="<%= returnPath %>">← Mis tareas</a><span class="rf-task-reference"><%= task.codigo_tarea %></span><h1><%= taskNames[task.tipo] || 'Confirmar movimiento' %></h1><p>La mercancía solo se mueve en el sistema cuando confirmes el final.</p></section>
+<section class="rf-cargo-card">
+  <div class="rf-cargo-icon"><svg class="icon"><use href="/icons.svg#i-package"/></svg></div>
+  <div><small>Tu carga</small><strong><%= task.producto %></strong><span>Lote <%= task.numero_lote %></span></div><b><%= task.cantidad %><small>unidades</small></b>
+</section>
+<form method="post" action="/rf/tareas/<%= task.id %>/completar" class="rf-confirm-form" data-rf-guided novalidate>
+  <input type="hidden" name="_csrf" value="<%= csrfToken %>">
+  <div class="rf-execution-progress"><span data-rf-progress-label>0 de 3 lecturas confirmadas</span><b data-rf-progress-number>0%</b><div role="progressbar" aria-label="Lecturas confirmadas" aria-valuemin="0" aria-valuemax="3" aria-valuenow="0" data-rf-progress><i></i></div></div>
+  <ol class="rf-stepper" aria-label="Secuencia de confirmación"><li data-rf-step-indicator="0"><b>1</b><span>Ubicación</span></li><li data-rf-step-indicator="1"><b>2</b><span>Carga</span></li><li data-rf-step-indicator="2"><b>3</b><span>Destino</span></li></ol>
+  <section class="rf-scan-step" data-rf-step="0">
+    <header><span class="rf-scan-step-number">1</span><div><small>Primero, sitúate aquí</small><h2>Confirma dónde recoges</h2></div><span class="rf-step-check" aria-hidden="true">✓</span></header>
+    <div class="rf-step-location"><%- include('_location',{code:task.loc_origen,zone:task.zona_origen}) %></div>
+    <label for="rfOrigin">Etiqueta de la ubicación origen</label><input id="rfOrigin" class="form-control" name="codigo_origen" data-scan-input data-rf-scan-only data-scan-identity="location" data-expected-code="<%= task.loc_origen %>" readonly inputmode="none" autocomplete="off" required placeholder="Pendiente de escanear">
+    <button class="rf-camera-action" type="button" data-rf-scan-for="rfOrigin"><svg class="icon"><use href="/icons.svg#i-camera"/></svg><span>Escanear ubicación origen</span></button>
+  </section>
+  <section class="rf-scan-step" data-rf-step="1">
+    <header><span class="rf-scan-step-number">2</span><div><small>Después, verifica lo que recoges</small><h2>Confirma la carga</h2></div><span class="rf-step-check" aria-hidden="true">✓</span></header>
+    <p><%= traceable ? 'Lee la etiqueta del palé o del lote asignado. El código del producto por sí solo no identifica este lote.' : 'Lee la etiqueta de la carga o el código de barras del producto asignado.' %></p>
+    <div class="rf-cargo-reference"><span>Lote <b><%= task.numero_lote %></b></span><% if(task.codigo_hu){ %><span>Unidad logística <b><%= task.codigo_hu %></b></span><% } %></div>
+    <label for="rfCargo">Etiqueta de la carga</label><input id="rfCargo" class="form-control" name="codigo_producto" data-scan-input data-rf-scan-only data-scan-identity="logistic" data-expected-sku="<%= task.sku %>" data-expected-lot="<%= task.numero_lote %>" data-expected-lot-id="<%= task.codigo_lote_wms || (task.lote_fabricante_id ? 'L-'+String(task.lote_fabricante_id).padStart(6,'0') : '') %>" data-expected-hu="<%= task.codigo_hu || '' %>" data-require-lot="<%= traceable?'true':'false' %>" readonly inputmode="none" autocomplete="off" required placeholder="Pendiente de escanear">
+    <button class="rf-camera-action" type="button" data-rf-scan-for="rfCargo" disabled><svg class="icon"><use href="/icons.svg#i-camera"/></svg><span>Escanear carga asignada</span></button>
+  </section>
+  <section class="rf-scan-step" data-rf-step="2">
+    <header><span class="rf-scan-step-number">3</span><div><small>Lleva la carga y verifica su llegada</small><h2>Confirma dónde entregas</h2></div><span class="rf-step-check" aria-hidden="true">✓</span></header>
+    <div class="rf-step-location"><%- include('_location',{code:task.loc_destino,zone:task.zona_destino}) %></div>
+    <label for="rfDestination">Etiqueta de la ubicación destino</label><input id="rfDestination" class="form-control" name="codigo_destino" data-scan-input data-rf-scan-only data-scan-identity="location" data-expected-code="<%= task.loc_destino %>" readonly inputmode="none" autocomplete="off" required placeholder="Pendiente de escanear">
+    <button class="rf-camera-action" type="button" data-rf-scan-for="rfDestination" disabled><svg class="icon"><use href="/icons.svg#i-camera"/></svg><span>Escanear ubicación destino</span></button>
+  </section>
+  <div class="rf-finish-card"><span class="rf-finish-check" aria-hidden="true">✓</span><strong>Revisa la carga antes de finalizar</strong><p data-rf-finish-message>Faltan las tres lecturas para registrar el movimiento.</p><button class="btn btn-success btn-lg w-100 rf-confirm-button" disabled data-rf-complete data-confirm="¿La carga está físicamente en el destino? Se registrará el movimiento de <%= task.cantidad %> unidades.">Finalizar movimiento <span aria-hidden="true">→</span></button><div class="rf-inline-error" role="alert" data-rf-form-error hidden></div></div>
+</form>
+<details class="rf-task-detail rf-task-detail-wide"><summary>Ver datos de la tarea <span aria-hidden="true">+</span></summary><div><span>Producto</span><strong><%= task.sku %></strong></div><div><span>Estado de inventario</span><strong><%= task.estado_inventario %></strong></div><div><span>Prioridad</span><strong><%= task.prioridad %></strong></div><div><span>Asignado</span><strong><%= task.asignado %></strong></div><% if(task.observaciones){ %><p class="rf-note"><%= task.observaciones %></p><% } %></details>

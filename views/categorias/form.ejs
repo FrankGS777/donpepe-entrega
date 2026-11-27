@@ -1,0 +1,68 @@
+<div class="page-head">
+  <div>
+    <h1><%= title %></h1>
+    <p><%= type==='ubicaciones'?'Dirección física del plano CD1. Puedes activar o bloquear el bin y ajustar su secuencia; la dirección no cambia con stock histórico.':'Registra información estable que será reutilizada por la operación.' %></p>
+  </div>
+  <a href="/catalogos/<%= type %>" class="btn btn-outline-light">Cancelar y volver</a>
+</div>
+
+<%- include('../partials/catalogTabs') %>
+<%- include('../partials/errors') %>
+
+<div class="panel form-panel">
+  <form method="post" action="<%= item.id?'/catalogos/'+type+'/'+item.id+'?_method=PUT':'/catalogos/'+type %>">
+    <input type="hidden" name="_csrf" value="<%= csrfToken %>">
+
+    <% if(type==='proveedores'){ %>
+      <div class="form-section"><div><span>01</span><h2>IDENTIDAD FISCAL</h2></div><p>Usa la razón social y RUC que aparecerán en órdenes e historial.</p></div>
+      <div class="row g-3">
+        <div class="col-md-4"><label class="form-label">RUC</label><input class="form-control" inputmode="numeric" pattern="[0-9]{11}" maxlength="11" name="ruc" required value="<%= item.ruc||'' %>" placeholder="20123456789"><small class="field-help">Exactamente 11 dígitos.</small></div>
+        <div class="col-md-8"><label class="form-label">Razón social</label><input class="form-control" name="razon_social" maxlength="150" required value="<%= item.razon_social||'' %>" placeholder="Nombre legal del proveedor"></div>
+      </div>
+      <div class="form-section mt-4"><div><span>02</span><h2>CONTACTO Y ESTADO</h2></div><p>Canales utilizados por compras para coordinar el abastecimiento.</p></div>
+      <div class="row g-3">
+        <div class="col-md-6"><label class="form-label">Teléfono</label><input class="form-control" name="telefono" maxlength="20" value="<%= item.telefono||'' %>" placeholder="01 555 0000"></div>
+        <div class="col-md-6"><label class="form-label">Correo</label><input class="form-control" type="email" name="email" maxlength="100" value="<%= item.email||'' %>" placeholder="pedidos@proveedor.pe"></div>
+        <div class="col-md-7"><label class="form-label">URL del logo oficial</label><input class="form-control" type="url" name="logo_url" maxlength="500" value="<%= item.logo_url||'' %>" placeholder="https://empresa.pe/logo.svg"><small class="field-help">Usa el archivo de marca exacto, no una fotografía genérica.</small></div>
+        <div class="col-md-5"><label class="form-label">Sitio web oficial</label><input class="form-control" type="url" name="sitio_web" maxlength="255" value="<%= item.sitio_web||'' %>" placeholder="https://empresa.pe/"></div>
+        <div class="col-12"><label class="form-switch-box"><input class="form-check-input" type="checkbox" name="activo" value="1" <%= item.activo?'checked':'' %>><span><strong>Proveedor activo</strong><small>Puede seleccionarse en nuevas órdenes de compra.</small></span></label></div>
+      </div>
+
+    <% } else if(type==='ubicaciones'){ %>
+      <div class="topology-rule">
+        <svg class="icon"><use href="/icons.svg#i-pin"></use></svg>
+        <div><strong><%= item.codigo_loc %></strong><span><%= item.zona_nombre||item.zona %> · <%= item.tipo %> · <%= item.condicion_almacenamiento %>. Una LOC es un casillero para una HU o caja.</span></div>
+      </div>
+      <% ['zona_id','pasillo','estante','nivel','posicion','tipo','capacidad_unidades'].forEach(field=>{ %><input type="hidden" name="<%= field %>" value="<%= item[field] %>"><% }) %>
+      <div class="form-section mt-4"><div><span>01</span><h2>DIRECCIÓN FIJA</h2></div><p>Zona, pasillo, rack, nivel, casillero y profundidad forman la dirección. Para ampliar la nave se versiona el plano y se migran posiciones, no se renombra una LOC usada.</p></div>
+      <div class="bin-grid">
+        <% [['Zona',item.codigo_zona],['Pasillo','A'+item.pasillo],['Rack','R'+item.estante],['Nivel','N'+item.nivel],['Casillero','C'+item.posicion],['Profundidad','D'+item.profundidad]].forEach(([label,value])=>{ %>
+          <div class="bin-card"><small><%= label %></small><strong><%= value %></strong></div>
+        <% }) %>
+      </div>
+      <div class="form-section mt-4"><div><span>02</span><h2>ESTADO Y RECORRIDO</h2></div><p>Bloquea un casillero solo cuando esté vacío, sin tareas pendientes ni SKU asignado como cara primaria.</p></div>
+      <div class="row g-3">
+        <div class="col-md-6"><label class="form-label">Secuencia de put-away</label><input class="form-control" type="number" min="1" max="50000000" name="secuencia_putaway" required value="<%= item.secuencia_putaway||100 %>"></div>
+        <div class="col-md-6"><label class="form-label">Secuencia de picking</label><input class="form-control" type="number" min="1" max="50000000" name="secuencia_pick" required value="<%= item.secuencia_pick||100 %>"></div>
+      </div>
+      <label class="form-switch-box mt-3"><input class="form-check-input" type="checkbox" name="activo" value="1" <%= item.activo?'checked':'' %>><span><strong>LOC activa</strong><small>Disponible para tareas, conteos y reglas de ubicación.</small></span></label>
+
+    <% } else { %>
+      <div class="form-section"><div><span>01</span><h2><%= type==='categorias'?'CLASIFICACIÓN DEL PRODUCTO':'IDENTIDAD DE MARCA' %></h2></div><p>Usa nombres claros; evita duplicados o abreviaturas internas.</p></div>
+      <div class="row g-3">
+        <div class="<%= type==='categorias'?'col-md-4':'col-md-5' %>"><label class="form-label">Nombre</label><input class="form-control" name="nombre" maxlength="50" required value="<%= item.nombre||'' %>" placeholder="Nombre visible"></div>
+        <div class="<%= type==='categorias'?'col-md-5':'col-md-7' %>"><label class="form-label">Descripción</label><input class="form-control" name="descripcion" maxlength="255" value="<%= item.descripcion||'' %>" placeholder="Qué agrupa o representa"></div>
+        <% if(type==='categorias'){ %><div class="col-md-3"><label class="form-label">Vida útil automática</label><input class="form-control" type="number" min="0" max="3650" name="vida_util_dias" required value="<%= item.vida_util_dias??365 %>"><small class="field-help">Días que el WMS suma al ingreso para calcular vencimiento.</small></div><% } %>
+      </div>
+    <% } %>
+
+    <div class="form-actions"><a href="/catalogos/<%= type %>" class="btn btn-outline-light">Cancelar</a><button class="btn btn-brand">Guardar <%= type==='ubicaciones'?'LOC':'registro' %></button></div>
+  </form>
+
+  <% if(item.id&&can('catalogs.delete')&&type!=='ubicaciones'){ %>
+    <div class="danger-zone">
+      <div><strong><%= type==='proveedores'?'Desactivar proveedor':'Eliminar maestro sin uso' %></strong><small><%= type==='proveedores'?'No podrá usarse en nuevas órdenes; el historial permanece.':'El sistema lo impedirá si tiene SKU, lotes o tareas relacionados.' %></small></div>
+      <form method="post" action="/catalogos/<%= type %>/<%= item.id %>?_method=DELETE"><input type="hidden" name="_csrf" value="<%= csrfToken %>"><button class="btn btn-outline-danger" data-confirm="¿Confirmar esta operación?">Confirmar</button></form>
+    </div>
+  <% } %>
+</div>

@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="960" height="600" viewBox="0 0 960 600" role="img" aria-label="Célula de automatización logística">
+<defs><linearGradient id="p" x2="0" y2="1"><stop stop-color="#202930"/><stop offset="1" stop-color="#0c1116"/></linearGradient><linearGradient id="g"><stop stop-color="#f2d698"/><stop offset="1" stop-color="#a47c36"/></linearGradient></defs>
+<rect width="960" height="600" rx="30" fill="url(#p)"/>
+<g fill="none" stroke="#5b6873" stroke-width="2" opacity=".3"><path d="m0 410 480-180 480 180M0 470l480-180 480 180M0 530l480-180 480 180M0 590l480-180 480 180M160 600l480-180M320 600l480-180M480 600l480-180M800 600 160 360M640 600 0 360"/></g>
+<g stroke-linejoin="round"><path d="m190 385 360-142 240 91-360 144Z" fill="#263139" stroke="#7f8a90" stroke-width="3"/><path d="m190 385 240 93v31l-240-93Zm240 93 360-144v31L430 509Z" fill="#10181f" stroke="#67747c" stroke-width="3"/>
+<g stroke="#7b878d" stroke-width="8"><path d="m238 367 235 91m-193-108 235 91m-193-108 235 91m-192-109 235 91m-193-108 235 91m-193-108 235 91m-193-108 235 91"/></g>
+<path d="M365 389V167l144-55 134 49v220l-25 9V180l-109-41-120 45v214Z" fill="#485b68" stroke="#b4c4cb" stroke-width="3"/><path d="m390 192 228-11M396 216l209-18" stroke="#e9ca80" stroke-width="5" opacity=".8"/>
+<path d="m425 320 95-37 83 33-95 37Z" fill="#deb975"/><path d="M425 320v65l83 33v-65Zm83 33v65l95-38v-64Z" fill="#b88846" stroke="#edca8c" stroke-width="2"/><path d="m471 302 84 32v25" fill="none" stroke="#f6dfb3" stroke-width="10"/><path d="m420 386 87 34 103-41v14l-103 41-87-34Z" fill="#6b543a"/>
+<path d="m655 184 57-20 49 18v87l-57 22-49-20Z" fill="#17242d" stroke="#889da9" stroke-width="3"/><path d="m670 193 40-14 35 13v54l-40 16-35-15Z" fill="#263e46" stroke="url(#g)" stroke-width="3"/><path d="m682 218 14 10 32-25" fill="none" stroke="#e4c985" stroke-width="6"/>
+<path d="M240 414v54m487-63v55" stroke="#9da7aa" stroke-width="12"/>
+</g><g fill="#e8c77f"><circle cx="396" cy="218" r="5"/><circle cx="603" cy="202" r="5"/></g>
+</svg>

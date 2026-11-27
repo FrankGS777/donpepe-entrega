@@ -1,0 +1,111 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <meta name="theme-color" content="#101114" />
+    <meta name="description" content="Acceso a DonPepe para administrar la red, coordinar el almacén y solicitar abastecimiento desde tienda." />
+    <title>Ingresar · DonPepe</title>
+    <link rel="icon" href="/images/favicon-64.png" />
+    <script src="/theme.js"></script>
+    <link rel="stylesheet" href="/auth-bundle.css" />
+    <link
+      rel="preload"
+      as="image"
+      href="/images/auth/donpepe-lima-exterior-v2.webp"
+      imagesrcset="/images/auth/donpepe-lima-exterior-v2-960.webp 960w, /images/auth/donpepe-lima-exterior-v2-1440.webp 1440w, /images/auth/donpepe-lima-exterior-v2-1920.webp 1920w, /images/auth/donpepe-lima-exterior-v2-3840.webp 3840w"
+      imagesizes="100vw"
+    />
+  </head>
+  <body class="login-page auth-premium">
+    <div class="auth-atmosphere" aria-hidden="true">
+      <img
+        src="/images/auth/donpepe-lima-exterior-v2.webp"
+        srcset="/images/auth/donpepe-lima-exterior-v2-960.webp 960w, /images/auth/donpepe-lima-exterior-v2-1440.webp 1440w, /images/auth/donpepe-lima-exterior-v2-1920.webp 1920w, /images/auth/donpepe-lima-exterior-v2-3840.webp 3840w"
+        sizes="100vw"
+        alt=""
+        fetchpriority="high"
+        decoding="async"
+      />
+    </div>
+    <div class="auth-theme-toolbar">
+      <button
+        type="button"
+        class="theme-toggle icon-button"
+        data-theme-toggle
+        aria-label="Cambiar tema"
+        title="Cambiar tema"
+      >
+        <svg
+          class="theme-icon-light icon"
+          viewBox="0 0 24 24"
+          aria-hidden="true"
+        >
+          <circle cx="12" cy="12" r="4" />
+          <path
+            d="M12 2v2m0 16v2M2 12h2m16 0h2M5 5l1.5 1.5m11 11L19 19M5 19l1.5-1.5m11-11L19 5"
+          /></svg
+        ><svg
+          class="theme-icon-dark icon"
+          viewBox="0 0 24 24"
+          aria-hidden="true"
+        >
+          <path
+            d="M20.6 13.8A8.7 8.7 0 0 1 10.2 3.4 8.8 8.8 0 1 0 20.6 13.8Z"
+          />
+        </svg>
+      </button>
+    </div>
+    <main class="auth-shell">
+      <div class="login-visual" aria-hidden="true"></div>
+      <section class="login-panel" aria-labelledby="auth-title">
+      <a href="/login" class="login-logo" aria-label="DonPepe, inicio de sesión"
+        ><img
+          class="brand-logo"
+          src="/images/donpepe-logo-ui-720.webp"
+          alt="DonPepe"
+          width="2117"
+          height="743"
+        /></a>
+      <div class="login-heading">
+        <h1 id="auth-title">Iniciar sesión</h1>
+        <p></p>
+      </div>
+      <form id="login-form">
+        <label
+          >Correo<input
+            name="email"
+            type="email"
+            autocomplete="username"
+            maxlength="120"
+            required
+            placeholder="nombre@empresa.com" /></label
+        ><label
+          >Contraseña<span class="password-wrap"
+            ><input
+              name="password"
+              id="password"
+              type="password"
+              autocomplete="current-password"
+              maxlength="72"
+              required
+            /><button
+              type="button"
+              id="show-password"
+              aria-label="Mostrar contraseña"
+            >
+              Mostrar
+            </button></span
+          ></label
+        >
+        <p id="login-error" role="alert"></p>
+        <button class="btn primary wide auth-submit" type="submit">
+          <span class="auth-submit-label">Ingresar</span><span class="auth-submit-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M5 12h14m-6-6 6 6-6 6" /></svg></span>
+        </button>
+      </form>
+      <a class="recovery-link" href="/forgot-password">Olvidé mi contraseña</a>
+      </section>
+    </main>
+    <script src="/login.js"></script>
+  </body>
+</html>

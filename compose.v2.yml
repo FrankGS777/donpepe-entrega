@@ -1,0 +1,22 @@
+# Local educational simulation. Bound to localhost; demo credentials are not for public deployment.
+services:
+  donpepe:
+    build:
+      context: .
+      dockerfile: Dockerfile.v2
+    ports:
+      - "127.0.0.1:3010:3010"
+    environment:
+      DONPEPE_MODE: demo
+      DONPEPE_PUBLIC_URL: ${DONPEPE_PUBLIC_URL:-http://localhost:3010}
+      SMTP_HOST: ${SMTP_HOST:-smtp.gmail.com}
+      SMTP_PORT: ${SMTP_PORT:-587}
+      SMTP_SECURE: ${SMTP_SECURE:-false}
+      SMTP_USER: ${SMTP_USER:-}
+      SMTP_PASS: ${SMTP_PASS:-}
+      MAIL_FROM: ${MAIL_FROM:-}
+    volumes:
+      - donpepe_v2:/app/v2/data
+    restart: unless-stopped
+volumes:
+  donpepe_v2:

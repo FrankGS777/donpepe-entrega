@@ -1,0 +1,39 @@
+<% const values=typeof form==='object'&&form?form:{}; %>
+<div class="commerce-page"><div class="page-head"><div><h1>Comprar a un proveedor</h1><p>Elige su catálogo y revisa la orden antes de emitirla.</p></div><a class="btn btn-outline-light" href="/compras">Volver a compras</a></div>
+<%- include('../partials/errors') %>
+<form method="post" action="/compras" id="purchaseForm" class="purchase-workflow" data-commerce-flow>
+  <input type="hidden" name="_csrf" value="<%= csrfToken %>"><input type="hidden" name="items" id="purchaseItems" value="<%= values.items||'[]' %>">
+
+  <section class="panel purchase-step" data-flow-panel data-flow-label="Proveedor">
+    <div class="wizard-heading"><span>1</span><div><h2>¿A quién compraremos?</h2><p>Los productos se habilitan al elegir el proveedor.</p></div></div>
+    <label class="form-label" for="purchaseProvider">Proveedor</label>
+    <select class="form-select" id="purchaseProvider" data-complex-select data-resource="provider" name="proveedor_id" required><option value="">Selecciona un proveedor autorizado</option><% providers.filter(p=>p.activo).forEach(p=>{ %><option value="<%= p.id %>" data-reference="Proveedor homologado" data-ruc="<%= p.ruc %>" data-telefono="<%= p.telefono||'No registrado' %>" data-email="<%= p.email||'No registrado' %>" data-image="<%= p.logo_url||'' %>" data-reference-url="<%= p.sitio_web||'' %>" <%= Number(values.proveedor_id)===Number(p.id)?'selected':'' %>><%= p.razon_social %> · RUC <%= p.ruc %></option><% }) %></select>
+    <small class="field-help">Primero define el proveedor. La orden solo admitirá SKU de su catálogo homologado.</small>
+  </section>
+
+  <section class="panel purchase-step" data-flow-panel data-flow-label="Productos" data-flow-items="#purchaseItems">
+    <div class="wizard-heading"><span>2</span><div><h2>¿Qué necesitas recibir?</h2><p>Selecciona productos de este proveedor y agrégalos a la orden.</p></div></div>
+    <div class="row g-3 align-items-end">
+      <div class="col-lg-5"><label class="form-label" for="purchaseProduct">SKU / producto</label><select id="purchaseProduct" data-complex-select data-resource="product" class="form-select" disabled><option value="">Primero selecciona un proveedor</option><% products.forEach(p=>{ %><option value="<%= p.id %>" data-provider-id="<%= p.proveedor_id||'' %>" data-price="<%= p.precio_compra %>" data-sku="<%= p.sku %>" data-name="<%= p.nombre %>" data-reference="SKU homologado" data-category="<%= p.categoria %>" data-brand="<%= p.marca||'' %>" data-provider="<%= p.proveedor||'' %>" data-barcode="<%= p.codigo_barras||'No registrado' %>" data-image="<%= p.imagen_url||'' %>" data-reference-url="<%= p.referencia_url||'' %>" data-meta="Costo: S/ <%= p.precio_compra %> · Vida útil: <%= p.vida_util_dias %> días"><%= p.sku %> · <%= p.nombre %></option><% }) %></select></div>
+      <div class="col-lg-2"><label class="form-label" for="purchaseQty">Cantidad</label><input id="purchaseQty" class="form-control" type="number" min="1" max="100000" value="1"></div>
+      <div class="col-lg-3"><label class="form-label" for="purchasePrice">Costo unitario (S/)</label><input id="purchasePrice" class="form-control" type="number" min="0" max="999999.99" step=".01" value="0" disabled></div>
+      <div class="col-lg-2"><button type="button" class="btn btn-outline-warning w-100" id="addPurchase" disabled>Agregar al detalle</button></div>
+    </div>
+    <div class="quantity-rule" id="purchaseFeedback" aria-live="polite">Selecciona primero un proveedor para habilitar sus productos.</div>
+  </section>
+
+  <section class="panel purchase-step" data-flow-panel data-flow-label="Revisar y emitir" data-flow-items="#purchaseItems">
+    <div class="wizard-heading"><span>3</span><div><h2>Revisa tu orden</h2><p>Puedes retirar una línea o volver para añadir más productos.</p></div></div>
+    <div id="purchaseRows"><div class="empty">Aún no agregaste productos.</div></div>
+  </section>
+
+  <aside class="purchase-summary" aria-live="polite">
+    <h2>Tu orden</h2>
+    <div><small>PROVEEDOR</small><strong id="purchaseProviderSummary">Pendiente</strong></div>
+    <div><small>LÍNEAS / UNIDADES</small><strong><span id="purchaseLineCount">0</span> / <span id="purchaseUnitCount">0</span></strong></div>
+    <div class="purchase-summary-total"><small>TOTAL ESTIMADO</small><strong id="purchaseTotal">S/ 0.00</strong></div>
+    <p>Crear la OC no aumenta stock. El inventario cambia únicamente al recibir y confirmar lotes.</p>
+    <button id="submitPurchase" class="btn btn-brand btn-lg w-100" data-flow-submit disabled>Emitir orden de compra</button>
+  </aside>
+</form>
+</div>

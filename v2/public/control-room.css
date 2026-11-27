@@ -1,0 +1,1331 @@
+/* DonPepe control room — a full-canvas industrial scene with compact instruments.
+   All overrides are scoped to the operations map; the other workspaces retain
+   their own navigation and document layouts. */
+html[data-theme] body[data-role="operations"][data-view="overview"] #main {
+  padding: 0;
+  max-width: none;
+}
+.console-accessible-title {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  margin: -1px;
+  padding: 0;
+  overflow: hidden;
+  clip-path: inset(50%);
+  white-space: nowrap;
+}
+html[data-theme] body[data-role="operations"][data-view="overview"] .topbar {
+  height: 60px;
+  min-height: 60px;
+  padding: 0 22px;
+  gap: 16px;
+  flex-wrap: nowrap;
+  backdrop-filter: none;
+  -webkit-backdrop-filter: none;
+  background: var(--surface-raised);
+  box-shadow: 0 2px 12px #1b293a08;
+}
+html[data-theme]
+  body[data-role="operations"][data-view="overview"]
+  .workspace-brand {
+  width: 138px;
+  flex: 0 0 138px;
+  padding: 5px 8px 5px 0;
+}
+html[data-theme]
+  body[data-role="operations"][data-view="overview"]
+  .workspace-brand
+  img {
+  height: 44px;
+}
+#console-header-center {
+  display: flex;
+  align-items: center;
+  gap: clamp(14px, 3vw, 52px);
+  min-width: 0;
+  flex: 1;
+}
+#console-header-center .map-find {
+  position: relative;
+  width: auto;
+  flex: 1;
+  max-width: 470px;
+  min-width: 160px;
+}
+html[data-theme] #console-header-center .map-find > label {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  height: 36px;
+  min-height: 36px;
+  padding: 0 11px;
+  background: var(--surface-input);
+  border: 1px solid var(--line-strong);
+  border-radius: 8px;
+  box-shadow: inset 0 1px 2px #18233304;
+  backdrop-filter: none;
+  -webkit-backdrop-filter: none;
+}
+html[data-theme] #console-header-center #map-find {
+  font-size: 11px;
+  padding: 8px 0;
+  min-height: 34px;
+}
+#console-header-center .map-find .icon {
+  width: 15px;
+  height: 15px;
+  flex-shrink: 0;
+}
+#console-header-center kbd {
+  font:
+    10px GeistMono,
+    monospace;
+  color: var(--muted);
+  border: 1px solid var(--line-strong);
+  border-radius: 4px;
+  padding: 1px 5px;
+}
+html[data-theme] #console-header-center #map-results {
+  position: absolute;
+  top: 43px;
+  left: 0;
+  width: max(100%, 310px);
+  max-width: min(520px, calc(100vw - 24px));
+  max-height: 50dvh;
+  overflow: auto;
+  border: 1px solid var(--line-strong);
+  border-radius: 11px;
+  z-index: 8;
+}
+.console-site {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  color: var(--ink);
+  background: var(--surface-input);
+  border: 1px solid var(--line-strong);
+  border-radius: 8px;
+  padding: 4px 8px 4px 5px;
+  min-height: 36px;
+  text-align: left;
+  font-family: Geist, sans-serif;
+  cursor: pointer;
+  flex-shrink: 0;
+}
+.console-site:hover {
+  border-color: var(--accent-line);
+}
+.console-site .site-code {
+  display: grid;
+  place-items: center;
+  width: 29px;
+  height: 28px;
+  font:
+    600 9px Geist,
+    sans-serif;
+  color: var(--accent-ink);
+  background: var(--accent);
+  border-radius: 6px;
+}
+.console-site strong {
+  display: block;
+  font-size: 10px;
+  line-height: 1.35;
+}
+.console-site small {
+  display: block;
+  font-size: 8px;
+  color: var(--muted);
+}
+.console-site > span:last-child {
+  margin-left: 10px;
+  color: var(--muted);
+}
+html[data-theme] .console-navigation-toggle {
+  width: auto;
+  flex: 0 0 auto;
+  height: 36px;
+  min-height: 36px;
+  padding: 0 10px;
+  gap: 7px;
+  display: flex;
+  border-radius: 7px;
+  font-size: 10px;
+}
+.console-navigation-toggle .icon {
+  width: 15px;
+  height: 15px;
+}
+html[data-theme]
+  body[data-role="operations"][data-view="overview"]
+  #workspace-nav {
+  display: none;
+  position: absolute;
+  top: 53px;
+  right: 230px;
+  width: 290px;
+  max-height: calc(100dvh - 72px);
+  overflow: auto;
+  padding: 8px;
+  margin: 0;
+  border: 1px solid var(--line-strong);
+  border-radius: 12px;
+  box-shadow: var(--shadow-float);
+  background: var(--surface-raised);
+}
+html[data-theme]
+  body[data-role="operations"][data-view="overview"]
+  #workspace-nav[data-console-open] {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 4px;
+}
+html[data-theme]
+  body[data-role="operations"][data-view="overview"]
+  #workspace-nav
+  .nav-item {
+  padding: 10px 9px;
+  min-height: 40px;
+  font-size: 10px;
+  gap: 7px;
+}
+html[data-theme]
+  body[data-role="operations"][data-view="overview"]
+  #workspace-nav
+  .nav-item
+  .icon {
+  display: block;
+}
+.console-shortcuts {
+  grid-column: 1 / -1;
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 6px;
+  padding-top: 9px;
+  margin-top: 5px;
+  border-top: 1px solid var(--line);
+}
+.console-shortcuts .btn {
+  min-height: 35px;
+  padding: 7px;
+  font-size: 10px;
+  justify-content: center;
+}
+.console-shortcuts .btn:last-child {
+  grid-column: 1 / -1;
+}
+html[data-theme]
+  body[data-role="operations"][data-view="overview"]
+  .topbar-right {
+  gap: 11px;
+  margin-left: 0;
+}
+html[data-theme] body[data-role="operations"][data-view="overview"] #sim-time {
+  display: block;
+  color: var(--green);
+  background: var(--green-soft);
+  border-radius: 18px;
+  font-size: 9px;
+  white-space: nowrap;
+  padding: 5px 8px;
+}
+html[data-theme]
+  body[data-role="operations"][data-view="overview"]
+  .theme-toggle {
+  width: 30px;
+  height: 30px;
+  min-width: 30px;
+  border: 0;
+}
+html[data-theme] body[data-role="operations"][data-view="overview"] .user-chip {
+  height: 40px;
+  padding: 0;
+  gap: 8px;
+  border: 0;
+  border-radius: 0;
+  background: transparent;
+}
+html[data-theme]
+  body[data-role="operations"][data-view="overview"]
+  .user-chip
+  .user-avatar {
+  width: 33px;
+  height: 33px;
+  min-width: 33px;
+}
+html[data-theme] body[data-role="operations"][data-view="overview"] #user-name {
+  font-size: 10px;
+  max-width: 142px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+html[data-theme] body[data-role="operations"][data-view="overview"] #user-role {
+  font-size: 8px;
+}
+html[data-theme]
+  body[data-role="operations"][data-view="overview"]
+  .diorama-stage {
+  height: calc(100dvh - 60px);
+  min-height: 590px;
+  border-radius: 0;
+  border: 0;
+  box-shadow: none;
+  margin: 0;
+  background: #e5ebf3;
+}
+html[data-theme] .diorama-stage .map-host {
+  height: 100%;
+  min-height: 0;
+  background: #e5ebf3;
+}
+.map-preview,
+.map-preview > img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+}
+.map-preview > img { object-fit: cover; }
+.map-preview-action,
+.map-load-status {
+  position: absolute;
+  inset: 0;
+  display: grid;
+  place-content: center;
+  gap: 10px;
+  background: linear-gradient(180deg, #11151a18, #11151a66);
+  color: #fff;
+}
+html[data-theme] .diorama-stage .map-hud {
+  position: absolute;
+  top: 12px;
+  left: 22px;
+  max-width: calc(100% - 44px);
+  z-index: 3;
+}
+html[data-theme] .diorama-stage .map-hud .metric-row {
+  display: flex;
+  gap: 9px;
+  margin: 0;
+}
+html[data-theme] .diorama-stage .map-hud .metric {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  width: 174px;
+  min-width: 0;
+  height: 63px;
+  padding: 10px 12px;
+  border-radius: 11px;
+  border: 1px solid var(--line);
+  background: var(--glass-raised);
+  box-shadow: 0 4px 15px #1b29450b;
+}
+html[data-theme] .diorama-stage .map-hud .metric .metric-icon {
+  display: grid;
+  place-items: center;
+  width: 34px;
+  height: 34px;
+  min-width: 34px;
+  border-radius: 9px;
+  color: var(--accent);
+  background: linear-gradient(135deg, var(--accent-soft), var(--surface-soft));
+  border: 1px solid var(--accent-line);
+}
+html[data-theme] .diorama-stage .map-hud .metric .metric-icon .icon {
+  width: 18px;
+  height: 18px;
+}
+html[data-theme] .diorama-stage .map-hud .metric > div > span {
+  font-size: 9px;
+  color: var(--ink);
+  white-space: nowrap;
+}
+html[data-theme] .diorama-stage .map-hud .metric strong {
+  font-size: 24px;
+  line-height: 1;
+  margin: 3px 0;
+  letter-spacing: -0.04em;
+}
+html[data-theme] .diorama-stage .map-hud .metric small {
+  display: block;
+  font-size: 8px;
+  line-height: 1.2;
+  margin: 0;
+}
+html[data-theme] .diorama-stage .map-camera-tools {
+  position: absolute;
+  top: 12px;
+  right: 334px;
+  width: 44px;
+  z-index: 5;
+  display: flex;
+  flex-direction: column;
+  gap: 7px;
+  transition: right 0.2s ease;
+}
+html[data-theme] .diorama-stage:has(.map-inspector[hidden]) .map-camera-tools {
+  right: 22px;
+}
+html[data-theme] .diorama-stage .view-tabs,
+html[data-theme] .diorama-stage .map-zoom-tools,
+html[data-theme] .diorama-stage .quality-control {
+  display: flex;
+  flex-direction: column;
+  padding: 4px;
+  gap: 1px;
+  border: 1px solid var(--line);
+  border-radius: 9px;
+  background: var(--glass-raised);
+  box-shadow: 0 3px 12px #1b29450b;
+}
+html[data-theme] .diorama-stage .view-tabs button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  width: 100%;
+  min-height: 40px;
+  padding: 5px 0;
+  gap: 3px;
+  border: 0;
+  border-radius: 6px;
+  font:
+    500 8.5px Geist,
+    sans-serif;
+  color: var(--muted);
+  background: transparent;
+  cursor: pointer;
+}
+html[data-theme] .diorama-stage .view-tabs button .icon {
+  width: 15px;
+  height: 15px;
+}
+html[data-theme] .diorama-stage .view-tabs button.active,
+html[data-theme] .diorama-stage .view-tabs button:hover,
+html[data-theme] .diorama-stage .map-zoom-tools button:hover {
+  color: var(--accent);
+  background: var(--accent-soft);
+  box-shadow: none;
+}
+html[data-theme] .diorama-stage .map-zoom-tools button {
+  display: grid;
+  place-items: center;
+  width: 100%;
+  min-height: 30px;
+  border: 0;
+  padding: 0;
+  border-radius: 5px;
+  background: transparent;
+  color: var(--ink);
+  font:
+    400 22px Geist,
+    sans-serif;
+  cursor: pointer;
+}
+html[data-theme] .diorama-stage .map-zoom-tools button .icon {
+  width: 14px;
+  height: 14px;
+}
+html[data-theme] .diorama-stage .quality-control {
+  text-align: center;
+  font-size: 8px;
+  margin: 0;
+  color: var(--muted);
+  gap: 3px;
+}
+html[data-theme] .diorama-stage .quality-control select {
+  width: 100%;
+  min-height: 25px;
+  padding: 3px 0;
+  background: transparent;
+  color: var(--ink);
+  border: 0;
+  font-size: 8px;
+  text-align: center;
+}
+html[data-theme] .diorama-stage .map-inspector {
+  top: 12px;
+  right: 22px;
+  left: auto;
+  width: 302px;
+  padding: 12px;
+  max-height: calc(100% - 250px);
+  border-radius: 12px;
+  border: 1px solid var(--line);
+  background: var(--glass-raised);
+  box-shadow: 0 5px 20px #1b294512;
+  overflow: auto;
+}
+html[data-theme] .diorama-stage .inspector-head {
+  gap: 8px;
+  margin: 0 0 9px;
+  align-items: flex-start;
+}
+html[data-theme] .diorama-stage .inspector-head > div {
+  min-width: 0;
+  flex: 1;
+}
+html[data-theme] .diorama-stage .inspector-symbol {
+  display: grid;
+  place-items: center;
+  width: 31px;
+  height: 31px;
+  flex: 0 0 31px;
+  border-radius: 7px;
+  background: var(--surface-soft);
+  color: var(--accent);
+}
+html[data-theme] .diorama-stage .inspector-symbol .icon {
+  width: 18px;
+  height: 18px;
+}
+html[data-theme] .diorama-stage .map-inspector .eyebrow {
+  display: block;
+  font-size: 8px;
+  line-height: 1.25;
+  letter-spacing: 0.06em;
+  margin-bottom: 4px;
+}
+html[data-theme] .diorama-stage .map-inspector h2 {
+  font:
+    600 15px/1.2 Geist,
+    sans-serif;
+  letter-spacing: -0.025em;
+  margin: 0;
+}
+html[data-theme] .diorama-stage .inspector-head .icon-button {
+  width: 22px;
+  height: 22px;
+  min-width: 22px;
+  border-radius: 5px;
+  font-size: 17px;
+}
+html[data-theme] .diorama-stage .map-inspector .info-row {
+  padding: 6px 0;
+  gap: 10px;
+  font-size: 9px;
+}
+html[data-theme] .diorama-stage .map-inspector .info-row strong {
+  font-size: 9px;
+  font-weight: 500;
+  overflow-wrap: anywhere;
+  text-align: right;
+}
+html[data-theme] .diorama-stage .map-inspector .btn {
+  min-height: 30px;
+  width: 100%;
+  margin-top: 9px;
+  padding: 6px;
+  font-size: 9px;
+}
+html[data-theme] .diorama-stage .shipment-tracking,
+html[data-theme] .diorama-stage .map-resources {
+  position: absolute;
+  z-index: 3;
+  color: var(--ink);
+  background: var(--glass-raised);
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  box-shadow: 0 5px 22px #1b29450f;
+  overflow: hidden;
+}
+html[data-theme] .diorama-stage .shipment-tracking {
+  bottom: 18px;
+  left: 22px;
+  width: min(760px, calc(100% - 430px));
+}
+html[data-theme] .diorama-stage .shipment-head {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 14px 3px;
+}
+html[data-theme] .diorama-stage .shipment-symbol {
+  width: 19px;
+  height: 19px;
+  display: grid;
+  place-items: center;
+  color: var(--accent);
+}
+html[data-theme] .diorama-stage .shipment-symbol .icon {
+  width: 17px;
+  height: 17px;
+}
+html[data-theme] .diorama-stage .shipment-head > strong {
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--ink);
+  white-space: nowrap;
+}
+html[data-theme] .diorama-stage .shipment-head > small {
+  font-size: 9px;
+  color: var(--muted);
+  margin-left: auto;
+}
+html[data-theme] .diorama-stage .shipment-head .icon-button {
+  width: 22px;
+  height: 22px;
+  min-width: 22px;
+  font-size: 15px;
+  border: 0;
+  background: transparent;
+}
+html[data-theme] .diorama-stage .shipment-track-body {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 175px;
+  gap: 9px;
+  padding: 5px 12px 11px;
+}
+html[data-theme] .diorama-stage .shipment-steps {
+  display: flex;
+  align-items: center;
+  list-style: none;
+  margin: 0;
+  padding: 4px 0;
+  min-width: 0;
+}
+html[data-theme] .diorama-stage .shipment-steps li {
+  position: relative;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+  color: var(--muted);
+  font-size: 9px;
+}
+html[data-theme] .diorama-stage .shipment-steps li::before {
+  content: "";
+  position: absolute;
+  top: 12px;
+  left: -50%;
+  width: 100%;
+  height: 2px;
+  background: var(--line-strong);
+  z-index: 0;
+}
+html[data-theme] .diorama-stage .shipment-steps li:first-child::before {
+  display: none;
+}
+html[data-theme] .diorama-stage .shipment-steps b {
+  position: relative;
+  display: grid;
+  place-items: center;
+  width: 25px;
+  height: 25px;
+  border-radius: 50%;
+  border: 1px solid var(--line-strong);
+  background: var(--surface-raised);
+  z-index: 1;
+  font:
+    500 10px Geist,
+    sans-serif;
+}
+html[data-theme] .diorama-stage .shipment-steps b .icon {
+  width: 12px;
+  height: 12px;
+}
+html[data-theme] .diorama-stage .shipment-steps .complete,
+html[data-theme] .diorama-stage .shipment-steps .current {
+  color: var(--accent);
+}
+html[data-theme] .diorama-stage .shipment-steps .complete::before,
+html[data-theme] .diorama-stage .shipment-steps .current::before {
+  background: var(--accent);
+}
+html[data-theme] .diorama-stage .shipment-steps .complete b,
+html[data-theme] .diorama-stage .shipment-steps .current b {
+  background: var(--accent);
+  border-color: var(--accent);
+  color: var(--accent-ink);
+}
+html[data-theme] .diorama-stage .shipment-steps .current b {
+  box-shadow: 0 0 0 4px var(--accent-soft);
+}
+html[data-theme] .diorama-stage .shipment-destination {
+  display: flex;
+  align-items: center;
+  text-align: left;
+  gap: 8px;
+  color: var(--ink);
+  border: 0;
+  border-radius: 8px;
+  padding: 8px;
+  background: var(--surface-soft);
+  cursor: pointer;
+  font-family: Geist, sans-serif;
+}
+html[data-theme] .diorama-stage .shipment-destination > span:last-child {
+  min-width: 0;
+}
+html[data-theme] .diorama-stage .shipment-destination-icon {
+  color: var(--accent);
+  display: grid;
+  place-items: center;
+  width: 25px;
+  flex: 0 0 25px;
+}
+html[data-theme] .diorama-stage .shipment-destination-icon .icon {
+  width: 25px;
+  height: 25px;
+}
+html[data-theme] .diorama-stage .shipment-destination strong {
+  display: block;
+  font-size: 9px;
+}
+html[data-theme] .diorama-stage .shipment-destination small {
+  display: block;
+  font-size: 8px;
+  color: var(--muted);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 125px;
+}
+html[data-theme] .diorama-stage .shipment-destination .badge {
+  font-size: 9px;
+  padding: 2px 5px;
+  margin: 2px 0;
+}
+html[data-theme] .diorama-stage .shipment-empty {
+  font-size: 11px;
+  color: var(--muted);
+  padding: 6px 14px 14px;
+}
+html[data-theme] .diorama-stage .loading-meter {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin: -2px 14px 8px;
+  color: var(--muted);
+  font-size: 8px;
+}
+html[data-theme] .diorama-stage .loading-meter > span {
+  flex-shrink: 0;
+  max-width: 75%;
+}
+html[data-theme] .diorama-stage progress,
+html[data-theme] .order-load-progress {
+  display: block;
+  width: 100%;
+  height: 4px;
+  border: 0;
+  border-radius: 4px;
+  overflow: hidden;
+  accent-color: var(--accent);
+  background: var(--line);
+}
+html[data-theme] .diorama-stage progress::-webkit-progress-bar,
+html[data-theme] .order-load-progress::-webkit-progress-bar {
+  background: var(--line);
+  border-radius: 4px;
+}
+html[data-theme] .diorama-stage progress::-webkit-progress-value,
+html[data-theme] .order-load-progress::-webkit-progress-value {
+  background: var(--accent);
+  border-radius: 4px;
+}
+html[data-theme] .diorama-stage #next-action {
+  position: absolute;
+  top: 8px;
+  right: 44px;
+  left: auto;
+  bottom: auto;
+  width: max-content;
+  max-width: 90px;
+}
+html[data-theme]
+  .diorama-stage
+  .shipment-tracking:has(#next-action:not(:empty))
+  .shipment-head
+  > small {
+  margin-right: 68px;
+}
+html[data-theme] .diorama-stage #next-action:empty {
+  display: none;
+}
+html[data-theme] .diorama-stage .next-action {
+  display: flex;
+  padding: 0;
+  gap: 9px;
+  border: 0;
+  border-radius: 0;
+  background: transparent;
+  box-shadow: none;
+  backdrop-filter: none;
+  -webkit-backdrop-filter: none;
+}
+html[data-theme] .diorama-stage .next-action-icon {
+  display: none;
+}
+html[data-theme] .diorama-stage .next-action > div {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  clip-path: inset(50%);
+  overflow: hidden;
+  white-space: nowrap;
+}
+html[data-theme] .diorama-stage .next-action strong {
+  font-size: 9px;
+  font-weight: 500;
+}
+html[data-theme] .diorama-stage .next-action > div > span {
+  font-size: 8px;
+  color: var(--muted);
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  overflow: hidden;
+}
+html[data-theme] .diorama-stage .next-action .btn {
+  min-height: 25px;
+  padding: 4px 9px;
+  font-size: 8px;
+  margin-left: auto;
+}
+html[data-theme] .diorama-stage .map-resources {
+  right: 22px;
+  bottom: 65px;
+  width: 350px;
+  max-height: 200px;
+}
+html[data-theme] .diorama-stage .resource-tabs {
+  display: flex;
+  align-items: center;
+  gap: 3px;
+  padding: 7px 9px 6px;
+  border-bottom: 1px solid var(--line);
+}
+html[data-theme] .diorama-stage .resource-tabs > button {
+  border: 0;
+  border-radius: 6px;
+  background: transparent;
+  color: var(--muted);
+  font:
+    500 9px Geist,
+    sans-serif;
+  min-height: 25px;
+  padding: 4px 10px;
+  cursor: pointer;
+}
+html[data-theme] .diorama-stage .resource-tabs > button.active {
+  background: var(--surface-soft);
+  color: var(--ink);
+  box-shadow: 0 1px 3px #1018280c;
+}
+html[data-theme] .diorama-stage .resource-tabs > button:hover {
+  color: var(--accent);
+  background: var(--accent-soft);
+}
+html[data-theme] .diorama-stage .resource-tabs .resource-close {
+  margin-left: auto;
+  font-size: 16px;
+  padding: 0 6px;
+}
+html[data-theme] .diorama-stage #resource-list {
+  max-height: 154px;
+  overflow: auto;
+  scrollbar-width: thin;
+  scrollbar-color: var(--line-strong) transparent;
+}
+html[data-theme] .diorama-stage .resource-row {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 12px;
+  background: transparent;
+  color: var(--ink);
+  border: 0;
+  border-top: 1px solid var(--line);
+  text-align: left;
+  cursor: pointer;
+  transition: background 0.15s;
+}
+html[data-theme] .diorama-stage .resource-row:first-child {
+  border-top: 0;
+}
+html[data-theme] .diorama-stage .resource-row:hover {
+  background: var(--accent-soft);
+}
+html[data-theme] .diorama-stage .resource-symbol {
+  width: 25px;
+  height: 25px;
+  flex: 0 0 25px;
+  display: grid;
+  place-items: center;
+  border-radius: 6px;
+  color: var(--accent);
+  background: var(--surface-soft);
+}
+html[data-theme] .diorama-stage .resource-symbol .icon {
+  width: 14px;
+  height: 14px;
+}
+html[data-theme] .diorama-stage .resource-description {
+  flex: 1;
+  min-width: 0;
+}
+html[data-theme] .diorama-stage .resource-description strong {
+  display: block;
+  font-size: 9px;
+  font-weight: 600;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+html[data-theme] .diorama-stage .resource-description small {
+  display: block;
+  font-size: 8px;
+  color: var(--muted);
+  margin-top: 2px;
+}
+html[data-theme] .diorama-stage .resource-state {
+  max-width: 100px;
+  text-align: right;
+}
+html[data-theme] .diorama-stage .resource-state .badge {
+  font-size: 9px;
+  padding: 3px 5px;
+  white-space: normal;
+  line-height: 1.3;
+}
+html[data-theme] .diorama-stage .resource-state progress {
+  margin-top: 4px;
+  height: 3px;
+}
+html[data-theme] .diorama-stage .resource-arrow {
+  color: var(--muted);
+}
+html[data-theme] .diorama-stage .resource-empty {
+  padding: 12px;
+  font-size: 10px;
+  color: var(--muted);
+}
+html[data-theme] .diorama-stage .map-bottom {
+  left: auto;
+  right: 22px;
+  bottom: 18px;
+  width: 350px;
+  padding: 5px 7px;
+  min-height: 36px;
+  gap: 6px;
+  border: 1px solid var(--line);
+  border-radius: 9px;
+  background: var(--glass-raised);
+  box-shadow: 0 3px 12px #1b29450b;
+}
+html[data-theme] .diorama-stage .map-bottom .map-sim-tag {
+  padding: 2px 4px;
+  font-size: 6px;
+  letter-spacing: 0.03em;
+}
+html[data-theme] .diorama-stage .simulation-controls {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  margin: 0;
+}
+html[data-theme] .diorama-stage .map-bottom .btn {
+  min-height: 26px;
+  padding: 5px 7px;
+  border: 0;
+  border-radius: 5px;
+  background: var(--surface-soft);
+  color: var(--ink);
+  font-size: 8px;
+}
+html[data-theme] .diorama-stage .map-bottom .btn .icon {
+  width: 13px;
+  height: 13px;
+}
+html[data-theme] .diorama-stage .speed-control {
+  gap: 0;
+}
+html[data-theme] .diorama-stage .speed-control > span {
+  display: none;
+}
+html[data-theme] .diorama-stage .speed-control select {
+  min-height: 26px;
+  width: 47px;
+  font-size: 9px;
+  border: 0;
+  border-radius: 5px;
+  padding: 4px 2px;
+  background: var(--surface-soft);
+}
+html[data-theme] .diorama-stage .map-bottom .resource-toggle {
+  display: flex;
+  gap: 4px;
+  margin-left: auto;
+}
+html[data-theme] .diorama-stage .map-alert-link {
+  font-size: 8px;
+  min-width: 22px;
+  justify-content: center;
+}
+html[data-theme] .diorama-stage .map-alert-link .icon {
+  width: 15px;
+  height: 15px;
+}
+html[data-theme] .diorama-stage .map-alert-link > span {
+  display: none;
+}
+html[data-theme] .order-load-progress {
+  margin: 12px 0;
+  height: 6px;
+}
+html[data-theme] .order-steps {
+  grid-template-columns: repeat(6, minmax(0, 1fr));
+}
+html[data-theme]
+  .diorama-stage:has(.map-host[data-effective-quality="low"])
+  :is(
+    .shipment-tracking,
+    .map-resources,
+    .view-tabs,
+    .map-zoom-tools,
+    .quality-control
+  ) {
+  background: var(--surface-raised);
+  backdrop-filter: none;
+  -webkit-backdrop-filter: none;
+}
+@media (max-width: 1250px) {
+  html[data-theme] body[data-role="operations"][data-view="overview"] .topbar {
+    gap: 12px;
+    padding: 0 18px;
+  }
+  html[data-theme]
+    body[data-role="operations"][data-view="overview"]
+    .workspace-brand {
+    width: 125px;
+    flex-basis: 125px;
+  }
+  #console-header-center {
+    gap: 15px;
+  }
+  .console-site {
+    padding-right: 5px;
+  }
+  .console-site > span:last-child {
+    margin-left: 1px;
+  }
+  html[data-theme] .console-navigation-toggle {
+    width: 35px;
+    padding: 0;
+    justify-content: center;
+  }
+  .console-navigation-toggle > span {
+    display: none;
+  }
+  html[data-theme]
+    body[data-role="operations"][data-view="overview"]
+    #user-name {
+    max-width: 110px;
+  }
+  html[data-theme] .diorama-stage .map-hud .metric {
+    width: 162px;
+  }
+  html[data-theme] .diorama-stage .shipment-tracking {
+    width: min(760px, calc(100% - 430px));
+  }
+  html[data-theme] .diorama-stage .shipment-track-body {
+    grid-template-columns: minmax(0, 1fr) 160px;
+    gap: 6px;
+  }
+}
+@media (max-width: 1050px) {
+  .console-site {
+    display: none;
+  }
+  html[data-theme] .diorama-stage .map-hud .metric {
+    width: 144px;
+    padding: 10px;
+    gap: 8px;
+  }
+  html[data-theme] .diorama-stage .map-hud .metric .metric-icon {
+    width: 27px;
+    height: 30px;
+    min-width: 27px;
+  }
+  html[data-theme] .diorama-stage .shipment-track-body {
+    grid-template-columns: 1fr;
+  }
+  html[data-theme] .diorama-stage .shipment-destination {
+    display: none;
+  }
+  html[data-theme] .diorama-stage .shipment-steps {
+    padding: 9px 0;
+  }
+  html[data-theme] .diorama-stage .next-action > div > span {
+    display: none;
+  }
+}
+@media (max-width: 900px) {
+  html[data-theme]
+    body[data-role="operations"][data-view="overview"]
+    .user-chip
+    > span:nth-child(2) {
+    display: none;
+  }
+  html[data-theme] .diorama-stage .map-inspector {
+    top: 92px;
+    right: 22px;
+    width: 280px;
+    max-height: calc(100% - 270px);
+  }
+  html[data-theme] .diorama-stage .map-camera-tools {
+    top: 92px;
+    right: 312px;
+  }
+  html[data-theme] .diorama-stage .map-hud .metric {
+    width: 165px;
+  }
+  html[data-theme] .diorama-stage .shipment-tracking {
+    width: min(540px, calc(100% - 44px));
+    bottom: 65px;
+  }
+  html[data-theme] .diorama-stage .shipment-track-body {
+    grid-template-columns: minmax(0, 1fr) 170px;
+  }
+  html[data-theme] .diorama-stage .shipment-destination {
+    display: flex;
+  }
+  html[data-theme] .diorama-stage .map-resources {
+    bottom: 65px;
+    z-index: 6;
+    max-height: 230px;
+  }
+  html[data-theme] .diorama-stage #resource-list {
+    max-height: 182px;
+  }
+  html[data-theme] .diorama-stage .map-bottom {
+    width: min(350px, calc(100% - 44px));
+  }
+  html[data-theme]
+    body[data-role="operations"][data-view="overview"]
+    #workspace-nav {
+    right: 18px;
+  }
+}
+@media (max-width: 640px) {
+  html[data-theme] body[data-role="operations"][data-view="overview"] .topbar {
+    display: flex;
+    flex-wrap: wrap;
+    align-content: center;
+    justify-content: space-between;
+    height: 104px;
+    min-height: 104px;
+    padding: 6px 12px 9px;
+    gap: 6px 10px;
+  }
+  html[data-theme]
+    body[data-role="operations"][data-view="overview"]
+    .workspace-brand {
+    width: 112px;
+    flex-basis: 112px;
+    padding: 0;
+    margin-right: auto;
+  }
+  html[data-theme]
+    body[data-role="operations"][data-view="overview"]
+    .workspace-brand
+    img {
+    height: 41px;
+  }
+  #console-header-center {
+    order: 5;
+    width: 100%;
+    flex: 0 0 100%;
+  }
+  #console-header-center .map-find {
+    min-width: 0;
+    width: 100%;
+    max-width: none;
+  }
+  html[data-theme] #console-header-center .map-find > label {
+    min-height: 34px;
+    height: 34px;
+  }
+  html[data-theme] #console-header-center #map-find {
+    font-size: 10px;
+    min-height: 32px;
+  }
+  html[data-theme]
+    body[data-role="operations"][data-view="overview"]
+    .topbar-right {
+    gap: 9px;
+    margin: 0;
+  }
+  html[data-theme]
+    body[data-role="operations"][data-view="overview"]
+    #sim-time {
+    display: block;
+    font-size: 8px;
+  }
+  html[data-theme]
+    body[data-role="operations"][data-view="overview"]
+    .user-chip
+    > span:nth-child(2) {
+    display: none;
+  }
+  html[data-theme]
+    body[data-role="operations"][data-view="overview"]
+    .user-chip {
+    padding: 0;
+    min-height: 36px;
+  }
+  html[data-theme]
+    body[data-role="operations"][data-view="overview"]
+    #workspace-nav {
+    top: 110px;
+    right: 12px;
+    max-height: calc(100dvh - 122px);
+  }
+  html[data-theme]
+    body[data-role="operations"][data-view="overview"]
+    .diorama-stage {
+    height: calc(100dvh - 104px);
+    min-height: 620px;
+  }
+  html[data-theme] .diorama-stage .map-hud {
+    top: 10px;
+    left: 10px;
+    right: 10px;
+    max-width: none;
+  }
+  html[data-theme] .diorama-stage .map-hud .metric-row {
+    width: 100%;
+    gap: 6px;
+  }
+  html[data-theme] .diorama-stage .map-hud .metric {
+    width: auto;
+    flex: 1;
+    height: 62px;
+    padding: 9px;
+    border-radius: 9px;
+  }
+  html[data-theme] .diorama-stage .map-hud .metric .metric-icon {
+    display: none;
+  }
+  html[data-theme] .diorama-stage .map-hud .metric > div > span {
+    font-size: 8px;
+  }
+  html[data-theme] .diorama-stage .map-hud .metric strong {
+    font-size: 23px;
+  }
+  html[data-theme] .diorama-stage .map-hud .metric small {
+    font-size: 7.5px;
+  }
+  html[data-theme] .diorama-stage .map-camera-tools {
+    top: 84px;
+    right: auto;
+    left: 10px;
+    width: 42px;
+  }
+  html[data-theme]
+    .diorama-stage:has(.map-inspector[hidden])
+    .map-camera-tools {
+    right: 10px;
+    left: auto;
+  }
+  html[data-theme] .diorama-stage .view-tabs button {
+    min-height: 41px;
+  }
+  html[data-theme] .diorama-stage .map-inspector {
+    top: 84px;
+    right: 10px;
+    width: calc(100% - 70px);
+    max-height: calc(100% - 285px);
+    padding: 11px;
+  }
+  html[data-theme] .diorama-stage .map-inspector h2 {
+    font-size: 14px;
+  }
+  html[data-theme] .diorama-stage .shipment-tracking {
+    left: 10px;
+    right: 10px;
+    bottom: 58px;
+    width: auto;
+  }
+  html[data-theme] .diorama-stage .shipment-head {
+    padding: 8px 10px 3px;
+    gap: 6px;
+  }
+  html[data-theme] .diorama-stage .shipment-head > strong {
+    font-size: 10px;
+  }
+  html[data-theme] .diorama-stage .shipment-track-body {
+    grid-template-columns: 1fr;
+    padding: 2px 7px 7px;
+  }
+  html[data-theme] .diorama-stage .shipment-destination {
+    display: none;
+  }
+  html[data-theme] .diorama-stage .shipment-steps {
+    padding: 5px 0;
+  }
+  html[data-theme] .diorama-stage .shipment-steps li {
+    font-size: 9px;
+  }
+  html[data-theme] .diorama-stage .shipment-steps b {
+    width: 26px;
+    height: 26px;
+  }
+  html[data-theme] .diorama-stage .next-action {
+    padding: 0;
+  }
+  html[data-theme] .diorama-stage .next-action strong {
+    font-size: 8px;
+  }
+  html[data-theme] .diorama-stage .loading-meter {
+    margin: 0 10px 6px;
+    font-size: 7px;
+  }
+  html[data-theme] .diorama-stage .map-resources {
+    bottom: 58px;
+    right: 10px;
+    width: calc(100% - 20px);
+    max-width: none;
+  }
+  html[data-theme] .diorama-stage .map-bottom {
+    bottom: 10px;
+    right: 10px;
+    left: 10px;
+    width: auto;
+    padding: 5px 7px;
+    gap: 6px;
+  }
+  html[data-theme] .diorama-stage .map-bottom .btn {
+    min-height: 30px;
+    font-size: 9px;
+  }
+  html[data-theme] .diorama-stage .speed-control select {
+    min-height: 30px;
+  }
+  html[data-theme] .diorama-stage .map-bottom .map-sim-tag {
+    font-size: 7px;
+  }
+  html[data-theme] .diorama-stage .resource-row {
+    min-height: 44px;
+  }
+  html[data-theme] .diorama-stage .resource-tabs > button {
+    min-height: 34px;
+  }
+  html[data-theme] .order-steps {
+    overflow-x: auto;
+  }
+  html[data-theme] .order-steps > div {
+    min-width: 48px;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  html[data-theme] .diorama-stage *,
+  html[data-theme] .order-load-progress {
+    transition: none;
+  }
+}

@@ -1,0 +1,9 @@
+<%
+const address = String(code || '');
+const parts = [...address.matchAll(/(?:^|-)([ARNCD])(\d+)/g)];
+const addressLabels = { A:'Pasillo', R:'Rack', N:'Nivel', C:'Casillero', D:'Fondo' };
+const humanAddress = parts.map(part => addressLabels[part[1]] + ' ' + Number(part[2])).join(' · ');
+%>
+<span class="rf-location-zone"><%= zone || 'Ubicación asignada' %></span>
+<strong class="rf-location-human"><%= humanAddress || address %></strong>
+<small class="rf-location-code"><%= address %></small>

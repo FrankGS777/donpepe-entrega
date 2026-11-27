@@ -1,0 +1,324 @@
+.autonomy-metrics {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 16px;
+  margin-bottom: 24px;
+}
+.autonomy-metrics article {
+  padding: 24px;
+  border: 1px solid var(--border);
+  border-radius: 18px;
+  background: var(--surface);
+}
+.autonomy-metrics span {
+  display: block;
+  color: var(--muted);
+  font-size: 12px;
+}
+.autonomy-metrics strong {
+  display: block;
+  font-size: 32px;
+  margin-top: 12px;
+  letter-spacing: -0.04em;
+}
+.autonomy-metrics .autonomy-status-value {
+  font-size: 22px;
+}
+.autonomy-workspace .panel {
+  margin-bottom: 24px;
+}
+.autonomy-filter {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  font-size: 12px;
+  margin: 0;
+}
+.autonomy-filter select {
+  min-width: 150px;
+}
+.autonomy-job-list {
+  padding: 0 24px;
+}
+.autonomy-job {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 24px;
+  padding: 24px 0;
+  border-top: 1px solid var(--border);
+}
+.autonomy-job small,
+.autonomy-legacy-list small {
+  display: block;
+  color: var(--muted);
+  font-size: 11px;
+}
+.autonomy-job h3 {
+  margin: 8px 0 12px;
+}
+.autonomy-job p {
+  font-size: 13px;
+  color: var(--muted);
+  max-width: 720px;
+  line-height: 1.7;
+}
+.autonomy-job-actions {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+  justify-content: flex-end;
+  flex-shrink: 0;
+}
+.autonomy-legacy-list article {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 16px;
+  padding: 18px 0;
+  border-bottom: 1px solid var(--border);
+}
+.autonomy-legacy-list small {
+  margin-top: 8px;
+}
+.autonomy-infrastructure {
+  padding: 0 24px 24px;
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 16px;
+}
+.autonomy-infrastructure article {
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  overflow: hidden;
+  min-width: 0;
+}
+.autonomy-infrastructure .autonomy-equipment-photo {
+  display: block;
+  width: 100%;
+  height: 230px;
+  padding: 16px;
+  object-fit: contain;
+  border-radius: 0;
+  background: #f5f5f1;
+}
+.autonomy-equipment-content {
+  padding: 20px;
+}
+.autonomy-infrastructure strong {
+  display: block;
+  font-size: 14px;
+  min-height: 40px;
+}
+.autonomy-infrastructure p,
+.autonomy-scope p {
+  font-size: 12px;
+  color: var(--muted);
+  line-height: 1.8;
+}
+.autonomy-scope {
+  margin: 24px 0;
+  color: var(--muted);
+}
+.autonomy-scope summary {
+  cursor: pointer;
+  font-size: 12px;
+}
+.autonomy-dossier { min-width: 0; }
+.autonomy-process-overview {
+  padding: 24px;
+  border: 1px solid var(--accent-line);
+  border-radius: 18px;
+  background: radial-gradient(ellipse at 100% 0, color-mix(in srgb, var(--accent) 11%, transparent), transparent 68%), var(--surface-raised);
+}
+.autonomy-process-kicker { display: flex; align-items: center; justify-content: space-between; gap: 16px; }
+.autonomy-process-kicker > span:first-child { color: var(--accent); text-transform: uppercase; letter-spacing: .11em; font-size: 10px; font-weight: 700; }
+.autonomy-process-overview h3 { font-size: 24px; line-height: 1.25; margin: 22px 0 10px; max-width: 560px; }
+.autonomy-process-overview > p { font-size: 13px; line-height: 1.8; color: var(--muted); margin: 0; max-width: 600px; }
+.autonomy-process-metrics { display: flex; flex-wrap: wrap; gap: 24px 36px; margin-top: 25px; padding-top: 22px; border-top: 1px solid var(--border); }
+.autonomy-process-metrics > div { display: grid; gap: 7px; }
+.autonomy-process-metrics strong { font-size: 27px; line-height: 1; letter-spacing: -.04em; font-weight: 600; font-variant-numeric: tabular-nums; }
+.autonomy-process-metrics strong small { font-size: 17px; font-weight: 500; color: var(--muted); }
+.autonomy-process-metrics > div > span { font-size: 11px; color: var(--muted); }
+.autonomy-process-overview.is-held { border-color: color-mix(in srgb, var(--red) 36%, var(--border)); }
+.autonomy-attention { display: flex; align-items: flex-start; gap: 15px; margin-top: 18px; padding: 20px; border: 1px solid color-mix(in srgb, var(--red) 28%, var(--border)); border-radius: 15px; background: color-mix(in srgb, var(--red-soft) 72%, var(--surface)); }
+.autonomy-attention-symbol { display: grid; place-items: center; width: 30px; height: 30px; flex: none; border: 1px solid color-mix(in srgb, var(--red) 55%, transparent); border-radius: 50%; color: var(--red); font-weight: 700; }
+.autonomy-attention > div > span { color: var(--red); font-size: 10px; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; }
+.autonomy-attention h4 { margin: 5px 0 8px; font-size: 15px; line-height: 1.5; }
+.autonomy-attention p { margin: 0 0 14px; font-size: 12px; line-height: 1.8; color: var(--ink); }
+.autonomy-attention .autonomy-attention-owner { color: var(--muted); margin-bottom: 0; }
+.autonomy-dossier-meta { display: flex; justify-content: space-between; flex-wrap: wrap; gap: 10px 24px; padding: 17px 2px 23px; color: var(--muted); font-size: 11px; }
+.autonomy-dossier-meta strong { color: var(--ink); margin-left: 5px; font-weight: 500; }
+.autonomy-manifest { border: 1px solid var(--border); border-radius: 15px; margin: 0 0 28px; overflow: hidden; }
+.autonomy-manifest > summary { display: flex; justify-content: space-between; align-items: center; gap: 18px; padding: 20px; cursor: pointer; }
+.autonomy-manifest > summary strong { display: block; font-size: 14px; font-weight: 600; }
+.autonomy-manifest > summary small { display: block; color: var(--muted); font-size: 11px; line-height: 1.65; margin-top: 6px; }
+.autonomy-manifest-loads { display: grid; padding: 0 20px 6px; }
+.autonomy-manifest-loads > article { display: flex; align-items: flex-start; gap: 18px; padding: 18px 0; border-top: 1px solid var(--border); }
+.autonomy-manifest-loads > article > div { flex: 1; min-width: 0; }
+.autonomy-manifest-loads h4 { font-size: 14px; line-height: 1.5; margin: 2px 0 8px; }
+.autonomy-manifest-loads > article > div > span { color: var(--accent); font-size: 13px; font-weight: 600; }
+.autonomy-manifest-loads p { color: var(--muted); font-size: 11px; line-height: 1.8; margin: 6px 0; }
+.autonomy-dossier .autonomy-load-photo { width: 76px; height: 98px; object-fit: contain; padding: 7px; background: #fff; border: 1px solid #0000000a; border-radius: 12px; flex: none; }
+.autonomy-load-symbol { width: 56px; height: 60px; display: grid; place-items: center; background: var(--surface-soft); color: var(--accent); border-radius: 12px; font-size: 24px; flex: none; }
+.autonomy-load-identity { color: var(--muted); font-size: 11px; margin-top: 9px; }
+.autonomy-load-identity > summary { color: var(--accent); cursor: pointer; padding: 3px 0; }
+.autonomy-history { margin-top: 4px; }
+.autonomy-history-heading { display: flex; align-items: center; justify-content: space-between; gap: 20px; }
+.autonomy-history-heading h3 { font-size: 17px; margin: 0; }
+.autonomy-history-heading > span { color: var(--muted); font-size: 11px; white-space: nowrap; }
+.autonomy-history-caption { font-size: 12px; color: var(--muted); line-height: 1.7; margin: 8px 0 20px; }
+.autonomy-authorization { display: flex; align-items: center; gap: 14px; margin: 0 0 12px; padding: 4px 20px 15px; }
+.autonomy-authorization > div { display: grid; gap: 6px; }
+.autonomy-authorization strong { font-weight: 500; font-size: 13px; }
+.autonomy-authorization > div > span { color: var(--muted); font-size: 11px; }
+.autonomy-control-mark { display: grid; place-items: center; width: 29px; height: 29px; flex: none; border: 1px solid var(--line-strong); border-radius: 50%; color: var(--muted); font-size: 15px; font-weight: 600; }
+.autonomy-authorization .autonomy-control-mark, .autonomy-evidence-card.is-passed .autonomy-control-mark { border-color: color-mix(in srgb, var(--green) 40%, transparent); color: var(--green); background: var(--green-soft); }
+.autonomy-evidence-card { border: 1px solid var(--border); border-radius: 15px; margin-top: 12px; background: var(--surface-raised); overflow: hidden; transition: border-color .2s ease; }
+.autonomy-evidence-card:hover { border-color: var(--line-strong); }
+.autonomy-evidence-card > summary { display: flex; align-items: center; gap: 13px; padding: 19px 20px; cursor: pointer; list-style: none; }
+.autonomy-manifest > summary, .autonomy-evidence-card > summary, .autonomy-references > summary { list-style: none; }
+.autonomy-manifest > summary::-webkit-details-marker, .autonomy-evidence-card > summary::-webkit-details-marker, .autonomy-references > summary::-webkit-details-marker { display: none; }
+.autonomy-evidence-heading { flex: 1; display: grid; gap: 5px; min-width: 0; }
+.autonomy-evidence-heading > strong { font-size: 14px; font-weight: 600; line-height: 1.5; }
+.autonomy-evidence-heading > span { font-size: 12px; color: var(--ink); line-height: 1.5; overflow-wrap: anywhere; }
+.autonomy-evidence-heading > small { font-size: 10px; color: var(--muted); line-height: 1.6; }
+.autonomy-evidence-card > summary > .badge { flex: none; font-size: 10px; }
+.autonomy-disclosure { color: var(--muted); font-size: 17px; transition: transform .2s ease; flex: none; }
+.autonomy-evidence-card[open] > summary > .autonomy-disclosure, .autonomy-manifest[open] > summary > .autonomy-disclosure { transform: rotate(180deg); }
+.autonomy-evidence-card[open] > summary { border-bottom: 1px solid var(--border); }
+.autonomy-evidence-card.is-held { border-color: color-mix(in srgb, var(--red) 38%, var(--border)); }
+.autonomy-evidence-card.is-held .autonomy-control-mark { color: var(--red); border-color: color-mix(in srgb, var(--red) 45%, transparent); background: var(--red-soft); }
+.autonomy-evidence-body { padding: 20px; }
+.autonomy-control-description { color: var(--muted); font-size: 12px; line-height: 1.8; margin: 0 0 18px; }
+.autonomy-recorded-by { display: flex; flex-wrap: wrap; align-items: baseline; gap: 8px 14px; margin: 0 0 17px; }
+.autonomy-recorded-by > span { color: var(--muted); font-size: 11px; }
+.autonomy-recorded-by > strong { font-size: 12px; font-weight: 500; }
+.autonomy-reading-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 0 24px; margin: 0; }
+.autonomy-reading-grid > div { padding: 13px 0; border-top: 1px solid var(--border); min-width: 0; }
+.autonomy-reading-grid dt { color: var(--muted); font-size: 11px; line-height: 1.5; }
+.autonomy-reading-grid dd { margin: 6px 0 0; font-size: 14px; font-weight: 500; font-variant-numeric: tabular-nums; overflow-wrap: anywhere; }
+.autonomy-check-results { list-style: none; margin: 18px 0 0; padding: 16px; border-radius: 10px; background: var(--surface-soft); }
+.autonomy-check-results > li { display: flex; align-items: baseline; gap: 10px; margin: 0 0 13px; }
+.autonomy-check-results > li:last-child { margin-bottom: 0; }
+.autonomy-check-results > li > span { color: var(--accent); font-weight: 600; }
+.autonomy-check-results strong { font-size: 12px; font-weight: 600; }
+.autonomy-check-results p { margin: 5px 0 0; color: var(--muted); font-size: 11px; line-height: 1.8; }
+.autonomy-evidence-card.is-held .autonomy-check-results > li > span { color: var(--red); }
+.autonomy-received-loads { margin-top: 15px; }
+.autonomy-received-loads > article { display: flex; align-items: center; gap: 15px; padding: 15px 0; border-top: 1px solid var(--border); }
+.autonomy-received-loads > article > div { display: grid; gap: 7px; min-width: 0; }
+.autonomy-received-loads strong { font-size: 13px; line-height: 1.5; }
+.autonomy-received-loads span { font-size: 12px; line-height: 1.7; }
+.autonomy-received-loads small { font-size: 11px; line-height: 1.7; color: var(--muted); }
+.autonomy-reading-scope { font-size: 10px; line-height: 1.8; color: var(--muted); margin: 17px 0 0; }
+.autonomy-references { border-top: 1px solid var(--border); margin-top: 18px; padding-top: 15px; }
+.autonomy-references > summary { cursor: pointer; font-size: 11px; color: var(--muted); width: fit-content; padding: 3px 0; }
+.autonomy-references > summary::before { content: "+"; color: var(--accent); font-size: 14px; margin-right: 8px; }
+.autonomy-references[open] > summary::before { content: "−"; }
+.autonomy-reference-grid { display: grid; gap: 12px; margin: 16px 0 0; }
+.autonomy-reference-grid > div { display: grid; grid-template-columns: 140px minmax(0, 1fr); align-items: baseline; gap: 12px; }
+.autonomy-reference-grid dt { font-size: 10px; color: var(--muted); line-height: 1.7; }
+.autonomy-reference-grid dd { font-size: 11px; color: var(--ink); line-height: 1.7; margin: 0; overflow-wrap: anywhere; }
+.autonomy-process-references { margin-top: 26px; }
+.autonomy-no-readings { padding: 23px 20px; border: 1px dashed var(--line-strong); border-radius: 14px; }
+.autonomy-no-readings strong { font-size: 13px; font-weight: 500; }
+.autonomy-no-readings p { color: var(--muted); font-size: 12px; line-height: 1.8; margin-bottom: 0; }
+.autonomy-corrections { margin-top: 26px; }
+.autonomy-corrections h3 { font-size: 16px; }
+.autonomy-corrections article { padding: 14px 0 14px 16px; border-left: 2px solid var(--accent-line); }
+.autonomy-corrections article > span { color: var(--muted); font-size: 11px; }
+.autonomy-corrections p { font-size: 12px; line-height: 1.8; margin: 7px 0 0; white-space: pre-line; overflow-wrap: anywhere; }
+.autonomy-evidence-card[open] > .autonomy-evidence-body, .autonomy-manifest[open] > .autonomy-manifest-loads { animation: autonomy-disclose .22s ease-out; }
+@keyframes autonomy-disclose { from { opacity: 0; transform: translateY(-5px); } to { opacity: 1; transform: translateY(0); } }
+@media (prefers-reduced-motion: reduce) { .autonomy-dossier *, .autonomy-dossier *::before { animation: none !important; transition: none !important; } }
+.autonomy-document-context {
+  margin: 16px 0;
+  padding: 16px;
+  border: 1px solid var(--border);
+  border-radius: 12px;
+}
+.autonomy-document-context p {
+  margin: 10px 0;
+  font-size: 12px;
+  color: var(--muted);
+  line-height: 1.7;
+}
+@media (max-width: 1000px) {
+  .autonomy-metrics {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+  .autonomy-infrastructure {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+  .autonomy-job {
+    align-items: flex-start;
+    flex-direction: column;
+  }
+  .autonomy-job-actions {
+    justify-content: flex-start;
+  }
+}
+@media (max-width: 640px) {
+  .autonomy-metrics {
+    gap: 10px;
+  }
+  .autonomy-metrics article {
+    padding: 16px;
+  }
+  .autonomy-metrics strong {
+    font-size: 26px;
+  }
+  .autonomy-metrics .autonomy-status-value {
+    font-size: 17px;
+  }
+  .autonomy-job-list {
+    padding: 0 16px;
+  }
+  .autonomy-job {
+    gap: 12px;
+  }
+  .autonomy-infrastructure {
+    grid-template-columns: 1fr;
+    padding: 0 16px 16px;
+  }
+  .autonomy-filter {
+    align-items: flex-start;
+    flex-direction: column;
+  }
+  .autonomy-legacy-list article {
+    align-items: flex-start;
+    flex-direction: column;
+  }
+  .autonomy-job-actions .btn {
+    font-size: 12px;
+  }
+  .autonomy-process-overview { padding: 19px; }
+  .autonomy-process-overview h3 { font-size: 21px; }
+  .autonomy-process-kicker { align-items: flex-start; }
+  .autonomy-process-kicker > .badge { font-size: 9px; }
+  .autonomy-process-metrics { gap: 20px 25px; }
+  .autonomy-process-metrics > div { flex: 1; min-width: 96px; }
+  .autonomy-dossier-meta { flex-direction: column; }
+  .autonomy-manifest > summary, .autonomy-evidence-card > summary { padding: 16px; }
+  .autonomy-evidence-card > summary { flex-wrap: wrap; align-items: flex-start; gap: 10px; }
+  .autonomy-evidence-heading { flex-basis: calc(100% - 40px); }
+  .autonomy-evidence-card > summary > .badge { margin-left: 39px; }
+  .autonomy-evidence-card > summary > .autonomy-disclosure { margin-left: auto; }
+  .autonomy-evidence-body { padding: 16px; }
+  .autonomy-reading-grid { gap: 0 16px; }
+  .autonomy-reading-grid dd { font-size: 13px; }
+  .autonomy-manifest-loads { padding: 0 16px 4px; }
+  .autonomy-manifest-loads > article { gap: 13px; }
+  .autonomy-dossier .autonomy-load-photo { width: 60px; height: 82px; }
+  .autonomy-manifest-loads h4 { font-size: 13px; }
+  .autonomy-reference-grid > div { grid-template-columns: 1fr; gap: 3px; }
+  .autonomy-attention { padding: 16px; gap: 12px; }
+  .autonomy-authorization { padding-left: 16px; padding-right: 16px; }
+}
+.autonomy-workspace,
+.autonomy-dossier {
+  --border: var(--line, #9da7b126);
+  --surface-alt: var(--surface-soft, #1e232b);
+  color: var(--ink);
+}

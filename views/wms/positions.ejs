@@ -1,0 +1,68 @@
+<div class="page-head">
+  <div><h1>LOCALIZADOR DE INVENTARIO</h1><p>Recorre la nave por zona → pasillo → rack → nivel → casillero. Cada dirección es una posición física escaneable.</p></div>
+  <a class="btn btn-brand" href="/wms/mapa">Explorar mapa 3D</a>
+</div>
+
+<section class="panel bin-finder" aria-label="Navegación física por almacén">
+  <form method="get" action="/wms/posiciones" class="bin-finder-form">
+    <label>1 · Zona
+      <select name="zone" class="form-select" onchange="this.form.elements.aisle.value='';this.form.elements.rack.value='';this.form.elements.level.value='';this.form.submit()">
+        <option value="">Selecciona una zona</option>
+        <% zones.forEach(zone=>{ %><option value="<%= zone.codigo_zona %>" <%= filters.zone===zone.codigo_zona?'selected':'' %>><%= zone.codigo_zona %> · <%= zone.zona %> (<%= zone.locs %> bins)</option><% }) %>
+      </select>
+    </label>
+    <label>2 · Pasillo
+      <select name="aisle" class="form-select" <%= !filters.zone?'disabled':'' %> onchange="this.form.elements.rack.value='';this.form.elements.level.value='';this.form.submit()">
+        <option value="">Todos</option>
+        <% aisles.forEach(item=>{ %><option value="<%= item.pasillo %>" <%= filters.aisle===item.pasillo?'selected':'' %>>A<%= item.pasillo %></option><% }) %>
+      </select>
+    </label>
+    <label>3 · Rack
+      <select name="rack" class="form-select" <%= !filters.aisle?'disabled':'' %> onchange="this.form.elements.level.value='';this.form.submit()">
+        <option value="">Todos</option>
+        <% racks.forEach(item=>{ %><option value="<%= item.estante %>" <%= filters.rack===item.estante?'selected':'' %>>R<%= item.estante %></option><% }) %>
+      </select>
+    </label>
+    <label>4 · Nivel
+      <select name="level" class="form-select" <%= !filters.rack?'disabled':'' %> onchange="this.form.submit()">
+        <option value="">Todos</option>
+        <% levels.forEach(item=>{ %><option value="<%= item.nivel %>" <%= Number(filters.level)===Number(item.nivel)?'selected':'' %>>N<%= String(item.nivel).padStart(2,'0') %></option><% }) %>
+      </select>
+    </label>
+    <button class="btn btn-outline-light" type="submit">Consultar</button>
+  </form>
+  <% if(filters.zone&&!filters.aisle){ %><p class="bin-finder-hint">Selecciona un pasillo para reducir la lista; se muestran como máximo 80 direcciones por consulta.</p><% } %>
+</section>
+
+<section class="panel bin-results" aria-labelledby="binResultsTitle">
+  <div class="panel-title"><div><h2 id="binResultsTitle">CASILLEROS <%= filters.zone?'· '+filters.zone:'' %></h2><small><%= occupancy.length %> visibles · <%= occupancy.filter(loc=>Number(loc.ocupacion_hu)>0).length %> ocupados</small></div><span class="badge text-bg-warning">1 HU por bin</span></div>
+  <% if(!filters.zone){ %>
+    <div class="empty"><strong>Elige una zona para empezar.</strong><small>El plano contiene <%= zones.reduce((sum,zone)=>sum+Number(zone.locs),0) %> direcciones activas. No se mezclan ubicaciones de distintas cámaras o áreas.</small></div>
+  <% } else if(!occupancy.length){ %>
+    <div class="empty"><strong>No hay casilleros con esos filtros.</strong><small>Vuelve al nivel anterior y selecciona otro pasillo o rack.</small></div>
+  <% } else { %>
+    <div class="bin-grid">
+      <% occupancy.forEach(loc=>{ %>
+        <a class="bin-card <%= selectedLoc?.codigo_loc===loc.codigo_loc?'is-current':'' %> <%= Number(loc.ocupacion_hu)>0?'is-filled':'is-empty' %>" href="?zone=<%= encodeURIComponent(loc.codigo_zona) %>&aisle=<%= encodeURIComponent(loc.pasillo) %>&rack=<%= encodeURIComponent(loc.estante) %>&level=<%= loc.nivel %>&loc=<%= encodeURIComponent(loc.codigo_loc) %>">
+          <span class="bin-card-status"><%= Number(loc.ocupacion_hu)>0?'OCUPADO':'LIBRE' %></span>
+          <strong><%= loc.codigo_loc %></strong>
+          <small>A<%= loc.pasillo %> · R<%= loc.estante %> · N<%= loc.nivel %> · C<%= loc.posicion %> · D<%= loc.profundidad %></small>
+          <span><%= loc.tipo %> · <%= loc.condicion_almacenamiento %></span>
+        </a>
+      <% }) %>
+    </div>
+  <% } %>
+</section>
+
+<% if(selectedLoc){ %>
+  <section class="panel bin-detail" aria-labelledby="binDetailTitle">
+    <div class="panel-title"><div><h2 id="binDetailTitle"><%= selectedLoc.codigo_loc %></h2><small><%= selectedLoc.zona %> · pasillo <%= selectedLoc.pasillo %> · rack <%= selectedLoc.estante %> · nivel <%= selectedLoc.nivel %> · casillero <%= selectedLoc.posicion %> · profundidad <%= selectedLoc.profundidad %></small></div><span class="status-pill <%= Number(selectedLoc.ocupacion_hu)>0?'pending':'ok' %>"><%= Number(selectedLoc.ocupacion_hu)>0?'Ocupado':'Libre' %></span></div>
+    <% if(!positions.length){ %><div class="empty"><strong>Casillero vacío</strong><small>Puede recibir una HU o caja compatible con su zona y perfil.</small></div><% } else { %>
+      <% positions.forEach(p=>{ %><article class="bin-stock-line">
+        <img src="<%= p.imagen_url||'/images/resource-fallback.svg' %>" alt="" loading="lazy" referrerpolicy="no-referrer">
+        <div><span class="sku-chip"><%= p.sku %></span><strong><%= p.producto %></strong><small>Lote interno <b><%= p.codigo_lote_wms %></b> · fabricante <%= p.numero_lote %></small><small><%= p.codigo_hu?'HU '+p.codigo_hu+' · ':'' %><%= p.estado_inventario %> · <%= p.tipo_loc %> · <%= p.proposito_zona %> · vence <%= date(p.fecha_vencimiento)||'No aplica' %></small></div>
+        <b><%= p.cantidad_actual %> <%= p.unidad_medida %></b>
+      </article><% }) %>
+    <% } %>
+  </section>
+<% } %>

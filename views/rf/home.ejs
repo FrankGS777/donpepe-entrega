@@ -1,0 +1,50 @@
+<%
+const rfLabels = {
+  recepcion: ['Recibir mercancía', 'Identifica lo que acaba de llegar', summary.purchases.pendientes || 0],
+  checkin: ['Ubicar mercancía', 'De recepción a su lugar de almacenaje', summary.tasks.putaway || 0],
+  picking: ['Preparar pedidos', 'Recoge los productos para cada tienda', summary.tasks.picking || 0],
+  transfer: ['Mover mercancía', 'Traslados y reposición de preparación', summary.tasks.transferencias || 0],
+  count: ['Contar existencias', 'Verifica la cantidad física por lote', null],
+  returns: ['Procesar devoluciones', 'Lleva el retorno al área indicada', summary.tasks.devoluciones || 0]
+};
+const firstName = String(currentUser.nombre || 'Operador').split(' ')[0];
+const nextModule = modules.find(item => rfLabels[item.key]?.[2] > 0);
+const underway = Number(summary.tasks.en_proceso || 0);
+const nextTask = summary.nextTask || null;
+const nextPath = {PUTAWAY:'/rf/check-in',PICKING:'/rf/picking',REUBICACION:'/rf/transfer',REABASTECIMIENTO:'/rf/transfer',DEVOLUCION_RUTA:'/rf/returns'};
+const resumeUrl = nextTask ? (nextTask.estado==='EN_PROCESO' ? '/rf/tareas/'+nextTask.id+'/ejecutar' : nextPath[nextTask.tipo] || '/rf') : nextModule?.path || '/rf/scanner';
+const resumeCopy = nextTask?.producto || (nextModule ? rfLabels[nextModule.key][0] : 'Abrir mis tareas');
+const resumeIcon = nextTask ? ({PUTAWAY:'i-pin',PICKING:'i-package',REUBICACION:'i-arrows',REABASTECIMIENTO:'i-arrows',DEVOLUCION_RUTA:'i-alert'}[nextTask.tipo] || 'i-package') : nextModule?.icon || 'i-package';
+%>
+<section class="rf-welcome">
+  <div class="rf-shift-label"><span class="rf-live-dot"></span> Tu estación de trabajo</div>
+  <h1>Hola, <%= firstName %>.</h1>
+  <p>Tu trabajo, paso a paso. Escanea, revisa y confirma.</p>
+  <div class="rf-shift-stats">
+    <div><strong><%= underway %></strong><span>en curso</span></div>
+    <div><strong><%= Number(summary.tasks.putaway||0)+Number(summary.tasks.picking||0)+Number(summary.tasks.transferencias||0)+Number(summary.tasks.devoluciones||0) %></strong><span>asignadas por hacer</span></div>
+    <a href="/mi-cuenta" aria-label="Abrir mi cuenta"><svg class="icon"><use href="/icons.svg#i-user"/></svg> Mi cuenta <span aria-hidden="true">↗</span></a>
+  </div>
+</section>
+<% if(nextTask || nextModule || underway){ %>
+<a class="rf-next-work" href="<%= resumeUrl %>">
+  <span class="rf-next-icon"><svg class="icon"><use href="/icons.svg#<%= resumeIcon %>"/></svg></span>
+  <span><small><%= nextTask?.estado==='EN_PROCESO' ? 'Continúa tu tarea' : 'Siguiente paso' %></small><strong><%= resumeCopy %></strong><em><%= nextTask?.estado==='EN_PROCESO' ? 'Retoma las lecturas de tu carga asignada' : 'Abre la bandeja y empieza una tarea asignada' %></em></span>
+  <b aria-hidden="true">↗</b>
+</a>
+<% } else { %>
+<div class="rf-quiet-state"><span class="rf-quiet-check">✓</span><div><strong>Sin tareas pendientes</strong><p>Tu jefe de operaciones asignará el siguiente movimiento.</p></div></div>
+<% } %>
+<div class="rf-section-heading"><h2>¿Qué vas a hacer?</h2><span>Trabajo guiado</span></div>
+<section class="rf-menu" aria-label="Operaciones disponibles">
+  <% modules.forEach(module=>{ const copy=rfLabels[module.key] || [module.title,module.subtitle,null]; %>
+    <a class="rf-menu-card" href="<%= module.path %>">
+      <span class="rf-module-symbol"><svg class="icon"><use href="/icons.svg#<%= module.icon %>"/></svg></span>
+      <% if(copy[2]!==null){ %><span class="rf-module-count"><%= copy[2] %></span><% } %>
+      <strong><%= copy[0] %></strong>
+      <small><%= copy[1] %></small>
+      <span class="rf-module-arrow" aria-hidden="true">↗</span>
+    </a>
+  <% }) %>
+</section>
+<a class="rf-scan-shortcut" href="/rf/scanner"><svg class="icon"><use href="/icons.svg#i-camera"/></svg><span><strong>¿Qué tengo delante?</strong><small>Escanea una etiqueta para consultar su registro</small></span><b aria-hidden="true">→</b></a>

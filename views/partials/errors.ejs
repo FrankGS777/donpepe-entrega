@@ -1,0 +1,1 @@
+<% if(typeof errors!=='undefined'&&errors.length) { %><div class="alert alert-danger validation-summary" role="alert" tabindex="-1" data-validation-summary><strong>Revisa estos datos:</strong><ul class="mb-0 mt-1"><% errors.forEach(e=>{ %><li><%= e.msg %></li><% }) %></ul></div><% } %>

@@ -1,0 +1,34 @@
+<div class="page-head">
+  <div><h1>LOTES POR LOC</h1></div>
+  <a href="/wms/posiciones" class="btn btn-outline-warning">Abrir mapa</a>
+</div>
+<div class="panel">
+  <form class="list-toolbar row g-2 mb-4">
+    <div class="col-lg-5"><label class="visually-hidden" for="lotSearch">Buscar</label><input id="lotSearch" class="form-control" name="q" value="<%= filters.q||'' %>" placeholder="SKU, producto, lote, HU o LOC..."></div>
+    <div class="col-lg-3"><label class="visually-hidden" for="lotState">Estado</label><select id="lotState" data-native-select="true" class="form-select" name="state"><option value="">Todos los estados</option><% ['DISPONIBLE','CUARENTENA','BLOQUEADO'].forEach(state=>{ %><option value="<%= state %>" <%= filters.state===state?'selected':'' %>><%= state %></option><% }) %></select></div>
+    <div class="col-lg-2"><label class="visually-hidden" for="lotZone">Zona</label><select id="lotZone" data-native-select="true" class="form-select" name="zone"><option value="">Todas las zonas</option><% zones.forEach(zone=>{ %><option value="<%= zone.nombre %>" <%= filters.zone===zone.nombre?'selected':'' %>><%= zone.codigo_zona %> · <%= zone.nombre %></option><% }) %></select></div>
+    <div class="col-lg-2 d-flex gap-2"><button class="btn btn-outline-light flex-grow-1">Filtrar</button><a class="btn btn-outline-secondary" href="/inventario/lotes" aria-label="Limpiar filtros">×</a></div>
+  </form>
+  <div class="panel-title"><div><h2>POSICIONES TRAZABLES</h2><small>Una fila representa SKU + lote fabricante + estado + HU + LOC.</small></div><span class="badge text-bg-warning"><%= lots.length %> resultados</span></div>
+  <% if(!lots.length){ %>
+    <div class="empty"><strong>No encontramos posiciones.</strong><small>Cambia los filtros o revisa otra zona.</small></div>
+  <% } else { %>
+    <div class="table-responsive"><table class="table table-darkish">
+      <thead><tr><th>Lote / HU</th><th>SKU / producto</th><th>LOC</th><th>Estado / cantidad</th><th>Ingreso</th><th>Vencimiento</th><th>Origen</th><th></th></tr></thead>
+      <tbody>
+      <% lots.forEach(l=>{ const hasExpiry=Boolean(l.fecha_vencimiento); const days=hasExpiry?Number(l.dias_restantes):null; const expiryIso=hasExpiry?new Date(l.fecha_vencimiento).toISOString().slice(0,10):''; %>
+        <tr>
+          <td><strong><%= l.numero_lote %></strong><small><%= l.codigo_hu?'HU '+l.codigo_hu+' · ':'' %>Posición #<%= l.id %> · <%= date(l.creado_en,true) %></small><% if(l.requiere_revision){ %><small>Fecha en revisión</small><% } %></td>
+          <td><span class="sku-chip"><%= l.sku %></span><%= l.producto %><small>Producto #<%= l.producto_id %></small></td>
+          <td><strong class="loc-code"><%= l.codigo_loc %></strong><small><%= l.zona %> · <%= l.pasillo %>/<%= l.estante %> · <%= l.tipo_loc %> · <%= l.condicion_almacenamiento||'AMBIENTE' %></small></td>
+          <td><span class="status-pill <%= l.estado_inventario==='DISPONIBLE'?'ok':l.estado_inventario==='CUARENTENA'?'pending':'off' %>"><%= l.estado_inventario %></span><small><%= l.cantidad_actual %> / <%= l.cantidad_inicial %> UND</small></td>
+          <td><%= date(l.fecha_ingreso) %></td>
+          <td><span class="badge <%= !hasExpiry?'text-bg-secondary':days<0?'text-bg-dark':days<=30?'text-bg-danger':'text-bg-secondary' %>"><%= hasExpiry?date(l.fecha_vencimiento):'NO APLICA' %></span><small><%= !hasExpiry?'SKU sin control de caducidad':days<0?'Vencido':days+' días restantes' %></small></td>
+          <td><%= l.codigo_orden||'Ajuste/traslado' %><small><%= l.orden_compra_id?'Orden #'+l.orden_compra_id:'Sin orden asociada' %></small></td>
+          <td class="text-end"><button type="button" class="btn btn-sm btn-outline-warning" data-lot-qr data-lot="<%= l.numero_lote %>" data-sku="<%= l.sku %>" data-product="<%= l.producto %>" data-loc="<%= l.codigo_loc %>" data-qty="<%= l.cantidad_actual %>" data-expiry="<%= expiryIso %>">QR</button></td>
+        </tr>
+      <% }) %>
+      </tbody>
+    </table></div>
+  <% } %>
+</div>

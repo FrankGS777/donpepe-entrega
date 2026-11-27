@@ -1,0 +1,15 @@
+<div class="page-head">
+  <div><h1><%= order.codigo_orden %></h1><p><%= order.proveedor %> · <%= date(order.fecha_emision,true) %></p></div>
+  <div class="d-flex gap-2">
+    <% if(['PENDIENTE','PARCIAL'].includes(order.estado)&&can('purchases.receive')){ %><a class="btn btn-brand" href="/compras/<%= order.id %>/recibir">Registrar entrega</a><% } %>
+    <% if(order.estado==='PENDIENTE'&&can('purchases.cancel')){ %><form method="post" action="/compras/<%= order.id %>/cancelar"><input type="hidden" name="_csrf" value="<%= csrfToken %>"><button class="btn btn-outline-danger" data-confirm="¿Cancelar esta orden?">Cancelar</button></form><% } %>
+  </div>
+</div>
+<div class="panel">
+  <div class="mb-4"><span class="badge <%= order.estado==='RECIBIDA'?'text-bg-success':order.estado==='CANCELADA'?'text-bg-danger':'text-bg-warning' %>"><%= order.estado %></span></div>
+  <div class="table-responsive"><table class="table table-darkish">
+    <thead><tr><th>SKU / producto</th><th>Solicitado</th><th>Recibido</th><th>Pendiente</th><th>Costo unitario</th><th>Subtotal OC</th></tr></thead>
+    <tbody><% order.items.forEach(i=>{ %><tr><td><span class="sku-chip"><%= i.sku %></span> <%= i.producto %></td><td><%= i.cantidad_solicitada %></td><td><%= i.cantidad_recibida %></td><td><strong><%= i.cantidad_solicitada-i.cantidad_recibida %></strong></td><td><%= money(i.precio_unitario_compra) %></td><td><%= money(i.subtotal) %></td></tr><% }) %></tbody>
+    <tfoot><tr><th colspan="5">Total estimado de la OC</th><th><%= money(order.total_estimado) %></th></tr></tfoot>
+  </table></div>
+</div>

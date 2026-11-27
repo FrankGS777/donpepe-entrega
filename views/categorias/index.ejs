@@ -1,0 +1,83 @@
+<div class="page-head">
+  <div>
+    <h1><%= type==='ubicaciones'?'MAESTRO DE BINS':title.toUpperCase() %></h1>
+    <p><%= type==='ubicaciones'?'El CD1 usa zona, pasillo, rack, nivel, casillero y profundidad como dirección física única.':'Datos confiables reutilizados por toda la operación.' %></p>
+  </div>
+  <% if(can('catalogs.create')&&type!=='ubicaciones'){ %><a class="btn btn-brand" href="/catalogos/<%= type %>/nuevo">+ Nuevo registro</a><% } %>
+</div>
+
+<%- include('../partials/catalogTabs') %>
+
+<% if(type==='ubicaciones'){ %>
+  <div class="topology-rule mb-3">
+    <svg class="icon"><use href="/icons.svg#i-pin"></use></svg>
+    <div><strong>Zona → pasillo → rack → nivel → casillero → profundidad</strong><span>Una LOC representa un espacio físico. Su HU o lote se consulta aparte; la capacidad se expresa en posiciones, no en unidades de producto.</span></div>
+  </div>
+
+  <section aria-labelledby="zonesTitle">
+    <div class="section-heading"><div><span>01</span><h2 id="zonesTitle">ZONAS DEL CENTRO DE DISTRIBUCIÓN</h2></div><p>Recepción, reserva ABC, cadena fría, picking, cuarentena y despacho a sucursales.</p></div>
+    <div class="topology-zone-grid mb-4">
+      <% zones.forEach(zone=>{ %>
+        <article class="topology-zone-card purpose-<%= zone.proposito.toLowerCase() %>">
+          <header><span><%= zone.codigo_zona %></span><b><%= zone.clase_abc?'ROTACIÓN '+zone.clase_abc:zone.condicion_almacenamiento %></b></header>
+          <h3><%= zone.nombre %></h3>
+          <p><%= zone.descripcion %></p>
+          <footer><strong><%= zone.locs %></strong><span>LOC activas</span><small><%= zone.proposito %></small></footer>
+        </article>
+      <% }) %>
+    </div>
+  </section>
+
+  <section class="panel" aria-labelledby="locationsTitle">
+    <div class="panel-title"><div><h2 id="locationsTitle">LOC OPERATIVAS</h2><small>Filtra antes de editar; se muestran hasta 80 direcciones por consulta.</small></div><span class="badge text-bg-warning"><%= zones.reduce((sum,zone)=>sum+Number(zone.locs),0) %> activas</span></div>
+    <form method="get" class="bin-finder-form mb-3">
+      <label>Zona<select name="zone" class="form-select"><option value="">Todas</option><% zones.forEach(zone=>{ %><option value="<%= zone.codigo_zona %>" <%= filters.zone===zone.codigo_zona?'selected':'' %>><%= zone.codigo_zona %> · <%= zone.nombre %></option><% }) %></select></label>
+      <label>Pasillo<input name="aisle" class="form-control" maxlength="2" value="<%= filters.aisle||'' %>" placeholder="Ej. 02"></label>
+      <label>Rack<input name="rack" class="form-control" maxlength="2" value="<%= filters.rack||'' %>" placeholder="Ej. 04"></label>
+      <label>Código LOC<input name="q" class="form-control" value="<%= filters.q||'' %>" placeholder="CD1-SEC-B-A..."></label>
+      <button class="btn btn-outline-light">Filtrar</button>
+    </form>
+    <% if(!items.length){ %><div class="empty">Selecciona una zona, pasillo o código para consultar las direcciones.</div><% } else { %>
+      <div class="location-master-list">
+        <% items.forEach(item=>{ %>
+          <article class="location-master-row <%= Number(item.activo)?'':'inactive' %>">
+            <div class="location-identity"><span class="location-type"><%= item.tipo %></span><strong><%= item.codigo_loc %></strong><small><%= item.codigo_zona||'LEG' %> · pasillo <%= item.pasillo %> · rack <%= item.estante %> · nivel <%= item.nivel %> · casillero <%= item.posicion %> · fondo <%= item.profundidad %></small></div>
+            <div class="location-capacity"><small>CAPACIDAD FÍSICA</small><strong><%= item.capacidad_hu %> HU</strong><span><%= item.condicion_almacenamiento||'AMBIENTE' %></span></div>
+            <div class="location-capabilities" aria-label="Operaciones permitidas">
+              <% if(Number(item.permite_recepcion)){ %><span>Recibir</span><% } %>
+              <% if(Number(item.permite_almacenaje)){ %><span>Almacenar</span><% } %>
+              <% if(Number(item.permite_picking)){ %><span>Picking</span><% } %>
+              <% if(Number(item.permite_conteo)){ %><span>Contar</span><% } %>
+            </div>
+            <span class="status-pill <%= Number(item.activo)?'ok':'off' %>"><%= Number(item.activo)?'Activa':'Inactiva' %></span>
+            <% if(can('catalogs.update')){ %><a class="btn btn-sm btn-outline-warning" href="/catalogos/ubicaciones/<%= item.id %>/editar">Editar</a><% } %>
+          </article>
+        <% }) %>
+      </div>
+    <% } %>
+  </section>
+<% } else { %>
+  <div class="panel">
+    <% if(!items.length){ %><div class="empty">No hay registros en este maestro.</div><% } else { %>
+      <div class="table-responsive"><table class="table table-darkish align-middle">
+        <thead><tr>
+          <% if(type==='proveedores'){ %><th>RUC / razón social</th><th>Contacto</th><th>Uso</th><th>Estado</th><% } else if(type==='categorias'){ %><th>Nombre</th><th>Descripción</th><th>Vida útil</th><% } else { %><th>Nombre</th><th>Descripción</th><% } %>
+          <% if(can('catalogs.update')){ %><th aria-label="Acciones"></th><% } %>
+        </tr></thead>
+        <tbody><% items.forEach(item=>{ %><tr>
+          <% if(type==='proveedores'){ %>
+            <td><div class="provider-master-identity"><img src="<%= item.logo_url||'/images/resource-fallback.svg' %>" alt="Logo de <%= item.razon_social %>" loading="lazy" referrerpolicy="no-referrer"><span><b class="sku-chip"><%= item.ruc %></b><strong><%= item.razon_social %></strong><% if(item.sitio_web){ %><a href="<%= item.sitio_web %>" target="_blank" rel="noopener noreferrer">Sitio oficial ↗</a><% } %></span></div></td>
+            <td><%= item.email||'Sin correo' %><small><%= item.telefono||'Sin teléfono' %></small></td>
+            <td><small><%= Number(item.activo)?'Disponible para nuevas órdenes':'Solo historial; no aparece en nuevas órdenes' %></small></td>
+            <td><span class="status-pill <%= Number(item.activo)?'ok':'off' %>"><%= Number(item.activo)?'Activo':'Inactivo' %></span></td>
+          <% } else if(type==='categorias'){ %>
+            <td><strong><%= item.nombre %></strong><small>ID maestro #<%= item.id %></small></td><td><%= item.descripcion||'Sin descripción' %></td><td><span class="badge text-bg-warning"><%= item.vida_util_dias %> días</span><small>Vida útil orientativa; la recepción usa el vencimiento impreso.</small></td>
+          <% } else { %>
+            <td><strong><%= item.nombre %></strong><small>ID maestro #<%= item.id %></small></td><td><%= item.descripcion||'Sin descripción' %></td>
+          <% } %>
+          <% if(can('catalogs.update')){ %><td class="text-end"><a class="btn btn-sm btn-outline-warning" href="/catalogos/<%= type %>/<%= item.id %>/editar">Editar</a></td><% } %>
+        </tr><% }) %></tbody>
+      </table></div>
+    <% } %>
+  </div>
+<% } %>
